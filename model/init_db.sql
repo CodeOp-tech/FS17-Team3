@@ -3,8 +3,6 @@ DROP TABLE IF EXISTS Products;
 DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Sellers;
 
-
-
 CREATE TABLE `Users` (
 	`userid` INT NOT NULL AUTO_INCREMENT,
 	`username` varchar(10) NOT NULL UNIQUE,

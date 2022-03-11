@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Cart from '../components/Cart';
 
-
   const Message = ({ message }) => (
     <section>
       <p>{message}</p>

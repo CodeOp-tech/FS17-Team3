@@ -4,7 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require('cors');  // add at the top
-const stripe = require('stripe')('sk_test_51JWei7KmdPIQ5CnWPHY28Xe0xkUWNABZ8U04iFNimYCZNvG9GCVuhgR1RRWMrr3jOo0HN77qiyehrgOTTl4U45oy009XmCpFbc');
+const { STRIPE_SECRET_KEY } = require('./config');
+const stripe = require('stripe')(STRIPE_SECRET_KEY);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');

@@ -25,17 +25,6 @@ app.use('/users', usersRouter);
 app.use('/products', productsRouter);
 app.use('/', authUsersRouter);
 
-// Catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    next(createError(404));
-});
-
-// General error handler
-app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.send({ error: err.message });
-});
-
 
 // Code for Stripe checkout
 
@@ -66,5 +55,16 @@ app.post('/create-checkout-session', async (req, res) => {
 });
 
 app.listen(4242, () => console.log('Running on port 4242'));
+
+// Catch 404 and forward to error handler
+app.use(function(req, res, next) {
+    next(createError(404));
+});
+
+// General error handler
+app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.send({ error: err.message });
+});
 
 module.exports = app;

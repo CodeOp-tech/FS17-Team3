@@ -1,13 +1,14 @@
-let express = require('express');
-let router = express.Router();
+var express = require('express');
+var router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 const { BCRYPT_WORK_FACTOR, SECRET_KEY } = require('../config');
-const db = require("..model/helper");
+const db = require("../model/helper");
 
-// Register a user with POST
 
-router.post('register', async (req, res) => {
+// Register a user with POST 
+
+router.post('/register', async (req, res) => {
     let {username, password, email} = req.body;
     let hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
 
@@ -52,3 +53,5 @@ router.post('/login', async (req, res) => {
         res.status(500).send({error: err.message});
     }
 });
+
+module.exports = router;

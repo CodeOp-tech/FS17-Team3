@@ -1,5 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
+import {Routes, Route} from 'react-router-dom';
+
+// Import pages
+import Checkout from '../pages/Checkout';
 
 function App() {
   return (
@@ -17,6 +21,12 @@ function App() {
         >
           Learn React
         </a>
+
+        <Routes>
+
+          <Route path="/checkout" element={<Checkout />} />
+
+        </Routes>
       </header>
     </div>
   );

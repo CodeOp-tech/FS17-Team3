@@ -67,13 +67,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-  
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/user-login" 
-            element={<UserLogin userLogInCb={(username, password) => handleUserLogin(username, password)}/>}
-                                loginError={loginError}/>
+          <Route path="/user-login" element={<UserLogin userLogInCb={(username, password) => handleUserLogin(username, password)}/>} loginError={loginError}/>
           <Route path="/user-signup" element={<UserSignUp addUserCb={(newUser) => handleUserSignUp(newUser)} />} />
         </Routes>
       </header>

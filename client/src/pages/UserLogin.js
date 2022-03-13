@@ -26,7 +26,6 @@ const UserLogin = (props) => {
     return (
      <div className="UserLogin row">
      <div className="col-4 offset-4"></div>
-
       <form onSubmit={handleSubmit}>
       <div className="form-group">
             <h2>Log In</h2>
@@ -41,7 +40,6 @@ const UserLogin = (props) => {
               className="form-control"
               onChange={handleChange}
               />
-            
             <div className="form-group">
               <label htmlFor="password"
                className="form-label">Password</label>
@@ -54,12 +52,11 @@ const UserLogin = (props) => {
               className="form-control"
               />
             </div>
-        
+  
             <div>
               <button type="submit" className="btn btn-primary">Log In</button>
             </div>
         </form>
-        
      </div>
   )
 }

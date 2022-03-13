@@ -8,7 +8,7 @@ const db = require("../model/helper");
 
 // Register a user with POST 
 
-router.post('/register', async (req, res) => {
+router.post('/user-register', async (req, res) => {
     let {username, password, email} = req.body;
     let hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
 
@@ -26,7 +26,7 @@ router.post('/register', async (req, res) => {
 
 // Login a user with POST
 
-router.post('/login', async (req, res) => {
+router.post('/user-login', async (req, res) => {
     let {username, password} = req.body;
 
     try {

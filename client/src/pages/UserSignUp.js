@@ -41,8 +41,7 @@ function UserSignUp(props) {
             <h2>Create Account</h2>
           </div>
             <div className="mb-3">
-              <label htmlFor="email"
-               className="form-label">Email address</label>
+              <label className="form-label">Email address</label>
               <input
               type="text"
               name="email"
@@ -52,8 +51,7 @@ function UserSignUp(props) {
               />
             </div>
             <div className="mb-3">
-            <label htmlFor="username"
-             className="form-label">Username</label>
+            <label className="form-label">Username</label>
               <input
               type="text"
               name="username"
@@ -63,8 +61,7 @@ function UserSignUp(props) {
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="password"
-               className="form-label">Password</label>
+              <label className="form-label">Password</label>
               <input
               type="password"
               name="password"

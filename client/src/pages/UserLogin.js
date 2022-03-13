@@ -30,8 +30,7 @@ const UserLogin = (props) => {
       <div className="form-group">
             <h2>Log In</h2>
           </div>
-            <label htmlFor="username"
-              className="form-label">Username</label>
+            <label className="form-label">Username</label>
               <input
               type="text"
               name="username"
@@ -41,8 +40,7 @@ const UserLogin = (props) => {
               onChange={handleChange}
               />
             <div className="form-group">
-              <label htmlFor="password"
-               className="form-label">Password</label>
+              <label className="form-label">Password</label>
               <input
               type="password"
               name="password"

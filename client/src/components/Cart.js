@@ -4,10 +4,10 @@ const Cart = () => {
 
     return (
     <section>
+        <h2>Cart</h2>
       <div className="product">
         <img
           src="https://i.imgur.com/EHyR2nP.png"
-          alt="The cover of Stubborn Attachments"
         />
         <div className="description">
         <h3>Stubborn Attachments</h3>
@@ -15,7 +15,7 @@ const Cart = () => {
         </div>
       </div>
       <form action="/create-checkout-session" method="POST">
-        <button type="submit">
+        <button type="submit" className="btn btn-primary">
           Checkout
         </button>
       </form>

@@ -8,19 +8,19 @@ const blank = {
     password: ''
 };
 
-function UserSignUp(props) {
+function SellerSignUp(props) {
     const [formData, setFormData] = useState(blank);
     const [modalShow, setModalShow] = useState(false);
     const modalInfo = {
       title: 'Account created successfully!',
       closetext: 'Close window',
       backtext: 'Log In',
-      backpath: '/user-login'
+      backpath: '/seller-login'
     }
   
     function handleSubmit(event) {
       event.preventDefault();
-      props.addUserCb(formData);
+      props.addSellerCb(formData);
       setModalShow(true);
       setFormData(blank);
       // add MUI alerts here depending on success or not
@@ -36,7 +36,7 @@ function UserSignUp(props) {
   
     return (
      <div className="container d-flex justify-content-center">
-        <Form className="mt-3 user-form" onSubmit={handleSubmit}>
+        <Form className="mt-3 seller-form" onSubmit={handleSubmit}>
           <div className="mb-3">
             <h2>Create Account</h2>
           </div>
@@ -80,8 +80,8 @@ function UserSignUp(props) {
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 modalInfo={modalInfo}/>
-      </div>
+      </div> 
     );
 }
 
-export default UserSignUp;
+export default SellerSignUp;

@@ -9,8 +9,10 @@ const stripe = require('stripe')(STRIPE_SECRET_KEY);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var sellersRouter = require('./routes/sellers');
 var productsRouter = require('./routes/products');
 var authUsersRouter = require('./routes/authUsers');
+var authSellersRouter = require('./routes/authSellers');
 
 var app = express();
 
@@ -23,8 +25,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/sellers', sellersRouter);
 app.use('/products', productsRouter);
 app.use('/', authUsersRouter);
+app.use('/', authSellersRouter);
 
 
 // Code for Stripe checkout

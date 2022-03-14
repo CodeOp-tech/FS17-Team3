@@ -28,6 +28,33 @@ class Api {
         return response;
     }
 
+    //Log in seller
+    static async loginSeller(username, password) {
+        // Prepare URL and options
+        let url = '/seller-login';
+        let body = { username, password };
+        let options = { 
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+        };
+
+        // Fetch
+        let response;
+        try {
+            response = await fetch(url, options);
+            if (response.ok) {
+                response.data = await response.json();
+            } else {
+                response.error = `Error ${response.status}: ${response.statusText}`;
+            }
+        } catch (err) {
+            response = { ok: false, error: err.message };
+        }
+
+        return response;
+    }
+
     // Register a user
 
     static async userSignUp(username, password, email) {
@@ -40,6 +67,30 @@ class Api {
         let response;
         try {
             response = await fetch('/user-register', options);
+            if (response.ok) {
+                response.data = await response.json();
+            } else {
+                response.error = `Error ${response.status}: ${response.statusText}`;
+            }
+        } catch (err) {
+            response = { ok: false, error: err.message };
+        }
+
+        return response;
+    }
+
+    // Register a seller
+
+    static async sellerSignUp(username, password, email) {
+        let body = { username, password, email };
+        let options = { 
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+        };
+        let response;
+        try {
+            response = await fetch('/seller-register', options);
             if (response.ok) {
                 response.data = await response.json();
             } else {
@@ -76,12 +127,64 @@ class Api {
         return response;
     }
 
+    // Get all sellers
+
+    static async getSellers() {
+        // Prepare URL and options
+        let url = '/sellers';
+        let options = { method: 'GET' };
+
+        // Fetch
+        let response;
+        try {
+            response = await fetch(url, options);
+            if (response.ok) {
+                response.data = await response.json();
+            } else {
+                response.error = `Error ${response.status}: ${response.statusText}`;
+            }
+        } catch (err) {
+            response = { ok: false, error: err.message };
+        }
+
+        return response;
+    }
+
 
     // GET user data by id
 
     static async getUser(userId) {
         // Prepare URL and options
         let url = `/users/${userId}`;
+        let options = { method: 'GET', headers: {} };
+
+        // Add JWT token (if it exists)
+        let token = Local.getToken();
+        if (token) {
+            options.headers['Authorization'] = 'Bearer ' + token;
+        }
+
+        // Fetch
+        let response;
+        try {
+            response = await fetch(url, options);
+            if (response.ok) {
+                response.data = await response.json();
+            } else {
+                response.error = `Error ${response.status}: ${response.statusText}`;
+            }
+        } catch (err) {
+            response = { ok: false, error: err.message };
+        }
+
+        return response;
+    }
+
+    // GET seller data by id
+
+    static async getSeller(sellerId) {
+        // Prepare URL and options
+        let url = `/sellers/${sellerId}`;
         let options = { method: 'GET', headers: {} };
 
         // Add JWT token (if it exists)
@@ -164,6 +267,35 @@ class Api {
         }
 
         return response;
+    }
+
+    // Update seller data
+
+    static async updateSellerData (updatedSeller, route) {
+        // Prepare options
+        let options = { 
+            method: 'PATCH', 
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(updatedSeller) 
+            };
+        // Add JWT token (if it exists) in case content is protected
+        let token = Local.getToken();
+        if (token) {
+            options.headers['Authorization'] = 'Bearer ' + token;
+        }
+        let response;
+        try {
+            response = await fetch(route, options);
+            if (response.ok) {
+                response.data = await response.json();
+            } else {
+                response.error = `Error ${response.status}: ${response.statusText}`;
+            }
+        } catch (err) {
+            response = { ok: false, error: err.message };
+        }
+
+        return response; 
     }
 
 }

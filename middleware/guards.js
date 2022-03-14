@@ -22,7 +22,22 @@ function ensureSameUser(req, res, next) {
 
     try {
         let payload = jwt.verify(token, SECRET_KEY);
-        if (payload.userId === Number(req.params.userId)) {
+        if (payload.userId === Number(req.params.sellerId)) {
+            next();
+        } else {
+            res.status(401).send({error: 'Unauthorised'}); 
+        }
+    } catch (err) {
+        res.status(500).send({error: 'Unauthorised'});
+    }
+}
+
+function ensureSameSeller(req, res, next) {
+    let token = _getToken(req);
+
+    try {
+        let payload = jwt.verify(token, SECRET_KEY);
+        if (payload.sellerId === Number(req.params.sellerId)) {
             next();
         } else {
             res.status(401).send({error: 'Unauthorised'});
@@ -52,5 +67,6 @@ function ensureSameUser(req, res, next) {
 
 module.exports = {
     ensureUserLoggedIn,
-    ensureSameUser
+    ensureSameUser,
+    ensureSameSeller 
 }

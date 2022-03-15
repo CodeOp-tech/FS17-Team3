@@ -139,7 +139,7 @@ function App() {
         <Routes>  
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products user={user} />} />
-          <Route path="/checkout" element={<Checkout cart={cart} />} />
+          <Route path="/checkout" element={<Checkout cart={cart} user={user} />} />
           <Route path="/user-login" element={<UserLogin userLogInCb={(username, password) => handleUserLogin(username, password)}/>} loginError={loginError}/>
           <Route path="/user-signup" element={<UserSignUp addUserCb={(newUser) => handleUserSignUp(newUser)} />} />
           <Route path="/seller-login" element={<SellerLogin sellerLogInCb={(username, password) => handleSellerLogin(username, password)}/>} loginError={loginError}/>

@@ -269,6 +269,64 @@ class Api {
         return response;
     }
 
+    // General purpose PATCH
+
+    static async patchContent(route, patchObject) {
+        // Prepare options
+        let options = { 
+            method: 'PATCH', 
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(patchObject) 
+            };
+        // Add JWT token (if it exists) in case content is protected
+        let token = Local.getToken();
+        if (token) {
+            options.headers['Authorization'] = 'Bearer ' + token;
+        }
+        let response;
+        try {
+            response = await fetch(route, options);
+            console.log(response)
+            if (response.ok) {
+                response.data = await response.json();
+            } else {
+                response.error = `Error ${response.status}: ${response.statusText}`;
+            }
+        } catch (err) {
+            response = { ok: false, error: err.message };
+        }
+
+        return response;
+    }
+
+    // General purpose delete
+
+    static async deleteContent(route) {
+        // Prepare options
+        let options = { 
+            method: 'DELETE', 
+            headers: {"Content-Type": "application/json"} 
+            };
+        // Add JWT token (if it exists) in case content is protected
+        let token = Local.getToken();
+        if (token) {
+            options.headers['Authorization'] = 'Bearer ' + token;
+        }
+        let response;
+        try {
+            response = await fetch(route, options);
+            console.log(response)
+            if (response.ok) {
+                response.data = await response.json();
+            } else {
+                response.error = `Error ${response.status}: ${response.statusText}`;
+            }
+        } catch (err) {
+            response = { ok: false, error: err.message };
+        }
+
+        return response;
+    }
 
      // Update user data
 

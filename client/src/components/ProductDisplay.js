@@ -6,10 +6,16 @@ import './ProductDisplay.css';
 
 const ProductDisplay = ({user}) => {
     const [errorMsg, setErrorMsg] = useState("");
+    const [cartTotal, setCartTotal] = useState("");
 
     let { cart, increaseOrderCountCB, decreaseOrderCountCB, deleteFromCartCB } = useContext(CartContext);
 
-    const cartTotal = cart.map(i=>i.price*i.quantity).reduce((a,b)=>a+b)
+    useEffect(() => {
+      if (cart.length > 0) {
+        let total = cart.map(i=>i.price*i.quantity).reduce((a,b)=>a+b)
+        setCartTotal(total);
+      }
+    }, [cart]);
 
     const handleIncrease = (id, current) => {
         increaseOrderCountCB(id, current);

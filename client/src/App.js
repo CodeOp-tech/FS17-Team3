@@ -175,12 +175,30 @@ function App() {
         }
 }
 
-  const contextObj = {cart, increaseOrderCountCB: increaseOrderCount, decreaseOrderCountCB: decreaseOrderCount, deleteFromCartCB: deleteFromCart}
+  const addToCart = async (id) => {
+  if (user) {
+    let newCartObj = {
+      userid: user.userid,
+      productid: id
+    }
+    let response = await Api.addContent('/cart', newCartObj);
+    if (response.ok) {
+      setCart(response.data);
+    }
+    else {
+      setErrorMsg(response.error)
+    }
+  }
+  }
+
+  const contextObj = {cart, increaseOrderCountCB: increaseOrderCount, decreaseOrderCountCB: decreaseOrderCount, deleteFromCartCB: deleteFromCart, addToCartCB: addToCart}
 
   return (
     <div className="App">
       <CartContext.Provider value={contextObj} >
       <header className="App-header">
+        <p>Items in cart: {cart.length}</p>
+
         <Routes>  
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products user={user} />} />

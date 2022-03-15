@@ -37,7 +37,7 @@ router.post('/seller/login', async (req, res) => {
             let seller = results.data[0];
             let passwordsEqual = await bcrypt.compare(password, seller.password);
             if (passwordsEqual) {
-                let payload = {sellerId: seller.id};
+                let payload = {sellerId: seller.sellerid};
                 let token = jwt.sign(payload, SECRET_KEY);
                 delete seller.password;
                 res.send({

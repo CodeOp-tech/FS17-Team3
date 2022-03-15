@@ -30,7 +30,7 @@ class Api {
     //Log in seller
     static async loginSeller(username, password) {
         // Prepare URL and options
-        let url = '/seller-login';
+        let url = '/seller/login';
         let body = { username, password };
         let options = { 
             method: 'POST',
@@ -65,7 +65,7 @@ class Api {
         };
         let response;
         try {
-            response = await fetch('/user-register', options);
+            response = await fetch('/user/register', options);
             if (response.ok) {
                 response.data = await response.json();
             } else {
@@ -89,7 +89,7 @@ class Api {
         };
         let response;
         try {
-            response = await fetch('/seller-register', options);
+            response = await fetch('/seller/register', options);
             if (response.ok) {
                 response.data = await response.json();
             } else {

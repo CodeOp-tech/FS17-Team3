@@ -14,6 +14,17 @@ function ensureUserLoggedIn(req, res, next) {
     }
 }
 
+function ensureSellerLoggedIn(req, res, next) {
+    let token = _getToken(req);
+
+    try {
+        jwt.verify(token, SECRET_KEY);
+        next();
+    } catch (err) {
+        res.status(401).send({error: 'Unauthorised'});
+    }
+}
+
 // Ensure user is logged in and accessing their own page
 // ie userId in token === userId in params
 
@@ -66,6 +77,7 @@ function ensureSameSeller(req, res, next) {
 
 module.exports = {
     ensureUserLoggedIn,
+    ensureSellerLoggedIn,
     ensureSameUser,
     ensureSameSeller 
 }

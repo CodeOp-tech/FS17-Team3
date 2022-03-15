@@ -15,7 +15,7 @@ function UserSignUp(props) {
       title: 'Account created successfully!',
       closetext: 'Close window',
       backtext: 'Log In',
-      backpath: '/user-login'
+      backpath: '/user/login'
     }
   
     function handleSubmit(event) {

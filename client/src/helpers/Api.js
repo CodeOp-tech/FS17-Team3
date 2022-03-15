@@ -4,14 +4,13 @@ class Api {
 //Log in user
     static async loginUser(username, password) {
         // Prepare URL and options
-        let url = '/user-login';
+        let url = '/user/login';
         let body = { username, password };
         let options = { 
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body)
         };
-
         // Fetch
         let response;
         try {

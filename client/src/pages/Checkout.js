@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { propTypes } from 'react-bootstrap/esm/Image';
 import ProductDisplay from '../components/ProductDisplay';
-import './Checkout.css';
 
   const Message = ({ message }) => (
     <section>

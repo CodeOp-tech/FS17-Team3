@@ -7,11 +7,11 @@ const stripe = require('stripe')(STRIPE_SECRET_KEY);
 // Get all stripe prices
 router.get("/", async (req, res) => {
     try {
-      let result = await stripe.products.list({
+      let result = await stripe.prices.list({
         limit: 100,
       });
       if (!result) {
-        res.status(404).send({ error: "No products found!" });
+        res.status(404).send({ error: "No prices found!" });
       } else {
         res.send(result.data);
       }

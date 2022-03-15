@@ -1,9 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import Api from '../helpers/Api';
+import CartContext from '../CartContext';
 
 function Products(props) {
   const [products, setProducts] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
+  let { addToCartCB } = useContext(CartContext);
   
   useEffect(() => {
     getProducts();
@@ -20,21 +22,8 @@ function Products(props) {
       }
     };
 
-  const addToCart = async (id) => {
-    if (props.user) {
-      let newCartObj = {
-        userid: props.user.userid,
-        productid: id
-      }
-      console.log(newCartObj);
-      let response = await Api.addContent('/cart', newCartObj);
-      if (response.ok) {
-        console.log("Product added to cart!")
-      }
-      else {
-        setErrorMsg(response.error)
-      }
-    }
+  const handleAdd = (id) => {
+    addToCartCB(id);
   }
 
   return (
@@ -44,7 +33,7 @@ function Products(props) {
           {products.map(p => (
             <li key={p.productid}>
             <span className="me-2">{p.name}</span> 
-            <button className="btn btn-primary" onClick={e => addToCart(p.productid)}>Add to cart</button>
+            <button className="btn btn-primary" onClick={e => handleAdd(p.productid)}>Add to cart</button>
             </li>
           ))}
           

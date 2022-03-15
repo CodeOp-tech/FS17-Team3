@@ -19,10 +19,9 @@ function ensureUserLoggedIn(req, res, next) {
 
 function ensureSameUser(req, res, next) {
     let token = _getToken(req);
-
     try {
         let payload = jwt.verify(token, SECRET_KEY);
-        if (payload.userId === Number(req.params.sellerId)) {
+        if (payload.userid === Number(req.params.userid)) {
             next();
         } else {
             res.status(401).send({error: 'Unauthorised'}); 

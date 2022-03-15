@@ -14,6 +14,7 @@ var productsRouter = require('./routes/products');
 var authUsersRouter = require('./routes/authUsers');
 var authSellersRouter = require('./routes/authSellers');
 var pricesRouter = require('./routes/prices');
+var cartRouter = require('./routes/cart')
 
 var app = express();
 
@@ -30,7 +31,8 @@ app.use('/sellers', sellersRouter);
 app.use('/products', productsRouter);
 app.use('/', authUsersRouter);
 app.use('/', authSellersRouter);
-app.use('/', pricesRouter);
+app.use('/prices', pricesRouter);
+app.use('/cart', cartRouter);
 
 
 // Code for Stripe checkout
@@ -50,8 +52,14 @@ app.post('/create-checkout-session', async (req, res) => {
       {
         // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
         price: 'price_1Kc6qeKmdPIQ5CnWjgBaHCAt',
-        quantity: 1,
+        quantity: 3,
       },
+      {
+        // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+        price: 'price_1KdDGuKmdPIQ5CnWe266Htsd',
+        quantity: 4,
+      },
+      
     ],
     mode: 'payment',
     success_url: `${YOUR_DOMAIN}?success=true`,

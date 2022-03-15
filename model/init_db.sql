@@ -21,13 +21,17 @@ CREATE TABLE `Sellers` (
 	`username` varchar(10) NOT NULL UNIQUE,
 	`password` varchar(255) NOT NULL,
 	`email` varchar(255) NOT NULL UNIQUE,
+	`picurl` varchar(255),
+	`coverurl` varchar(255),
+	`shopname` varchar(100),
+	`description` text,
 	PRIMARY KEY (`sellerid`)
 );
 
 INSERT INTO `Sellers` VALUES 
-    (1,'seller1','$2b$12$eFzMWbS9SogNtxkmo3J7aO8FQMFQSKbtpwLMIOVsF6GGKpTQdgq.W','seller1@example.com'),
-    (2,'seller2','$2b$12$WZcGPyrkCvD5e8m0Qz/nFOdBryUcsp6uDlE2MDo/AjuBhPrQBCfI6','seller2@example.com'),
-    (3,'seller3','$2b$12$tiAz4eaXlpU.CdltUVvw6udLA2BWsitk5zXM2XOm2IpAeAiFfMCdy','seller3@example.com');
+    (1,'seller1','$2b$12$eFzMWbS9SogNtxkmo3J7aO8FQMFQSKbtpwLMIOVsF6GGKpTQdgq.W','seller1@example.com', 'https://images.unsplash.com/photo-1528466829416-7c2576152a09?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80', 'https://images.unsplash.com/photo-1582131503261-fca1d1c0589f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80', 'Vase From The Earth', 'Welcome to Vase From The Earth. My wooden and ceramic vases are crafted with the utmost care in Gracia. Turnaround for general orders is 1 week. For custom orders, please allow up to 3 weeks.' ),
+    (2,'seller2','$2b$12$WZcGPyrkCvD5e8m0Qz/nFOdBryUcsp6uDlE2MDo/AjuBhPrQBCfI6','seller2@example.com', null, null, null, null),
+    (3,'seller3','$2b$12$tiAz4eaXlpU.CdltUVvw6udLA2BWsitk5zXM2XOm2IpAeAiFfMCdy','seller3@example.com', null, null, null, null);
 
 CREATE TABLE `Cart` (
 	`userid` INT NOT NULL,

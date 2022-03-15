@@ -25,4 +25,4 @@ function SubmitModal(props) {
     );
   }
 
-export default SubmitModal
+export default SubmitModal;

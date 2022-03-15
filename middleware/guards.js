@@ -21,7 +21,7 @@ function ensureSameUser(req, res, next) {
     let token = _getToken(req);
     try {
         let payload = jwt.verify(token, SECRET_KEY);
-        if (payload.userid === Number(req.params.userid)) {
+        if (payload.userId === Number(req.params.userId)) {
             next();
         } else {
             res.status(401).send({error: 'Unauthorised'}); 

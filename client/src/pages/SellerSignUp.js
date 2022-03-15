@@ -15,7 +15,7 @@ function SellerSignUp(props) {
       title: 'Account created successfully!',
       closetext: 'Close window',
       backtext: 'Log In',
-      backpath: '/seller-login'
+      backpath: '/seller/login'
     }
   
     function handleSubmit(event) {
@@ -35,10 +35,11 @@ function SellerSignUp(props) {
     }
   
     return (
+      <div>
+      <h1>Create Seller Account</h1>
      <div className="container d-flex justify-content-center">
         <Form className="mt-3 seller-form" onSubmit={handleSubmit}>
           <div className="mb-3">
-            <h2>Create Account</h2>
           </div>
             <div className="mb-3">
               <label className="form-label">Email address</label>
@@ -80,6 +81,8 @@ function SellerSignUp(props) {
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 modalInfo={modalInfo}/>
+                
+      </div> 
       </div> 
     );
 }

@@ -6,9 +6,9 @@ const { BCRYPT_WORK_FACTOR, SECRET_KEY } = require('../config');
 const db = require("../model/helper");
 
 
-// Register a user with POST 
+// Register a seller with POST 
 
-router.post('/seller-register', async (req, res) => {
+router.post('/seller/register', async (req, res) => {
     let {username, password, email} = req.body;
     let hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
 
@@ -24,9 +24,9 @@ router.post('/seller-register', async (req, res) => {
     }
 });
 
-// Login a user with POST
+// Login a seller with POST
 
-router.post('/seller-login', async (req, res) => {
+router.post('/seller/login', async (req, res) => {
     let {username, password} = req.body;
 
     try {

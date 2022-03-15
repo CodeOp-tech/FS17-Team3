@@ -15,7 +15,7 @@ function UserSignUp(props) {
       title: 'Account created successfully!',
       closetext: 'Close window',
       backtext: 'Log In',
-      backpath: '/user-login'
+      backpath: '/user/login'
     }
   
     function handleSubmit(event) {
@@ -35,10 +35,11 @@ function UserSignUp(props) {
     }
   
     return (
+      <div>
+      <h1>Create Shopper Account</h1>
      <div className="container d-flex justify-content-center">
         <Form className="mt-3 user-form" onSubmit={handleSubmit}>
           <div className="mb-3">
-            <h2>Create Account</h2>
           </div>
             <div className="mb-3">
               <label className="form-label">Email address</label>
@@ -80,6 +81,7 @@ function UserSignUp(props) {
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 modalInfo={modalInfo}/>
+      </div>
       </div>
     );
 }

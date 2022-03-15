@@ -24,11 +24,12 @@ const SellerLogin = (props) => {
     }
   
     return (
+      <div>
+      <h1>Seller Log In</h1>
      <div className="UserLogin row">
      <div className="col-4 offset-4"></div>
       <form onSubmit={handleSubmit}>
       <div className="form-group">
-            <h2>Log In</h2>
           </div>
             <label className="form-label">Username</label>
               <input
@@ -55,6 +56,12 @@ const SellerLogin = (props) => {
               <button type="submit" className="btn btn-primary">Log In</button>
             </div>
         </form>
+        <div>
+          <br></br>
+          <h3>Not got an account?</h3>
+        <a className="btn btn-primary" href="/seller-signup" role="button">Create Account</a>
+            </div>
+     </div>
      </div>
   )
 }

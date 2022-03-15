@@ -9,8 +9,8 @@ import Api from "./helpers/Api";
 import Checkout from './pages/Checkout';
 import Home from './pages/Home';
 import UserLogin from './pages/UserLogin';
-import UserSignUp from './pages/UserSignUp';
 import SellerLogin from './pages/SellerLogin';
+import UserSignUp from './pages/UserSignUp';
 import SellerSignUp from './pages/SellerSignUp';
 import ErrorPage from "./pages/ErrorPage";
 
@@ -120,6 +120,9 @@ function App() {
           <Route path="/user-signup" element={<UserSignUp addUserCb={(newUser) => handleUserSignUp(newUser)} />} />
           <Route path="/seller-login" element={<SellerLogin sellerLogInCb={(username, password) => handleSellerLogin(username, password)}/>} loginError={loginError}/>
           <Route path="/seller-signup" element={<SellerSignUp addSellerCb={(newSeller) => handleSellerSignUp(newSeller)} />} />
+
+          {/* <Route path="/signup" element={<SignUp addUserCb={(newUser) => handleUserSignUp(newUser)} addSellerCb={(newSeller) => handleSellerSignUp(newSeller)}/>} /> */}
+
         </Routes>
       </header>
     </div>

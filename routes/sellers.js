@@ -4,15 +4,15 @@ const {ensureSameSeller} = require('../middleware/guards');
 const db = require("../model/helper");
 
 /* GET sellers listing. */
-router.get('/', function(req, res, next) {
+router.get('/sellers', function(req, res, next) {
   res.send('respond with a resource');
 });
 
 // GET one seller
 
-router.get('/:sellerId', ensureSameSeller, async function(req, res, next) {
+router.get('/sellers/:sellerId', ensureSameSeller, async function(req, res, next) {
   let {sellerId} = req.params;
-  let sql = 'SELECT * FROM sellers WHERE id = ' + sellerId;
+  let sql = 'SELECT * FROM sellers WHERE sellerid = ' + sellerId;
 
   try {
     let results = await db(sql);
@@ -23,5 +23,7 @@ router.get('/:sellerId', ensureSameSeller, async function(req, res, next) {
     res.status(500).send({error: err.message});
   }
 }); 
+
+// Update Seller Shop Info with PATCH
 
 module.exports = router;

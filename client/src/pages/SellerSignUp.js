@@ -15,7 +15,7 @@ function SellerSignUp(props) {
       title: 'Account created successfully!',
       closetext: 'Close window',
       backtext: 'Log In',
-      backpath: '/seller-login'
+      backpath: '/seller/login'
     }
   
     function handleSubmit(event) {

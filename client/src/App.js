@@ -4,6 +4,7 @@ import './App.css';
 import {Routes, Route, useNavigate} from 'react-router-dom';
 import Local from './helpers/Local';
 import Api from "./helpers/Api";
+import CartContext from './CartContext';
 
 // Import pages
 import Checkout from './pages/Checkout';
@@ -29,13 +30,15 @@ function App() {
   }, []);
 
   const getCart = async () => {
-      let userid = user.userid;
-      let response = await Api.getContent(`/cart/${userid}`);
-      if (response.ok) {
-        setCart(response.data);
-      }
-      else {
-        setErrorMsg(response.error)
+      if (user) {
+        let userid = user.userid;
+        let response = await Api.getContent(`/cart/${userid}`);
+        if (response.ok) {
+          setCart(response.data);
+        }
+        else {
+          setErrorMsg(response.error)
+        }
       }
     };
 
@@ -129,17 +132,59 @@ function App() {
     }
   }
 
+  // CART FUNCTIONS
+  const increaseOrderCount = async (id, current) => {
+    let patched = {
+        productid: id,
+        quantity: current+1
+    }
+    let response = await Api.patchContent(`/cart/${user.userid}`, patched);
+    if (response.ok) {
+    setCart(response.data)
+    }
+    else {
+    setErrorMsg(response.error)
+  }
+}
+
+  const decreaseOrderCount = async (id, current) => {
+    if (current === 1) {
+        deleteFromCart(id)
+    }
+    else {
+        let patched = {
+            productid: id,
+            quantity: current-1
+        }
+        let response = await Api.patchContent(`/cart/${user.userid}`, patched);
+        if (response.ok) {
+        setCart(response.data)
+        }
+        else {
+        setErrorMsg(response.error)
+      }
+    }
+}
+    const deleteFromCart = async (productid) => {
+    let response = await Api.deleteContent(`/cart/${user.userid}/${productid}`);
+        if (response.ok) {
+        setCart(response.data)
+        }
+        else {
+        setErrorMsg(response.error)
+        }
+}
+
+  const contextObj = {cart, increaseOrderCountCB: increaseOrderCount, decreaseOrderCountCB: decreaseOrderCount, deleteFromCartCB: deleteFromCart}
+
   return (
     <div className="App">
+      <CartContext.Provider value={contextObj} >
       <header className="App-header">
-        
-        <p>Current user: {user.username} <br />
-        Cart: {cart.length}</p>
-        
         <Routes>  
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products user={user} />} />
-          <Route path="/checkout" element={<Checkout cart={cart} user={user} />} />
+          <Route path="/checkout" element={<Checkout user={user} />} />
           <Route path="/user/login" element={<UserLogin userLogInCb={(username, password) => handleUserLogin(username, password)}/>} loginError={loginError}/>
           <Route path="/user/signup" element={<UserSignUp addUserCb={(newUser) => handleUserSignUp(newUser)} />} />
           <Route path="/seller/login" element={<SellerLogin sellerLogInCb={(username, password) => handleSellerLogin(username, password)}/>} loginError={loginError}/>
@@ -149,6 +194,7 @@ function App() {
 
         </Routes>
       </header>
+      </CartContext.Provider>
     </div>
   );
 }

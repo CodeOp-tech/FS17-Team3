@@ -13,6 +13,7 @@ var sellersRouter = require('./routes/sellers');
 var productsRouter = require('./routes/products');
 var authUsersRouter = require('./routes/authUsers');
 var authSellersRouter = require('./routes/authSellers');
+var pricesRouter = require('./routes/prices');
 
 var app = express();
 
@@ -29,6 +30,7 @@ app.use('/sellers', sellersRouter);
 app.use('/products', productsRouter);
 app.use('/', authUsersRouter);
 app.use('/', authSellersRouter);
+app.use('/', pricesRouter);
 
 
 // Code for Stripe checkout
@@ -58,8 +60,6 @@ app.post('/create-checkout-session', async (req, res) => {
 
   res.redirect(303, session.url);
 });
-
-app.listen(4242, () => console.log('Running on port 4242'));
 
 // Catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -13,6 +13,7 @@ import SellerLogin from './pages/SellerLogin';
 import UserSignUp from './pages/UserSignUp';
 import SellerSignUp from './pages/SellerSignUp';
 import ErrorPage from "./pages/ErrorPage";
+import Products from './pages/Products';
 
 function App() {
   const [user, setUser] = useState(Local.getUser());
@@ -113,8 +114,12 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Routes>
+        
+        <p>Cart: </p>
+        
+        <Routes>  
           <Route path="/" element={<Home />} />
+          <Route path="/products" element={<Products />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/user-login" element={<UserLogin userLogInCb={(username, password) => handleUserLogin(username, password)}/>} loginError={loginError}/>
           <Route path="/user-signup" element={<UserSignUp addUserCb={(newUser) => handleUserSignUp(newUser)} />} />

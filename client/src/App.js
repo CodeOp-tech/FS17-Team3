@@ -18,9 +18,27 @@ import Products from './pages/Products';
 function App() {
   const [user, setUser] = useState(Local.getUser());
   const [seller, setSeller] = useState(Local.getSeller());
+  const [cart, setCart] = useState([]);
   const [loginError, setLoginError] = useState('');
+  const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
   // const history = useHistory();
+
+  useEffect(() => {
+    getCart();
+  }, []);
+
+  const getCart = async () => {
+      let userid = user.userid;
+      let response = await Api.getContent(`/cart/${userid}`);
+      if (response.ok) {
+        setCart(response.data);
+      }
+      else {
+        setErrorMsg(response.error)
+      }
+    };
+
 
   async function handleUserLogin(username, password) {
     let response = await Api.loginUser(username, password);
@@ -115,12 +133,13 @@ function App() {
     <div className="App">
       <header className="App-header">
         
-        <p>Cart: </p>
+        <p>Current user: {user.username} <br />
+        Cart: {cart.length}</p>
         
         <Routes>  
           <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/products" element={<Products user={user} />} />
+          <Route path="/checkout" element={<Checkout cart={cart} />} />
           <Route path="/user-login" element={<UserLogin userLogInCb={(username, password) => handleUserLogin(username, password)}/>} loginError={loginError}/>
           <Route path="/user-signup" element={<UserSignUp addUserCb={(newUser) => handleUserSignUp(newUser)} />} />
           <Route path="/seller-login" element={<SellerLogin sellerLogInCb={(username, password) => handleSellerLogin(username, password)}/>} loginError={loginError}/>

@@ -32,8 +32,11 @@ INSERT INTO `Sellers` VALUES
 CREATE TABLE `Cart` (
 	`userid` INT NOT NULL,
 	`productid` INT NOT NULL,
+    `quantity` INT NOT NULL,
     `completed` BOOLEAN NOT NULL,
-	PRIMARY KEY (`userid`)
+	PRIMARY KEY (`userid`, `productid`),
+    FOREIGN KEY (userid) REFERENCES `Users`(userid)
+
 );
 
 CREATE TABLE `Products` (

@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import Cart from '../components/Cart';
 
   const Message = ({ message }) => (
     <section>
@@ -7,7 +6,15 @@ import Cart from '../components/Cart';
     </section>
   );
 
-function Checkout() {
+  const ProductDisplay = ({cart}) => (
+    <ul>
+        {cart.map(cartitem => (
+            <li>{cartitem.productid}</li>
+        ))}
+    </ul>
+  )
+
+function Checkout( {cart} ) {
     const [message, setMessage] = useState("");
     
     useEffect(() => {
@@ -28,7 +35,7 @@ function Checkout() {
     return message ? (
         <Message message={message} />
       ) : (
-        <Cart />
+        <ProductDisplay cart={cart} />
       );
     }
 

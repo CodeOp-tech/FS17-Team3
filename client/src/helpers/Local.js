@@ -9,7 +9,7 @@
 
     static saveSellerInfo(token, seller) {
         localStorage.setItem('token', token);
-        localStorage.setItem('user', JSON.stringify(seller));
+        localStorage.setItem('seller', JSON.stringify(seller));
     }
     
     static removeUserInfo() {
@@ -43,7 +43,7 @@
         }
 
         let user = JSON.parse(userjson);
-        return user.userId;
+        return user.userid;
     }
 
     static getSellerId() {
@@ -53,7 +53,7 @@
         }
 
         let seller = JSON.parse(sellerjson);
-        return seller.sellerId;
+        return seller.sellerid;
     }
 
     static getUsername() {

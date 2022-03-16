@@ -15,6 +15,10 @@ import UserSignUp from './pages/UserSignUp';
 import SellerSignUp from './pages/SellerSignUp';
 import ErrorPage from "./pages/ErrorPage";
 import Products from './pages/Products';
+import TestPrivateUsers from "./pages/TestPrivateUsers";
+import TestPrivateSellers from "./pages/TestPrivateSellers";
+import PrivateRouteUsers from './components/PrivateRouteUsers';
+import PrivateRouteSellers from './components/PrivateRouteSellers';
 
 function App() {
   const [user, setUser] = useState(Local.getUser());
@@ -207,6 +211,18 @@ function App() {
           <Route path="/user/signup" element={<UserSignUp addUserCb={(newUser) => handleUserSignUp(newUser)} />} />
           <Route path="/seller/login" element={<SellerLogin sellerLogInCb={(username, password) => handleSellerLogin(username, password)}/>} loginError={loginError}/>
           <Route path="/seller/signup" element={<SellerSignUp addSellerCb={(newSeller) => handleSellerSignUp(newSeller)} />} />
+
+          <Route path="/users/private" element={
+              <PrivateRouteUsers>
+                <TestPrivateUsers />
+              </PrivateRouteUsers>    
+              } />
+
+          <Route path="/sellers/private" element={
+              <PrivateRouteSellers>
+                <TestPrivateSellers />
+              </PrivateRouteSellers>    
+              } />
 
           {/* <Route path="/signup" element={<SignUp addUserCb={(newUser) => handleUserSignUp(newUser)} addSellerCb={(newSeller) => handleSellerSignUp(newSeller)}/>} /> */}
 

@@ -233,7 +233,6 @@ function App() {
       </CartContext.Provider>
     </div>
   );
->>>>>>> main
 }
 
 export default App;

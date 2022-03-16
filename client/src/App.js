@@ -4,7 +4,7 @@ import "./App.css";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Local from "./helpers/Local";
 import Api from "./helpers/Api";
-import CartContext from './CartContext';
+import CartContext from "./CartContext";
 
 // Import pages
 import Checkout from "./pages/Checkout";
@@ -15,13 +15,13 @@ import UserSignUp from "./pages/UserSignUp";
 import SellerSignUp from "./pages/SellerSignUp";
 import ErrorPage from "./pages/ErrorPage";
 import Products from "./pages/Products";
-
 import TestPrivateUsers from "./pages/TestPrivateUsers";
 import TestPrivateSellers from "./pages/TestPrivateSellers";
 import PrivateRouteUsers from './components/PrivateRouteUsers';
 import PrivateRouteSellers from './components/PrivateRouteSellers';
 import UpdateShopDetails from "./pages/UpdateShopDetails";
 import Shopfront from "./pages/Shopfront";
+import Navbar from "./Navbar";
 
 function App() {
      
@@ -33,176 +33,189 @@ function App() {
   const navigate = useNavigate();
   // const history = useHistory();
 
-  useEffect(() => {
-    getCart();
-  }, []);
+     useEffect(() => {
+          getCart();
+     }, []);
 
-  const getCart = async () => {
-      if (user) {
-        let userid = user.userid;
-        let response = await Api.getContent(`/cart/${userid}`);
-        if (response.ok) {
-          setCart(response.data);
-        }
-        else {
-          setErrorMsg(response.error)
-        }
-      }
-    };
+     const getCart = async () => {
+          if (user) {
+               let userid = user.userid;
+               let response = await Api.getContent(`/cart/${userid}`);
+               if (response.ok) {
+                    setCart(response.data);
+               } else {
+                    setErrorMsg(response.error);
+               }
+          }
+     };
 
+     async function handleUserLogin(username, password) {
+          let response = await Api.loginUser(username, password);
+          console.log(response);
+          if (response.ok) {
+               Local.saveUserInfo(response.data.token, response.data.user);
+               setUser(response.data.user);
+               setLoginError("");
+               navigate("/");
+          } else {
+               setLoginError(response.error);
+               console.log(loginError);
+          }
+     }
 
-  async function handleUserLogin(username, password) {
-    let response = await Api.loginUser(username, password);
-    console.log(response)
-    if (response.ok) {
-        Local.saveUserInfo(response.data.token, response.data.user);
-        setUser(response.data.user);
-        setLoginError('');
-        navigate('/');
-    } else {
-        setLoginError(response.error);
-        console.log(loginError);
-    }
-  }
+     async function handleSellerLogin(username, password) {
+          let response = await Api.loginSeller(username, password);
+          console.log(response);
+          if (response.ok) {
+               Local.saveSellerInfo(response.data.token, response.data.seller);
+               setSeller(response.data.seller);
+               setLoginError("");
+               navigate("/");
+          } else {
+               setLoginError(response.error);
+               console.log(loginError);
+          }
+     }
 
-  async function handleSellerLogin(username, password) {
-    let response = await Api.loginSeller(username, password);
-    console.log(response)
-    if (response.ok) {
-        Local.saveSellerInfo(response.data.token, response.data.seller);
-        setSeller(response.data.seller);
-        setLoginError('');
-        navigate('/');
-    } else {
-        setLoginError(response.error);
-        console.log(loginError);
-    }
-  }
+     async function handleUserLogout() {
+          Local.removeUserInfo();
+          setUser(Local.getUser());
+     }
 
-  async function handleUserLogout() {
-    Local.removeUserInfo();
-    setUser(Local.getUser());
-  }
+     async function handleSellerLogout() {
+          Local.removeSellerInfo();
+          setSeller(Local.getSeller());
+     }
 
-  async function handleSellerLogout() {
-    Local.removeSellerInfo();
-    setSeller(Local.getSeller());
-  }
-  
+     const handleUserSignUp = async (newUser) => {
+          let response = await Api.userSignUp(
+               newUser.username,
+               newUser.password,
+               newUser.email
+          );
+          if (response.ok) {
+               setLoginError("");
+               console.log("Sign up successful!");
+          } else {
+               setLoginError(response.error);
+               console.log(loginError);
+          }
+     };
 
-  const handleUserSignUp = async (newUser) => {
-    let response = await Api.userSignUp(newUser.username, newUser.password, newUser.email);
-    if (response.ok) {
-      setLoginError('');
-      console.log("Sign up successful!")
-  } else {
-      setLoginError(response.error);
-      console.log(loginError);
-  }
-  }
+     const handleSellerSignUp = async (newSeller) => {
+          let response = await Api.sellerSignUp(
+               newSeller.username,
+               newSeller.password,
+               newSeller.email
+          );
+          if (response.ok) {
+               setLoginError("");
+               console.log("Sign up successful!");
+          } else {
+               setLoginError(response.error);
+               console.log(loginError);
+          }
+     };
 
-  const handleSellerSignUp = async (newSeller) => {
-    let response = await Api.sellerSignUp(newSeller.username, newSeller.password, newSeller.email);
-    if (response.ok) {
-      setLoginError('');
-      console.log("Sign up successful!")
-  } else {
-      setLoginError(response.error);
-      console.log(loginError);
-  }
-  }
+     // Change user info
 
-  // Change user info
+     async function updateUserData(userObj, route) {
+          let response = await Api.updateUserData(userObj, route);
+          console.log(response);
+          if (response.ok) {
+               Local.saveUserInfo(response.data.token, response.data.user);
+               setUser(response.data.user);
+               setLoginError("");
+          } else {
+               setLoginError("Login failed");
+               console.log(loginError);
+          }
+     }
 
-  async function updateUserData(userObj, route) {
-    let response = await Api.updateUserData(userObj, route);
-    console.log(response)
-    if (response.ok) {
-        Local.saveUserInfo(response.data.token, response.data.user);
-        setUser(response.data.user);
-        setLoginError('');
-    } else {
-        setLoginError('Login failed');
-        console.log(loginError);
-    }
-  }
+     async function updateSellerData(sellerObj, route) {
+          let response = await Api.updateSellerData(sellerObj, route);
+          console.log(response);
+          if (response.ok) {
+               Local.saveSellerInfo(response.data.token, response.data.seller);
+               setSeller(response.data.seller);
+               setLoginError("");
+          } else {
+               setLoginError("Login failed");
+               console.log(loginError);
+          }
+     }
 
-  async function updateSellerData(userObj, route) {
-    let response = await Api.updateSellerData(userObj, route);
-    console.log(response)
-    if (response.ok) {
-        Local.saveSellerInfo(response.data.token, response.data.seller);
-        setSeller(response.data.seller);
-        setLoginError('');
-    } else {
-        setLoginError('Login failed');
-        console.log(loginError);
-    }
-  }
+     // CART FUNCTIONS
+     const increaseOrderCount = async (id, current) => {
+          let patched = {
+               productid: id,
+               quantity: current + 1,
+          };
+          let response = await Api.patchContent(
+               `/cart/${user.userid}`,
+               patched
+          );
+          if (response.ok) {
+               setCart(response.data);
+          } else {
+               setErrorMsg(response.error);
+          }
+     };
 
-  // CART FUNCTIONS
-  const increaseOrderCount = async (id, current) => {
-    let patched = {
-        productid: id,
-        quantity: current+1
-    }
-    let response = await Api.patchContent(`/cart/${user.userid}`, patched);
-    if (response.ok) {
-    setCart(response.data)
-    }
-    else {
-    setErrorMsg(response.error)
-  }
-}
+     const decreaseOrderCount = async (id, current) => {
+          if (current === 1) {
+               deleteFromCart(id);
+          } else {
+               let patched = {
+                    productid: id,
+                    quantity: current - 1,
+               };
+               let response = await Api.patchContent(
+                    `/cart/${user.userid}`,
+                    patched
+               );
+               if (response.ok) {
+                    setCart(response.data);
+               } else {
+                    setErrorMsg(response.error);
+               }
+          }
+     };
+     const deleteFromCart = async (productid) => {
+          let response = await Api.deleteContent(
+               `/cart/${user.userid}/${productid}`
+          );
+          if (response.ok) {
+               setCart(response.data);
+          } else {
+               setErrorMsg(response.error);
+          }
+     };
 
-  const decreaseOrderCount = async (id, current) => {
-    if (current === 1) {
-        deleteFromCart(id)
-    }
-    else {
-        let patched = {
-            productid: id,
-            quantity: current-1
-        }
-        let response = await Api.patchContent(`/cart/${user.userid}`, patched);
-        if (response.ok) {
-        setCart(response.data)
-        }
-        else {
-        setErrorMsg(response.error)
-      }
-    }
-}
-    const deleteFromCart = async (productid) => {
-    let response = await Api.deleteContent(`/cart/${user.userid}/${productid}`);
-        if (response.ok) {
-        setCart(response.data)
-        }
-        else {
-        setErrorMsg(response.error)
-        }
-}
+     const addToCart = async (id) => {
+          if (user) {
+               let newCartObj = {
+                    userid: user.userid,
+                    productid: id,
+               };
+               let response = await Api.addContent("/cart", newCartObj);
+               if (response.ok) {
+                    setCart(response.data);
+               } else {
+                    setErrorMsg(response.error);
+               }
+          }
+     };
 
-  const addToCart = async (id) => {
-  if (user) {
-    let newCartObj = {
-      userid: user.userid,
-      productid: id
-    }
-    let response = await Api.addContent('/cart', newCartObj);
-    if (response.ok) {
-      setCart(response.data);
-    }
-    else {
-      setErrorMsg(response.error)
-    }
-  }
-  }
+     const contextObj = {
+          cart,
+          increaseOrderCountCB: increaseOrderCount,
+          decreaseOrderCountCB: decreaseOrderCount,
+          deleteFromCartCB: deleteFromCart,
+          addToCartCB: addToCart,
+     };
 
-
-  const contextObj = {cart, increaseOrderCountCB: increaseOrderCount, decreaseOrderCountCB: decreaseOrderCount, deleteFromCartCB: deleteFromCart, addToCartCB: addToCart}
-
-  return (
+return (
     <div className="App">
       <CartContext.Provider value={contextObj} >
       <header className="App-header">

@@ -21,7 +21,7 @@ import PrivateRouteUsers from './components/PrivateRouteUsers';
 import PrivateRouteSellers from './components/PrivateRouteSellers';
 import UpdateShopDetails from "./pages/UpdateShopDetails";
 import Shopfront from "./pages/Shopfront";
-import Navbar from "./Navbar";
+import Navbar from "./components/Navbar";
 
 function App() {
      
@@ -212,7 +212,7 @@ function App() {
           increaseOrderCountCB: increaseOrderCount,
           decreaseOrderCountCB: decreaseOrderCount,
           deleteFromCartCB: deleteFromCart,
-          addToCartCB: addToCart,
+          addToCartCB: addToCart
      };
 
 return (

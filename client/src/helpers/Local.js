@@ -1,4 +1,4 @@
-// All localStorage implementation is here
+// All localStorage implementation is here.
 
  class Local {
 

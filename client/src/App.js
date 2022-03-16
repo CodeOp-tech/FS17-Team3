@@ -20,6 +20,8 @@ import TestPrivateUsers from "./pages/TestPrivateUsers";
 import TestPrivateSellers from "./pages/TestPrivateSellers";
 import PrivateRouteUsers from './components/PrivateRouteUsers';
 import PrivateRouteSellers from './components/PrivateRouteSellers';
+import UpdateShopDetails from "./pages/UpdateShopDetails";
+import Shopfront from "./pages/Shopfront";
 
 function App() {
      
@@ -125,8 +127,8 @@ function App() {
     }
   }
 
-  async function updateSellerData(sellerObj, route) {
-    let response = await Api.updateSellerData(sellerObj, route);
+  async function updateSellerData(userObj, route) {
+    let response = await Api.updateSellerData(userObj, route);
     console.log(response)
     if (response.ok) {
         Local.saveSellerInfo(response.data.token, response.data.seller);
@@ -197,6 +199,7 @@ function App() {
   }
   }
 
+
   const contextObj = {cart, increaseOrderCountCB: increaseOrderCount, decreaseOrderCountCB: decreaseOrderCount, deleteFromCartCB: deleteFromCart, addToCartCB: addToCart}
 
   return (
@@ -225,8 +228,9 @@ function App() {
                 <TestPrivateSellers />
               </PrivateRouteSellers>    
               } />
-
-          {/* <Route path="/signup" element={<SignUp addUserCb={(newUser) => handleUserSignUp(newUser)} addSellerCb={(newSeller) => handleSellerSignUp(newSeller)}/>} /> */}
+              
+          <Route path="/update/shop" element={
+            <UpdateShopDetails />} />
 
         </Routes>
       </header>

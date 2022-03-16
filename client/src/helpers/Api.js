@@ -356,7 +356,7 @@ class Api {
         return response;
     }
 
-    // Update seller data.
+    // Update seller data
 
     static async updateSellerData (updatedSeller, route) {
         // Prepare options

@@ -13,7 +13,7 @@ function Checkout( {user, increaseOrderCountCB} ) {
     const [message, setMessage] = useState("");
     const [cart, setCart] = useState([1,2,3])
 
-    let { emptyCartCB } = useContext(CartContext);
+    // let { emptyCartCB } = useContext(CartContext);
     
     useEffect(() => {
         // Check to see if this is a redirect back from Checkout

@@ -6,7 +6,7 @@ const { BCRYPT_WORK_FACTOR, SECRET_KEY } = require('../config');
 const db = require("../model/helper");
 
 
-// Register a seller with POST 
+// Register a seller with POST .
 
 router.post('/seller/register', async (req, res) => {
     let {username, password, email} = req.body;
@@ -37,7 +37,7 @@ router.post('/seller/login', async (req, res) => {
             let seller = results.data[0];
             let passwordsEqual = await bcrypt.compare(password, seller.password);
             if (passwordsEqual) {
-                let payload = {sellerId: seller.sellerid};
+                let payload = {sellerid: seller.sellerid};
                 let token = jwt.sign(payload, SECRET_KEY);
                 delete seller.password;
                 res.send({

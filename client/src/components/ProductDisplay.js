@@ -29,6 +29,21 @@ const ProductDisplay = ({user}) => {
         deleteFromCartCB(productid);
     }
 
+      // e.preventDefault()
+     
+      // let url = '/create-checkout-session';
+      //   let options = { 
+      //       method: 'POST',
+      //       headers: { 'Content-Type': 'application/json' },
+      //       body: JSON.stringify(lineItems),
+      //   };
+      //   let response;
+      //   try {
+      //       response = await fetch(url, options);
+      //   } catch (err) {
+      //       response = { ok: false, error: err.message };
+      //   }
+      //   return response;
 
     return (
     <section className="container w-50">
@@ -53,7 +68,12 @@ const ProductDisplay = ({user}) => {
         ))}
 
         <div className="border d-flex justify-content-end">TOTAL: €{cartTotal}.00</div>
-        <button className="btn btn-primary">Checkout</button>
+
+        <form action="/create-checkout-session" method="POST">
+        <button type="submit" id="checkout-button">Checkout</button>
+        </form>
+
+        {/* <button type="submit" onClick={e => handleCheckout(e)} className="btn btn-primary">Checkout</button> */}
     </section>
     )
 }

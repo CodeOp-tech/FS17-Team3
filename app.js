@@ -6,6 +6,7 @@ var logger = require('morgan');
 const cors = require('cors');  // add at the top
 const { STRIPE_SECRET_KEY } = require('./config');
 const stripe = require('stripe')(STRIPE_SECRET_KEY);
+const db = require('./model/helper');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -50,16 +51,9 @@ app.post('/create-checkout-session', async (req, res) => {
     },
     line_items: [
       {
-        // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-        price: 'price_1Kc6qeKmdPIQ5CnWjgBaHCAt',
-        quantity: 3,
-      },
-      {
-        // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-        price: 'price_1KdDGuKmdPIQ5CnWe266Htsd',
-        quantity: 4,
-      },
-      
+      price: "price_1Kc6qeKmdPIQ5CnWjgBaHCAt", 
+      quantity: 1
+      }
     ],
     mode: 'payment',
     success_url: `${YOUR_DOMAIN}?success=true`,

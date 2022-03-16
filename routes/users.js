@@ -4,13 +4,13 @@ const {ensureSameUser} = require('../middleware/guards');
 const db = require("../model/helper");
 
 /* GET users listing. */
-router.get('/users', function(req, res, next) {
+router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-// GET one user
+// GET one user (add ensureSameUser function once working)
 
-router.get('/users/:userId', ensureSameUser, async function(req, res, next) {
+router.get('/:userId', async function(req, res, next) {
   let {userId} = req.params;
   let sql = 'SELECT * FROM users WHERE userid = ' + userId;
 

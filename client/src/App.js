@@ -21,7 +21,7 @@ import TestPrivateSellers from "./pages/TestPrivateSellers";
 import PrivateRouteUsers from "./components/PrivateRouteUsers";
 import PrivateRouteSellers from "./components/PrivateRouteSellers";
 
-import Navbar from "./components/Navbar";
+import Navbar from "./Navbar";
 
 function App() {
      const [user, setUser] = useState(Local.getUser());

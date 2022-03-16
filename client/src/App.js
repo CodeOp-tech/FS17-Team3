@@ -216,6 +216,7 @@ function App() {
      };
 
 return (
+
     <div className="App">
       <CartContext.Provider value={contextObj} >
       <header className="App-header">

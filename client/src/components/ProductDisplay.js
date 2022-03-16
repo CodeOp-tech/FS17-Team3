@@ -29,22 +29,6 @@ const ProductDisplay = ({user}) => {
         deleteFromCartCB(productid);
     }
 
-      // e.preventDefault()
-     
-      // let url = '/create-checkout-session';
-      //   let options = { 
-      //       method: 'POST',
-      //       headers: { 'Content-Type': 'application/json' },
-      //       body: JSON.stringify(lineItems),
-      //   };
-      //   let response;
-      //   try {
-      //       response = await fetch(url, options);
-      //   } catch (err) {
-      //       response = { ok: false, error: err.message };
-      //   }
-      //   return response;
-
     return (
     <section className="container w-50">
         {cart.map(cartitem => (
@@ -67,8 +51,7 @@ const ProductDisplay = ({user}) => {
             </div>
         ))}
 
-        <div className="border d-flex justify-content-end">TOTAL: €{cartTotal}.00</div>
-
+        <div className="d-flex justify-content-end">TOTAL: €{cartTotal}.00</div>
         <form action="/create-checkout-session" method="POST">
         <button type="submit" id="checkout-button">Checkout</button>
         </form>

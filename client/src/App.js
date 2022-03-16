@@ -197,7 +197,11 @@ function App() {
   }
   }
 
-  const contextObj = {cart, increaseOrderCountCB: increaseOrderCount, decreaseOrderCountCB: decreaseOrderCount, deleteFromCartCB: deleteFromCart, addToCartCB: addToCart}
+  const emptyCart = (id) => {
+    console.log("I'm emptying the cart!")
+  }
+
+  const contextObj = {cart, increaseOrderCountCB: increaseOrderCount, decreaseOrderCountCB: decreaseOrderCount, deleteFromCartCB: deleteFromCart, addToCartCB: addToCart, emptyCarbCB: emptyCart}
 
   return (
     <div className="App">

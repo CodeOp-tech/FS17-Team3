@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import { propTypes } from 'react-bootstrap/esm/Image';
 import ProductDisplay from '../components/ProductDisplay';
+import CartContext from '../CartContext';
 
   const Message = ({ message }) => (
     <section>
@@ -10,11 +11,10 @@ import ProductDisplay from '../components/ProductDisplay';
 
 function Checkout( {user, increaseOrderCountCB} ) {
     const [message, setMessage] = useState("");
-    
-    const increaseOrderCountCO = (id, current) => {
-        increaseOrderCountCB(id, current)
-    }
+    const [cart, setCart] = useState([1,2,3])
 
+    let { emptyCartCB } = useContext(CartContext);
+    
     useEffect(() => {
         // Check to see if this is a redirect back from Checkout
         const query = new URLSearchParams(window.location.search);

@@ -19,9 +19,9 @@ function makePatchSQL(body, sellerId) {
     // Combine everything into an SQL statement
     let sql = 'UPDATE sellers SET ';
     sql += parts.join(', ');
-    sql += `WHERE sellerid = ${sellerId}`;
+    sql += ` WHERE sellerid = ${sellerId}`;
 
-    return sql;
+    return sql; 
 }
 
 module.exports = {

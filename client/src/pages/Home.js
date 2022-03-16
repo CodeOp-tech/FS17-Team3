@@ -2,7 +2,10 @@ import React from "react";
 import "../App.css";
 
 function Home() {
-     return <div className="container">Home page</div>;
+     return (
+          <div className="container">
+               <h1>Home page</h1>
+          </div>
+     );
 }
-
 export default Home;

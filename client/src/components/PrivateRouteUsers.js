@@ -16,6 +16,6 @@ function PrivateRouteUsers(props) {
             {props.children}
         </>
     );
-}
+} 
 
 export default PrivateRouteUsers;

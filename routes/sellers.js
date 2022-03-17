@@ -9,10 +9,10 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-// GET one seller. (add ensureSameSeller function when working)
-router.get('/:sellerId', async function(req, res, next) {
-  let {sellerId} = req.params;
-  let sql = 'SELECT * FROM sellers WHERE sellerid = ' + sellerId;
+// GET one seller
+router.get('/:sellerid', ensureSameSeller, async function(req, res, next) {
+  let {sellerid} = req.params;
+  let sql = 'SELECT * FROM sellers WHERE sellerid = ' + sellerid;
 
   try {
     let results = await db(sql);
@@ -24,10 +24,10 @@ router.get('/:sellerId', async function(req, res, next) {
   }
 }); 
 
-// Update Seller Shop Info with PATCH (add ensureSameSeller function when working)
-router.patch('/:sellerId', async (req, res) => {
-  let { sellerId } = req.params;
-  let sql = makePatchSQL(req.body, sellerId);
+// Update Seller Shop Info with PATCH 
+router.patch('/:sellerid', ensureSameSeller, async (req, res) => {
+  let { sellerid } = req.params;
+  let sql = makePatchSQL(req.body, sellerid);
   try {
       let result = await db(sql);
       // ...

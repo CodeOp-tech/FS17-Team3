@@ -37,7 +37,7 @@ router.post('/user/login', async (req, res) => {
             let user = results.data[0];
             let passwordsEqual = await bcrypt.compare(password, user.password);
             if (passwordsEqual) {
-                let payload = {userId: user.userid};
+                let payload = {userid: user.userid};
                 let token = jwt.sign(payload, SECRET_KEY);
                 delete user.password;
                 res.send({

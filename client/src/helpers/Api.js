@@ -152,9 +152,9 @@ class Api {
 
     // GET user data by id
 
-    static async getUser(userId) {
+    static async getUser(userid) {
         // Prepare URL and options
-        let url = `/users/${userId}`;
+        let url = `/users/${userid}`;
         let options = { method: 'GET', headers: {} };
 
         // Add JWT token (if it exists)
@@ -181,9 +181,9 @@ class Api {
 
     // GET seller data by id
 
-    static async getSeller(sellerId) {
+    static async getSeller(sellerid) {
         // Prepare URL and options
-        let url = `/sellers/${sellerId}`;
+        let url = `/sellers/${sellerid}`;
         let options = { method: 'GET', headers: {} };
 
         // Add JWT token (if it exists)
@@ -385,28 +385,7 @@ class Api {
         return response; 
     }
 
-    // Create checkout session
 
-    static async createCheckoutSession(lineItems) {
-        // Prepare URL and options
-        let url = '/create-checkout-session';
-        let options = { 
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(lineItems),
-        };
-        console.log(options.body);
-        let response;
-        try {
-            response = await fetch(url, options);
-            console.log(response);
-            const body = await response.json()
-            console.log(body.url);
-            window.location.href = body.url
-        } catch (err) {
-            response = { ok: false, error: err.message };
-        }
-    }
 
 }
 

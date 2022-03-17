@@ -1,4 +1,4 @@
-function makePatchSQL(body, sellerId) {
+function makePatchSQL(body, sellerid) {
     // Create an empty array to store all assignments
     let parts = [];
     console.log("body", body);
@@ -19,7 +19,7 @@ function makePatchSQL(body, sellerId) {
     // Combine everything into an SQL statement
     let sql = 'UPDATE sellers SET ';
     sql += parts.join(', ');
-    sql += ` WHERE sellerid = ${sellerId}`;
+    sql += ` WHERE sellerid = ${sellerid}`;
     console.log("sql", sql);
     return sql; 
 }

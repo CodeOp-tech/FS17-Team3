@@ -14,7 +14,6 @@ var sellersRouter = require('./routes/sellers');
 var productsRouter = require('./routes/products');
 var authUsersRouter = require('./routes/authUsers');
 var authSellersRouter = require('./routes/authSellers');
-var pricesRouter = require('./routes/prices');
 var cartRouter = require('./routes/cart')
 
 var app = express();
@@ -32,7 +31,6 @@ app.use('/sellers', sellersRouter);
 app.use('/products', productsRouter);
 app.use('/', authUsersRouter);
 app.use('/', authSellersRouter);
-app.use('/prices', pricesRouter);
 app.use('/cart', cartRouter);
 
 
@@ -43,23 +41,16 @@ app.use(express.static('public'));
 const YOUR_DOMAIN = 'http://localhost:3000/checkout';
 
 app.post('/create-checkout-session', async (req, res) => {
+  let cart = await db(`SELECT c.quantity, p.stripe_priceid AS price FROM cart AS c JOIN products AS p ON c.productid = p.productid WHERE userid = 1`);
+  let line_items = cart.data;
+  console.log(line_items);
   const session = await stripe.checkout.sessions.create({
     customer_email: 'customer@example.com',
-    billing_address_collection: 'auto',
-    shipping_address_collection: {
-      allowed_countries: ['ES', 'FR', 'PT'],
-    },
-    line_items: [
-      {
-      price: "price_1Kc6qeKmdPIQ5CnWjgBaHCAt", 
-      quantity: 1
-      }
-    ],
+    line_items: line_items,
     mode: 'payment',
     success_url: `${YOUR_DOMAIN}?success=true`,
     cancel_url: `${YOUR_DOMAIN}?canceled=true`,
   });
-
   res.redirect(303, session.url);
 });
 

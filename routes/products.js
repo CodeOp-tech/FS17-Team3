@@ -20,39 +20,6 @@ router.get("/stripe", async (req, res) => {
     }
   });
 
-// Get stripe product by ID
-
-
-// Add stripe product
-
-router.post("/stripe", async (req, res) => {
-    let productid = req.params.productid;
-    let { name, description, img1, category, price, listedby } = req.body;
-    try {
-        await stripe.products.create(
-            {
-                name: name,
-                description: description,
-                images: [img1],
-                metadata: {
-                    listedby: listedby,
-                    category: category,
-                    price: price
-                }
-            });
-        let result = await stripe.products.list({
-            limit: 100,
-          });
-        let products = result.data;
-        res.status(201).send(products);
-    } catch (err) {
-      res.status(500).send({ error: err.message });
-    }
-  });
-
-
-
-
 // Edit stripe product
 
 router.post("/stripe/:productid", async (req, res) => {
@@ -132,16 +99,28 @@ router.get("/:productid", async (req, res) => {
 
 router.post("/", async (req, res) => {
     let { name, description, imgurl, category, price, listedby } = req.body;
-    let sql = `insert into products (name, description, imgurl, category, price, listedby) 
-              values ('${name}', '${description}', '${imgurl}', '${category}', ${price}, ${listedby})`;
       try {
-      await db(sql);
-      let result = await db(`SELECT p.*, s.username 
-      FROM products as p
-      JOIN sellers AS s ON p.listedby = s.sellerid`);
-      let products = result.data;
-      res.status(201).send(products);
-    } catch (err) {
+        // First, create the product id and price id using the Stripe API
+        let stripeProd = await stripe.products.create({name: name});
+        let productid = stripeProd.id;
+        let stripePrice = await stripe.prices.create(
+          {
+            product: productid,
+            unit_amount: price,
+            currency: 'eur',
+          }); 
+        let priceid = stripePrice.id;
+        // Second, create the product in our database using the info inputted in the form and the new Stripe API ids
+        let sql = `insert into products (name, description, imgurl, category, price, listedby, stripe_prodid, stripe_priceid) 
+              values ('${name}', '${description}', '${imgurl}', '${category}', ${price}, ${listedby}, '${productid}', '${priceid}')`;
+        await db(sql);
+        let result = await db(`SELECT p.*, s.username 
+        FROM products as p
+        JOIN sellers AS s ON p.listedby = s.sellerid`);
+        let products = result.data;
+        res.status(201).send(products);
+    } 
+    catch (err) {
       res.status(500).send({ error: err.message });
     }
   });

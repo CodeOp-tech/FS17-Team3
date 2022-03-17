@@ -22,6 +22,7 @@ import PrivateRouteSellers from "./components/PrivateRouteSellers";
 import UpdateShopDetails from "./pages/UpdateShopDetails";
 import Shopfront from "./pages/Shopfront";
 import Navbar from "./components/Navbar";
+import UserSettings from "./pages/UserSettings";
 
 function App() {
      const [user, setUser] = useState(Local.getUser());
@@ -206,12 +207,25 @@ function App() {
           }
      };
 
+     const emptyCart = async () => {
+          let response = await Api.patchContent(
+               `/cart/${user.userid}/empty`,
+               {}
+          );
+          if (response.ok) {
+               setCart(response.data);
+          } else {
+               setErrorMsg(response.error);
+          }
+     };
+
      const contextObj = {
           cart,
           increaseOrderCountCB: increaseOrderCount,
           decreaseOrderCountCB: decreaseOrderCount,
           deleteFromCartCB: deleteFromCart,
           addToCartCB: addToCart,
+          emptyCartCB: emptyCart,
      };
 
      return (
@@ -306,6 +320,15 @@ function App() {
                               <Route
                                    path="/update/shop"
                                    element={<UpdateShopDetails />}
+                              />
+
+                              <Route
+                                   path="/usersettings"
+                                   element={
+                                        <PrivateRouteUsers>
+                                             <UserSettings />
+                                        </PrivateRouteUsers>
+                                   }
                               />
                          </Routes>
                     </header>

@@ -1,16 +1,34 @@
-// import React from "react";
-// import "../App.css";
-// import * as FaIcons from "react-icons/fa";
-// import { Link } from "react-router-dom";
+import React from "react";
+import "./Navbar.css";
+import { NavLink } from "react-router-dom";
 
-// function Navbar() {
-//      return (
-//           <>
-//                <div className="navbar"></div>
-//                <Link to="#" className="menu-bars">
-//                     <FaIcons.FaBars />
-//                </Link>
-//           </>
-//      );
-// }
-// export default Navbar;
+function Navbar() {
+     return (
+          <nav className="Navbar">
+               <ul>
+                    <li>
+                         <NavLink to="/">Home</NavLink>
+                    </li>
+                    <li>
+                         <NavLink to="/products">Products</NavLink>
+                    </li>
+                    <li>
+                         <NavLink to="/checkout">Checkout</NavLink>
+                    </li>
+                    <li>
+                         <NavLink to="/user/login">Log In</NavLink>
+                    </li>
+                    <li>
+                         <NavLink to="/user/signup">User Sign Up</NavLink>
+                    </li>
+                    <li>
+                         <NavLink to="/seller/login">Seller Log In</NavLink>
+                    </li>
+                    <li>
+                         <NavLink to="/seller/signup">Seller Sign Up</NavLink>
+                    </li>
+               </ul>
+          </nav>
+     );
+}
+export default Navbar;

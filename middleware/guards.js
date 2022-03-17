@@ -10,7 +10,7 @@ function ensureUserLoggedIn(req, res, next) {
         jwt.verify(token, SECRET_KEY);
         next();
     } catch (err) {
-        res.status(401).send({error: 'Unauthorised'});
+        res.status(401).send({error: 'Unauthorized'});
     }
 }
 
@@ -21,7 +21,7 @@ function ensureSellerLoggedIn(req, res, next) {
         jwt.verify(token, SECRET_KEY);
         next();
     } catch (err) {
-        res.status(401).send({error: 'Unauthorised'});
+        res.status(401).send({error: 'Unauthorized'});
     }
 }
 
@@ -32,13 +32,13 @@ function ensureSameUser(req, res, next) {
     let token = _getToken(req);
     try {
         let payload = jwt.verify(token, SECRET_KEY);
-        if (payload.userId === Number(req.params.userId)) {
+        if (payload.userid === Number(req.params.userid)) {
             next();
         } else {
-            res.status(401).send({error: 'Unauthorised'}); 
+            res.status(401).send({error: 'Unauthorized'}); 
         }
     } catch (err) {
-        res.status(500).send({error: 'Unauthorised'});
+        res.status(500).send({error: err.message});
     }
 }
 
@@ -47,13 +47,14 @@ function ensureSameSeller(req, res, next) {
 
     try {
         let payload = jwt.verify(token, SECRET_KEY);
-        if (payload.sellerId === Number(req.params.sellerId)) {
+        console.log("token where r u", payload);
+        if (payload.sellerid === Number(req.params.sellerid)) {
             next();
         } else {
-            res.status(401).send({error: 'Unauthorised'});
+            res.status(401).send({error: 'Unauthorized'});
         }
     } catch (err) {
-        res.status(500).send({error: 'Unauthorised'});
+        res.status(500).send({error: err.message});
     }
 }
 
@@ -64,12 +65,12 @@ function ensureSameSeller(req, res, next) {
 
  function _getToken(req) {
     // Return '' if header not found
-    if ( !('authorisation' in req.headers) ) {
+    if ( !('authorization' in req.headers) ) {
         return '';
     }
 
     // Split header into 'Bearer' and token
-    let authHeader = req.headers['authorisation'];
+    let authHeader = req.headers['authorization'];
     let [str, token] = authHeader.split(' ');
 
     return (str === 'Bearer') ? token : '';

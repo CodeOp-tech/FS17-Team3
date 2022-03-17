@@ -5,8 +5,8 @@ import Local from '../helpers/Local';
 
 function PrivateRouteSellers(props) {
     // Redirect to /login if anonymous user
-    let sellerId = Local.getSellerId();
-    if (!sellerId) {
+    let sellerid = Local.getSellerId();
+    if (!sellerid) {
         return <Navigate to="/seller/login" />;
     }
 

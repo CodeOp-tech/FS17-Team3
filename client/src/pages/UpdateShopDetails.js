@@ -7,7 +7,7 @@ function UpdateShopDetails(props) {
     const [errorMsg, setErrorMsg] = useState("");
 
     const handleUpdateShop = async (newShopData) => {
-        let response = await Api.updateSellerData('/:sellerId', newShopData);
+        let response = await Api.updateSellerData('/:sellerid', newShopData);
         if (response.ok) {
           console.log("Shop details successfully updated!")
         }

@@ -152,9 +152,9 @@ class Api {
 
     // GET user data by id
 
-    static async getUser(userId) {
+    static async getUser(userid) {
         // Prepare URL and options
-        let url = `/users/${userId}`;
+        let url = `/users/${userid}`;
         let options = { method: 'GET', headers: {} };
 
         // Add JWT token (if it exists)
@@ -181,9 +181,9 @@ class Api {
 
     // GET seller data by id
 
-    static async getSeller(sellerId) {
+    static async getSeller(sellerid) {
         // Prepare URL and options
-        let url = `/sellers/${sellerId}`;
+        let url = `/sellers/${sellerid}`;
         let options = { method: 'GET', headers: {} };
 
         // Add JWT token (if it exists)

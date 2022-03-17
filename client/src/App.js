@@ -228,6 +228,19 @@ function App() {
           emptyCartCB: emptyCart,
      };
 
+
+    async function updateUserInfo(userObj, route) {
+      let response = await Api.patchContent(route, userObj);
+      if (response.ok) {
+          Local.saveUserInfo(response.data.token, response.data.user);
+          setUser(response.data.user);
+          setLoginError('');
+      } else {
+          setLoginError('Update failed');
+          console.log(loginError);
+      }
+    }
+  
      return (
           <div className="App">
                <CartContext.Provider value={contextObj}>
@@ -308,6 +321,7 @@ function App() {
                                    }
                               />
 
+
                               <Route
                                    path="/sellers/private"
                                    element={
@@ -326,7 +340,7 @@ function App() {
                                    path="/usersettings"
                                    element={
                                         <PrivateRouteUsers>
-                                             <UserSettings />
+                                             <UserSettings user={user} updateUserCB={(updatedUserObject, route) => updateUserInfo(updatedUserObject, route)} />
                                         </PrivateRouteUsers>
                                    }
                               />

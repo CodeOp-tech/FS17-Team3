@@ -10,9 +10,9 @@ router.get('/', function(req, res, next) {
 
 // GET one user (add ensureSameUser function once working)
 
-router.get('/:userId', async function(req, res, next) {
-  let {userId} = req.params;
-  let sql = 'SELECT * FROM users WHERE userid = ' + userId;
+router.get('/:userid', ensureSameUser, async function(req, res, next) {
+  let {userid} = req.params;
+  let sql = 'SELECT * FROM users WHERE userid = ' + userid;
 
   try {
     let results = await db(sql);

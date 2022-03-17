@@ -43,7 +43,7 @@
         }
 
         let user = JSON.parse(userjson);
-        return user.userId;
+        return user.userid;
     }
 
     static getSellerId() {

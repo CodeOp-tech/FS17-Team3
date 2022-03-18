@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 });
 
 // GET one seller
-router.get('/:sellerid', ensureSameSeller, async function(req, res, next) {
+router.get('/:sellerid', async function(req, res, next) {
   let {sellerid} = req.params;
   let sql = 'SELECT * FROM sellers WHERE sellerid = ' + sellerid;
 

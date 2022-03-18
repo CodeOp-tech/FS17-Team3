@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
 
 // Get order by ID
 
-router.get("/:orderid", async (req, res) => {
+router.get("/order/:orderid", async (req, res) => {
     let id = req.params.orderid;
     let sqlCheckID = `SELECT * from orders WHERE orderid = ${id}`;
     try {
@@ -31,15 +31,21 @@ router.get("/:orderid", async (req, res) => {
 
   // Get order(s) by user ID
 
-router.get("/:userid", async (req, res) => {
+router.get("/user/:userid", async (req, res) => {
     let userid = req.params.userid;
-    let sqlCheckID = `SELECT * from orders WHERE userid = ${userid}`;
+    let sqlGetOrders = `select * from orders WHERE userid = ${userid}`;
     try {
-      let result = await db(sqlCheckID);
+      let result = await db(sqlGetOrders);
       if (result.data.length === 0) {
         res.status(404).send({ error: "This user has no orders!" });
       } else {
-        res.send(result.data);
+        let userOrders = result.data;
+        for (let i in userOrders) {
+            let orderid = userOrders[i].orderid;
+            let orderItems = await db(`SELECT * from orderitems WHERE orderid = ${orderid}`);
+            userOrders[i].orderItems = orderItems.data;
+        }
+        res.send(userOrders);
       }
     } catch (err) {
       res.status(500).send({ error: err.message });

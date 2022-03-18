@@ -14,7 +14,9 @@ var sellersRouter = require('./routes/sellers');
 var productsRouter = require('./routes/products');
 var authUsersRouter = require('./routes/authUsers');
 var authSellersRouter = require('./routes/authSellers');
-var cartRouter = require('./routes/cart')
+var cartRouter = require('./routes/cart');
+var orderRouter = require('./routes/orders');
+var orderItemsRouter = require ('./routes/orderitems');
 
 var app = express();
 
@@ -32,6 +34,8 @@ app.use('/products', productsRouter);
 app.use('/', authUsersRouter);
 app.use('/', authSellersRouter);
 app.use('/cart', cartRouter);
+app.use('/orders', orderRouter);
+app.use('/orderitems', orderItemsRouter);
 
 
 // Code for Stripe checkout

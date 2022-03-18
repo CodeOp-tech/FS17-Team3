@@ -160,25 +160,25 @@ router.put("/:productid", async (req, res) => {
 
 // Delete product
 
-router.delete("/:productid", async (req, res) => {
-    let id = req.params.productid;
-    let sqlCheckID = `SELECT * FROM products WHERE productid = ${id}`;
-    let sqlDelete = `DELETE FROM products WHERE productid = ${id}`;
-    try {
-      let result = await db(sqlCheckID);
-      if (result.data.length === 0) {
-        res.status(404).send({ error: "Product not found!" });
-      } else {
-        await db(sqlDelete);
-        let result = await db(`SELECT p.*, s.username 
-        FROM products as p
-        JOIN sellers AS s ON p.listedby = s.sellerid`);
-        let products = result.data;
-        res.status(201).send(products);
-      }
-    } catch (err) {
-      res.status(500).send({ error: err.message });
-    }
-  });
+// router.delete("/:productid", async (req, res) => {
+//     let id = req.params.productid;
+//     let sqlCheckID = `SELECT * FROM products WHERE productid = ${id}`;
+//     let sqlDelete = `DELETE FROM products WHERE productid = ${id}`;
+//     try {
+//       let result = await db(sqlCheckID);
+//       if (result.data.length === 0) {
+//         res.status(404).send({ error: "Product not found!" });
+//       } else {
+//         await db(sqlDelete);
+//         let result = await db(`SELECT p.*, s.username 
+//         FROM products as p
+//         JOIN sellers AS s ON p.listedby = s.sellerid`);
+//         let products = result.data;
+//         res.status(201).send(products);
+//       }
+//     } catch (err) {
+//       res.status(500).send({ error: err.message });
+//     }
+//   });
 
 module.exports = router;

@@ -336,6 +336,9 @@ function App() {
                                    element={<UpdateShopDetails />}
                               />
 
+                              <Route path="shop/:sellerid" 
+                              element={<Shopfront seller={seller}/>} />
+
                               <Route
                                    path="/usersettings"
                                    element={

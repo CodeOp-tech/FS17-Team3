@@ -17,21 +17,21 @@ import ErrorPage from "./pages/ErrorPage";
 import Products from "./pages/Products";
 import TestPrivateUsers from "./pages/TestPrivateUsers";
 import TestPrivateSellers from "./pages/TestPrivateSellers";
-import PrivateRouteUsers from './components/PrivateRouteUsers';
-import PrivateRouteSellers from './components/PrivateRouteSellers';
+import PrivateRouteUsers from "./components/PrivateRouteUsers";
+import PrivateRouteSellers from "./components/PrivateRouteSellers";
 import UpdateShopDetails from "./pages/UpdateShopDetails";
 import Shopfront from "./pages/Shopfront";
 import Navbar from "./components/Navbar";
+import UserSettings from "./pages/UserSettings";
 
 function App() {
-     
-  const [user, setUser] = useState(Local.getUser());
-  const [seller, setSeller] = useState(Local.getSeller());
-  const [cart, setCart] = useState([]);
-  const [loginError, setLoginError] = useState('');
-  const [errorMsg, setErrorMsg] = useState("");
-  const navigate = useNavigate();
-  // const history = useHistory();
+     const [user, setUser] = useState(Local.getUser());
+     const [seller, setSeller] = useState(Local.getSeller());
+     const [cart, setCart] = useState([]);
+     const [loginError, setLoginError] = useState("");
+     const [errorMsg, setErrorMsg] = useState("");
+     const navigate = useNavigate();
+     // const history = useHistory();
 
      useEffect(() => {
           getCart();
@@ -207,50 +207,148 @@ function App() {
           }
      };
 
+     const emptyCart = async () => {
+          let response = await Api.patchContent(
+               `/cart/${user.userid}/empty`,
+               {}
+          );
+          if (response.ok) {
+               setCart(response.data);
+          } else {
+               setErrorMsg(response.error);
+          }
+     };
+
      const contextObj = {
           cart,
           increaseOrderCountCB: increaseOrderCount,
           decreaseOrderCountCB: decreaseOrderCount,
           deleteFromCartCB: deleteFromCart,
-          addToCartCB: addToCart
+          addToCartCB: addToCart,
+          emptyCartCB: emptyCart,
      };
 
-return (
 
-    <div className="App">
-      <CartContext.Provider value={contextObj} >
-      <header className="App-header">
-        <p>Items in cart: {cart.length}</p>
+    async function updateUserInfo(userObj, route) {
+      let response = await Api.patchContent(route, userObj);
+      if (response.ok) {
+          Local.saveUserInfo(response.data.token, response.data.user);
+          setUser(response.data.user);
+          setLoginError('');
+      } else {
+          setLoginError('Update failed');
+          console.log(loginError);
+      }
+    }
+  
+     return (
+          <div className="App">
+               <CartContext.Provider value={contextObj}>
+                    <header className="App-header">
+                         <p>Items in cart: {cart.length}</p>
+                         <Navbar />
+                         <Routes>
+                              <Route path="/" element={<Home />} />
+                              <Route
+                                   path="/products"
+                                   element={<Products user={user} />}
+                              />
+                              <Route
+                                   path="/checkout"
+                                   element={<Checkout user={user} />}
+                              />
+                              <Route
+                                   path="/user/login"
+                                   element={
+                                        <UserLogin
+                                             userLogInCb={(
+                                                  username,
+                                                  password
+                                             ) =>
+                                                  handleUserLogin(
+                                                       username,
+                                                       password
+                                                  )
+                                             }
+                                        />
+                                   }
+                                   loginError={loginError}
+                              />
+                              <Route
+                                   path="/user/signup"
+                                   element={
+                                        <UserSignUp
+                                             addUserCb={(newUser) =>
+                                                  handleUserSignUp(newUser)
+                                             }
+                                        />
+                                   }
+                              />
+                              <Route
+                                   path="/seller/login"
+                                   element={
+                                        <SellerLogin
+                                             sellerLogInCb={(
+                                                  username,
+                                                  password
+                                             ) =>
+                                                  handleSellerLogin(
+                                                       username,
+                                                       password
+                                                  )
+                                             }
+                                        />
+                                   }
+                                   loginError={loginError}
+                              />
+                              <Route
+                                   path="/seller/signup"
+                                   element={
+                                        <SellerSignUp
+                                             addSellerCb={(newSeller) =>
+                                                  handleSellerSignUp(newSeller)
+                                             }
+                                        />
+                                   }
+                              />
 
-        <Routes>  
-          <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products user={user} />} />
-          <Route path="/checkout" element={<Checkout user={user} />} />
-          <Route path="/user/login" element={<UserLogin userLogInCb={(username, password) => handleUserLogin(username, password)}/>} loginError={loginError}/>
-          <Route path="/user/signup" element={<UserSignUp addUserCb={(newUser) => handleUserSignUp(newUser)} />} />
-          <Route path="/seller/login" element={<SellerLogin sellerLogInCb={(username, password) => handleSellerLogin(username, password)}/>} loginError={loginError}/>
-          <Route path="/seller/signup" element={<SellerSignUp addSellerCb={(newSeller) => handleSellerSignUp(newSeller)} />} />
+                              <Route
+                                   path="/users/private"
+                                   element={
+                                        <PrivateRouteUsers>
+                                             <TestPrivateUsers />
+                                        </PrivateRouteUsers>
+                                   }
+                              />
 
-          <Route path="/users/private" element={
-              <PrivateRouteUsers>
-                <TestPrivateUsers />
-              </PrivateRouteUsers>    
-              } />
 
-          <Route path="/sellers/private" element={
-              <PrivateRouteSellers>
-                <TestPrivateSellers />
-              </PrivateRouteSellers>    
-              } />
-              
-          <Route path="/update/shop" element={
-            <UpdateShopDetails />} />
+                              <Route
+                                   path="/sellers/private"
+                                   element={
+                                        <PrivateRouteSellers>
+                                             <TestPrivateSellers />
+                                        </PrivateRouteSellers>
+                                   }
+                              />
 
-        </Routes>
-      </header>
-      </CartContext.Provider>
-    </div>
-  );
+                              <Route
+                                   path="/update/shop"
+                                   element={<UpdateShopDetails />}
+                              />
+
+                              <Route
+                                   path="/usersettings"
+                                   element={
+                                        <PrivateRouteUsers>
+                                             <UserSettings user={user} updateUserCB={(updatedUserObject, route) => updateUserInfo(updatedUserObject, route)} />
+                                        </PrivateRouteUsers>
+                                   }
+                              />
+                         </Routes>
+                    </header>
+               </CartContext.Provider>
+          </div>
+     );
 }
 
 export default App;

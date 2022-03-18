@@ -14,7 +14,6 @@ var sellersRouter = require('./routes/sellers');
 var productsRouter = require('./routes/products');
 var authUsersRouter = require('./routes/authUsers');
 var authSellersRouter = require('./routes/authSellers');
-// var pricesRouter = require('./routes/prices');
 var cartRouter = require('./routes/cart')
 
 var app = express();
@@ -32,7 +31,6 @@ app.use('/sellers', sellersRouter);
 app.use('/products', productsRouter);
 app.use('/', authUsersRouter);
 app.use('/', authSellersRouter);
-// app.use('/prices', pricesRouter);
 app.use('/cart', cartRouter);
 
 

@@ -53,7 +53,7 @@
         }
 
         let seller = JSON.parse(sellerjson);
-        return seller.sellerId;
+        return seller.sellerid;
     }
 
     static getUsername() {

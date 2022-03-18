@@ -39,4 +39,27 @@ router.patch('/:sellerid', ensureSameSeller, async (req, res) => {
 });
 
 
+// GET all products where listedby = sellerid
+
+// router.get("/", function(req, res, next) {
+//   // console.log(req.query);
+//   let { productid } = req.query;
+//   if (productid) {
+//     db(`SELECT * FROM products 
+//     WHERE listedby = '${sellerid}';`)
+//     .then(results => {
+//       console.log(results);
+//       res.send(results.data);
+//     })
+//     .catch(err => res.status(500).send(err));
+//   } else {
+//     db("SELECT * FROM products;")
+//     .then(results => {
+//       res.send(results.data);
+//     })
+//     .catch(err => res.status(500).send(err));
+//   }
+// });
+
+
 module.exports = router;

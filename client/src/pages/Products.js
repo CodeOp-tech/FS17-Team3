@@ -22,8 +22,8 @@ function Products(props) {
       }
     };
 
-  const handleAdd = (id) => {
-    addToCartCB(id);
+  const handleAdd = (id, price) => {
+    addToCartCB(id, price);
   }
 
   return (
@@ -33,7 +33,7 @@ function Products(props) {
           {products.map(p => (
             <li key={p.productid}>
             <span className="me-2">{p.name}</span> 
-            <button className="btn btn-primary" onClick={e => handleAdd(p.productid)}>Add to cart</button>
+            <button className="btn btn-primary" onClick={e => handleAdd(p.productid, p.price)}>Add to cart</button>
             </li>
           ))}
           

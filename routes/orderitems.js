@@ -22,7 +22,7 @@ router.get("/:orderid", async (req, res) => {
       if (result.data.length === 0) {
         res.status(404).send({ error: "Order not found!" });
       } else {
-        res.send(result.data[0]);
+        res.send(result.data);
       }
     } catch (err) {
       res.status(500).send({ error: err.message });

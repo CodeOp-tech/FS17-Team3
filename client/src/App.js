@@ -23,6 +23,7 @@ import UpdateShopDetails from "./pages/UpdateShopDetails";
 import Shopfront from "./pages/Shopfront";
 import Navbar from "./components/Navbar";
 import UserSettings from "./pages/UserSettings";
+import OrderHistory from './pages/OrderHistory';
 
 function App() {
      const [user, setUser] = useState(Local.getUser());
@@ -192,11 +193,12 @@ function App() {
           }
      };
 
-     const addToCart = async (id) => {
+     const addToCart = async (id, price) => {
           if (user) {
                let newCartObj = {
                     userid: user.userid,
                     productid: id,
+                    price: price
                };
                let response = await Api.addContent("/cart", newCartObj);
                if (response.ok) {
@@ -207,15 +209,18 @@ function App() {
           }
      };
 
-     const emptyCart = async () => {
-          let response = await Api.deleteContent(
-               `/cart/${user.userid}/empty`,
-               {}
+     const createOrder = async () => {
+          let response = await Api.addContent(
+               `/orders/create`,
+               {
+                 userid: user.userid,
+                 cart: cart
+                }
           );
           if (response.ok) {
-               setCart(response.data);
+                setCart([]); 
           } else {
-               setErrorMsg(response.error);
+                setErrorMsg(response.error);
           }
      };
 
@@ -225,7 +230,7 @@ function App() {
           decreaseOrderCountCB: decreaseOrderCount,
           deleteFromCartCB: deleteFromCart,
           addToCartCB: addToCart,
-          emptyCartCB: emptyCart,
+          createOrderCB: createOrder,
      };
 
 
@@ -344,6 +349,15 @@ function App() {
                                    element={
                                         <PrivateRouteUsers>
                                              <UserSettings user={user} updateUserCB={(updatedUserObject, route) => updateUserInfo(updatedUserObject, route)} />
+                                        </PrivateRouteUsers>
+                                   }
+                              />
+
+                            <Route
+                                   path="/orderhistory"
+                                   element={
+                                        <PrivateRouteUsers>
+                                             <OrderHistory user={user}/>
                                         </PrivateRouteUsers>
                                    }
                               />

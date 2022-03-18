@@ -6,6 +6,10 @@ import Local from "./helpers/Local";
 import Api from "./helpers/Api";
 import CartContext from "./CartContext";
 
+// Import navigation components
+import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
+
 // Import pages
 import Checkout from "./pages/Checkout";
 import Home from "./pages/Home";
@@ -21,7 +25,6 @@ import PrivateRouteUsers from "./components/PrivateRouteUsers";
 import PrivateRouteSellers from "./components/PrivateRouteSellers";
 import ShopSettings from "./pages/ShopSettings";
 import Shopfront from "./pages/Shopfront";
-import Navbar from "./components/Navbar";
 import UserSettings from "./pages/UserSettings";
 import OrderHistory from './pages/OrderHistory';
 
@@ -260,9 +263,16 @@ function App() {
           <div className="App">
                <CartContext.Provider value={contextObj}>
                     <header className="App-header">
-                         <p>Items in cart: {cart.length}</p>
                          <Navbar />
-                         <Routes>
+                    </header>
+
+                    <body className="App-body d-flex">
+                      <div id="sidebar" className="px-3">
+                        <Sidebar />
+                      </div>
+
+                      <div className="App-content d-flex ms-2">
+                      <Routes>
                               <Route path="/" element={<Home />} />
                               <Route
                                    path="/products"
@@ -375,7 +385,15 @@ function App() {
                                    }
                               />
                          </Routes>
-                    </header>
+                        
+                        </div>
+
+
+
+
+
+
+                    </body>
                </CartContext.Provider>
           </div>
      );

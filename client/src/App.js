@@ -19,7 +19,7 @@ import TestPrivateUsers from "./pages/TestPrivateUsers";
 import TestPrivateSellers from "./pages/TestPrivateSellers";
 import PrivateRouteUsers from "./components/PrivateRouteUsers";
 import PrivateRouteSellers from "./components/PrivateRouteSellers";
-import UpdateShopDetails from "./pages/UpdateShopDetails";
+import ShopSettings from "./pages/ShopSettings";
 import Shopfront from "./pages/Shopfront";
 import Navbar from "./components/Navbar";
 import UserSettings from "./pages/UserSettings";
@@ -240,6 +240,18 @@ function App() {
           console.log(loginError);
       }
     }
+
+    async function updateShopInfo(shopObj, route) {
+     let response = await Api.patchContent(route, shopObj);
+     if (response.ok) {
+         Local.saveSellerInfo(response.data.token, response.data.seller);
+         setSeller(response.data.seller);
+         setLoginError(''); //remove?
+     } else {
+         setLoginError('Update failed');
+         console.log(loginError); //remove?
+     }
+   }
   
      return (
           <div className="App">
@@ -331,9 +343,12 @@ function App() {
                                    }
                               />
 
-                              <Route
-                                   path="/update/shop"
-                                   element={<UpdateShopDetails />}
+                                   <Route
+                                   path="/shopsettings"
+                                   element={
+                                             <ShopSettings seller={seller} 
+                                             updateShopCB={(updatedShopObject, route) => updateShopInfo(updatedShopObject, route)} />
+                                   }
                               />
 
                               <Route path="shop/:sellerid" 

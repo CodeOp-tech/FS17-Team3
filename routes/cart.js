@@ -6,9 +6,9 @@ const db = require("../model/helper");
 // Add to cart
 
 router.post("/", async (req, res) => {
-    let { userid, productid } = req.body;
-    let sql = `insert into cart (userid, productid, quantity) 
-              values (${userid}, ${productid}, 1)`;
+    let { userid, productid, price } = req.body;
+    let sql = `insert into cart (userid, productid, price, quantity) 
+              values (${userid}, ${productid}, ${price}, 1)`;
       try {
       await db(sql);
       let result = await db(`SELECT c.*, p.* FROM cart AS c JOIN products AS p ON c.productid = p.productid WHERE userid = ${userid}`);

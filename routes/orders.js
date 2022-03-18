@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
 
 router.get("/:orderid", async (req, res) => {
     let id = req.params.orderid;
-    let sqlCheckID = `SELECT * from products WHERE orderid = ${id}`;
+    let sqlCheckID = `SELECT * from orders WHERE orderid = ${id}`;
     try {
       let result = await db(sqlCheckID);
       if (result.data.length === 0) {
@@ -29,16 +29,42 @@ router.get("/:orderid", async (req, res) => {
     }
   });
 
+  // Get order(s) by user ID
+
+router.get("/:userid", async (req, res) => {
+    let userid = req.params.userid;
+    let sqlCheckID = `SELECT * from orders WHERE userid = ${userid}`;
+    try {
+      let result = await db(sqlCheckID);
+      if (result.data.length === 0) {
+        res.status(404).send({ error: "This user has no orders!" });
+      } else {
+        res.send(result.data);
+      }
+    } catch (err) {
+      res.status(500).send({ error: err.message });
+    }
+  });
+
 // Add new order
 
-router.post("/", async (req, res) => {
+router.post("/create", async (req, res) => {
     let { userid } = req.body;
       try {
-        let sql = `insert into orders (userid) values (${userid})`;
-        await db(sql);
-        let result = await db(`SELECT * from orders`);
-        let orders = result.data;
-        res.status(201).send(orders);
+        let sqlCreateOrder = `insert into orders (userid) values (${userid})`;
+        await db(sqlCreateOrder);
+        let result = await db(`SELECT * from orders ORDER BY orderid DESC`);
+        let orderid = result.data[0].orderid;
+        let sqlUpdateCart = `UPDATE cart SET orderid = ${orderid} WHERE userid = ${userid}`;
+        await db(sqlUpdateCart);
+        let sqlCreateOrderItems = `insert into OrderItems (orderid, orderprice, orderquantity, productid) select orderid, price, quantity, productid from cart where userid = ${userid}`
+        await db(sqlCreateOrderItems);
+        let sqlEmptyCart = `DELETE FROM cart WHERE userid = ${userid}`;
+        await db(sqlEmptyCart);
+        // let sqlGetOrders = `SELECT * from orders`;
+        // let orderResult = await db(sqlGetOrders);
+        // let orders = orderResult.data;
+        res.status(201).send({message: 'Order created successfully!'});
     } 
     catch (err) {
       res.status(500).send({ error: err.message });

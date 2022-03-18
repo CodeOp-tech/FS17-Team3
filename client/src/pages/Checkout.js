@@ -12,7 +12,7 @@ import CartContext from '../CartContext';
 function Checkout( {user, increaseOrderCountCB} ) {
     const [message, setMessage] = useState("");
 
-    let { cart, emptyCartCB } = useContext(CartContext);
+    let { cart, createOrderCB } = useContext(CartContext);
     
     useEffect(() => {
         // Check to see if this is a redirect back from Checkout
@@ -20,7 +20,7 @@ function Checkout( {user, increaseOrderCountCB} ) {
     
         if (query.get("success")) {
           setMessage("Order placed! You will receive an email confirmation.");
-          emptyTheCart();
+          processOrder();
         }
     
         if (query.get("canceled")) {
@@ -30,8 +30,8 @@ function Checkout( {user, increaseOrderCountCB} ) {
         }
       }, []);
 
-    const emptyTheCart = () => {
-      emptyCartCB()
+    const processOrder = () => {
+      createOrderCB()
     }
 
 

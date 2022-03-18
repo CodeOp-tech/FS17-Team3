@@ -7,11 +7,11 @@ const db = require("../model/helper");
 
 router.post("/", async (req, res) => {
     let { userid, productid } = req.body;
-    let sql = `insert into cart (userid, productid, completed, quantity) 
-              values (${userid}, ${productid}, 0, 1)`;
+    let sql = `insert into cart (userid, productid, quantity) 
+              values (${userid}, ${productid}, 1)`;
       try {
       await db(sql);
-      let result = await db(`SELECT * from cart`);
+      let result = await db(`SELECT c.*, p.* FROM cart AS c JOIN products AS p ON c.productid = p.productid WHERE userid = ${userid}`);
       let cart = result.data;
       res.status(201).send(cart);
     } catch (err) {
@@ -35,12 +35,21 @@ router.patch("/:userid", async (req, res) => {
     }
   });
 
-  // Delete item from cart
+  // Delete item from cart or empty cart
 
-router.delete("/:userid/:productid", async (req, res) => {
+router.delete("/:userid/:productid", async (req, res, next) => {
     let {userid, productid} = req.params;
-    let sqlCheckID = `SELECT * FROM cart WHERE userid = ${userid} AND productid = ${productid}`;
-    let sqlDelete = `DELETE FROM cart WHERE userid = ${userid} AND productid = ${productid}`;
+    let sqlCheckID = "";
+    let sqlDelete = "";
+    if (productid === "empty") {
+      sqlCheckID = `SELECT * FROM cart WHERE userid = ${userid}`;
+      sqlDelete = `DELETE FROM cart WHERE userid = ${userid}`;
+    }
+    else {
+      sqlCheckID = `SELECT * FROM cart WHERE userid = ${userid} AND productid = ${productid}`;
+      sqlDelete = `DELETE FROM cart WHERE userid = ${userid} AND productid = ${productid}`;
+    }
+    
     let sqlGetCart = `SELECT c.*, p.* FROM cart AS c JOIN products AS p ON c.productid = p.productid WHERE userid = ${userid}`;
     try {
       let result = await db(sqlCheckID);
@@ -63,41 +72,11 @@ router.delete("/:userid/:productid", async (req, res) => {
 
 router.get('/:userid', async function(req, res, next) {
   let {userid} = req.params;
-  let sql = `SELECT c.*, p.* FROM cart AS c JOIN products AS p ON c.productid = p.productid WHERE userid = ${userid} AND completed = 0`;
+  let sql = `SELECT c.*, p.* FROM cart AS c JOIN products AS p ON c.productid = p.productid WHERE userid = ${userid}`;
   try {
     let results = await db(sql);
     let cart = results.data;
     res.send(cart);
-  } catch (err) {
-    res.status(500).send({error: err.message});
-  }
-});
-
-// Mark all cart items as purchased
-
-router.patch('/:userid/empty', async function(req, res, next) {
-  let {userid} = req.params;
-  let sqlEmpty = `UPDATE cart SET completed = 1 WHERE userid = ${userid}`;
-  let sql = `SELECT c.*, p.* FROM cart AS c JOIN products AS p ON c.productid = p.productid WHERE userid = ${userid} AND completed = 0`;
-  try {
-    await db(sqlEmpty);
-    let results = await db(sql);
-    let cart = results.data;
-    res.send(cart);
-  } catch (err) {
-    res.status(500).send({error: err.message});
-  }
-});
-
-// Get order history of logged-in user
-
-router.get('/:userid/history', async function(req, res, next) {
-  let {userid} = req.params;
-  let sql = `SELECT c.*, p.* FROM cart AS c JOIN products AS p ON c.productid = p.productid WHERE userid = ${userid} AND completed = 1`;
-  try {
-    let results = await db(sql);
-    let history = results.data;
-    res.send(history);
   } catch (err) {
     res.status(500).send({error: err.message});
   }

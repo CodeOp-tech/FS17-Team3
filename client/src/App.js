@@ -208,7 +208,7 @@ function App() {
      };
 
      const emptyCart = async () => {
-          let response = await Api.patchContent(
+          let response = await Api.deleteContent(
                `/cart/${user.userid}/empty`,
                {}
           );

@@ -12,7 +12,7 @@ import CartContext from '../CartContext';
 function Checkout( {user, increaseOrderCountCB} ) {
     const [message, setMessage] = useState("");
 
-    let { emptyCartCB } = useContext(CartContext);
+    let { cart, emptyCartCB } = useContext(CartContext);
     
     useEffect(() => {
         // Check to see if this is a redirect back from Checkout
@@ -31,16 +31,14 @@ function Checkout( {user, increaseOrderCountCB} ) {
       }, []);
 
     const emptyTheCart = () => {
-        emptyCartCB()
+      emptyCartCB()
     }
 
 
     return message ? (
         <Message message={message} />
-      ) : (
-        <ProductDisplay 
-        user={user}/>
-      );
+      ) : 
+        <ProductDisplay user={user}/>
     }
 
 export default Checkout;

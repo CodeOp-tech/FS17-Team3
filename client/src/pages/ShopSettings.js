@@ -5,7 +5,7 @@ const blank = {
     description: ''
 };
 
-const ShopSettings = (props) => { //need to include the sql helper?
+const ShopSettings = (props) => {
     const [formData, setFormData] = useState(blank);
 
     const handleSubmit = (event) => {
@@ -15,7 +15,6 @@ const ShopSettings = (props) => { //need to include the sql helper?
             description: formData.description
         }
         let route = `/sellers/${props.seller.sellerid}`;
-         // was /sellerid before but then added /sellers
          console.log(route, "route")
         props.updateShopCB(updatedShop, route);
         setFormData(blank);

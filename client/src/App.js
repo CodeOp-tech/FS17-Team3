@@ -251,10 +251,8 @@ function App() {
      if (response.ok) {
          Local.saveSellerInfo(response.data.token, response.data.seller);
          setSeller(response.data.seller);
-         setLoginError(''); //remove?
      } else {
-         setLoginError('Update failed');
-         console.log(loginError); //remove?
+          setErrorMsg(response.error);
      }
    }
   

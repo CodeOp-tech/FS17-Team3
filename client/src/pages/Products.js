@@ -1,11 +1,11 @@
 import React, {useEffect, useState, useContext} from 'react';
 import Api from '../helpers/Api';
-import CartContext from '../CartContext';
+import ProductDisplay from '../components/ProductDisplay';
 
 function Products(props) {
   const [products, setProducts] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
-  let { addToCartCB } = useContext(CartContext);
+  
   
   useEffect(() => {
     getProducts();
@@ -22,22 +22,10 @@ function Products(props) {
       }
     };
 
-  const handleAdd = (id, price) => {
-    addToCartCB(id, price);
-  }
-
   return (
     <div className="container">
-        <h2>List of products</h2>
-        <ul>
-          {products.map(p => (
-            <li key={p.productid}>
-            <span className="me-2">{p.name}</span> 
-            <button className="btn btn-primary" onClick={e => handleAdd(p.productid, p.price)}>Add to cart</button>
-            </li>
-          ))}
-          
-        </ul>
+        <h2>Category Name Goes Here</h2>
+        <ProductDisplay products={products} />
     </div>
   );
 }

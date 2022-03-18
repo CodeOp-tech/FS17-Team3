@@ -11,7 +11,7 @@ import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 
 // Import pages
-import Checkout from "./pages/Checkout";
+import Cart from "./pages/Cart";
 import Home from "./pages/Home";
 import UserLogin from "./pages/UserLogin";
 import SellerLogin from "./pages/SellerLogin";
@@ -150,10 +150,11 @@ function App() {
      }
 
      // CART FUNCTIONS
-     const increaseOrderCount = async (id, current) => {
+     const increaseOrderCount = async (id, current, price) => {
           let patched = {
                productid: id,
                quantity: current + 1,
+               price: price
           };
           let response = await Api.patchContent(
                `/cart/${user.userid}`,
@@ -166,13 +167,14 @@ function App() {
           }
      };
 
-     const decreaseOrderCount = async (id, current) => {
+     const decreaseOrderCount = async (id, current, price) => {
           if (current === 1) {
                deleteFromCart(id);
           } else {
                let patched = {
                     productid: id,
                     quantity: current - 1,
+                    price: price
                };
                let response = await Api.patchContent(
                     `/cart/${user.userid}`,
@@ -266,12 +268,12 @@ function App() {
                          <Navbar />
                     </header>
 
-                    <body className="App-body d-flex">
+                    <div className="App-body d-flex">
                       <div id="sidebar" className="px-3">
                         <Sidebar />
                       </div>
 
-                      <div className="App-content d-flex ms-2">
+                      <div className="App-content d-flex container">
                       <Routes>
                               <Route path="/" element={<Home />} />
                               <Route
@@ -279,8 +281,8 @@ function App() {
                                    element={<Products user={user} />}
                               />
                               <Route
-                                   path="/checkout"
-                                   element={<Checkout user={user} />}
+                                   path="/cart"
+                                   element={<Cart user={user} />}
                               />
                               <Route
                                    path="/user/login"
@@ -393,7 +395,7 @@ function App() {
 
 
 
-                    </body>
+                    </div>
                </CartContext.Provider>
           </div>
      );

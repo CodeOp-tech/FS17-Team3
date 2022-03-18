@@ -77,6 +77,8 @@ CREATE TABLE `OrderItems` (
 	PRIMARY KEY (`itemid`)
 );
 
+-- NOTE TO KEZI: I changed the prices into cents, so we can have prices that aren't round amounts, like €12.95 or whatever. They are stored in the DB in cents, then divided by 100 on the front end so they display correctly.
+
 INSERT INTO `Products` VALUES 
     (1,'Wooden vase','Handcrafted wall décor/propagation stations made with Australian reclaimed timber and glass test tubes! An original piece to complete your home décor displaying any plant from fresh to dry , you can display one as a statement piece or add different models and finish for a wall feature.','https://i.etsystatic.com/12397853/r/il/505fa0/2426681051/il_1588xN.2426681051_mocv.jpg', 'Homewares', 2000, 1, 'prod_LIiHCjlNIGlrKG', 'price_1Kc6qeKmdPIQ5CnWjgBaHCAt'),
     (2,'Paper plants','This is a set of four mini handmade paper plants. They are designed to brighten any spot in your home. Each leaf is printed, cut out by hand, and positioned in a 1.5" terracotta pot. The soil is not loose, so do not worry about your new plants making a mess. Although each leaf is treated with a clear coating, please do not get the plant wet (we know it might be hard). Wipe with a dry cloth to dust them if needed.','https://i.etsystatic.com/29669210/r/il/48a8a1/3619807266/il_1588xN.3619807266_4hg4.jpg', 'Homewares', 1000, 2, 'prod_LJqiKsHIwWEMqC', 'price_1KdDGuKmdPIQ5CnWe266Htsd'),

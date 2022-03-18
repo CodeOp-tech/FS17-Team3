@@ -33,7 +33,7 @@ router.get("/order/:orderid", async (req, res) => {
 
 router.get("/user/:userid", async (req, res) => {
     let userid = req.params.userid;
-    let sqlGetOrders = `select * from orders WHERE userid = ${userid}`;
+    let sqlGetOrders = `select * from orders WHERE userid = ${userid} ORDER BY orderdate DESC`;
     try {
       let result = await db(sqlGetOrders);
       if (result.data.length === 0) {
@@ -42,7 +42,7 @@ router.get("/user/:userid", async (req, res) => {
         let userOrders = result.data;
         for (let i in userOrders) {
             let orderid = userOrders[i].orderid;
-            let orderItems = await db(`SELECT * from orderitems WHERE orderid = ${orderid}`);
+            let orderItems = await db(`SELECT orderitems.*, products.name from orderitems JOIN products ON products.productid = orderitems.productid WHERE orderid = ${orderid}`);
             userOrders[i].orderItems = orderItems.data;
         }
         res.send(userOrders);
@@ -57,20 +57,41 @@ router.get("/user/:userid", async (req, res) => {
 router.post("/create", async (req, res) => {
     let { userid } = req.body;
       try {
+        
+        // Create a new order
         let sqlCreateOrder = `insert into orders (userid) values (${userid})`;
         await db(sqlCreateOrder);
+        
+        // Get the orderid of the order you just created
         let result = await db(`SELECT * from orders ORDER BY orderid DESC`);
         let orderid = result.data[0].orderid;
+        
+        // Associate that id with the items in the cart so you can identify them
         let sqlUpdateCart = `UPDATE cart SET orderid = ${orderid} WHERE userid = ${userid}`;
         await db(sqlUpdateCart);
-        let sqlCreateOrderItems = `insert into OrderItems (orderid, orderprice, orderquantity, productid) select orderid, price, quantity, productid from cart where userid = ${userid}`
+        
+        // Copy the items from the cart into new order items
+        let sqlCreateOrderItems = `insert into OrderItems (orderid, orderprice, orderquantity, productid, subtotal) select orderid, price, quantity, productid, subtotal from cart where userid = ${userid}`
         await db(sqlCreateOrderItems);
+        
+        // Calculate the order total
+        let sqlGetOrderItems = `select * from orderitems WHERE orderid = ${orderid}`
+        let orderItems = await db(sqlGetOrderItems);
+        let orderTotal = 0;
+        for (let i in orderItems.data) {
+          orderTotal+= orderItems.data[i].subtotal
+        }
+        await db(`UPDATE orders SET ordertotal = ${orderTotal} WHERE orderid = ${orderid}`)
+        
+        // Empty the cart
         let sqlEmptyCart = `DELETE FROM cart WHERE userid = ${userid}`;
         await db(sqlEmptyCart);
-        // let sqlGetOrders = `SELECT * from orders`;
-        // let orderResult = await db(sqlGetOrders);
-        // let orders = orderResult.data;
-        res.status(201).send({message: 'Order created successfully!'});
+        
+        // Return the final order
+        let sqlGetOrder = `SELECT * from orders WHERE orderid = ${orderid}`;
+        let orderResult = await db(sqlGetOrder);
+        let order = orderResult.data;
+        res.status(201).send(order);
     } 
     catch (err) {
       res.status(500).send({ error: err.message });

@@ -7,8 +7,8 @@ const db = require("../model/helper");
 
 router.post("/", async (req, res) => {
     let { userid, productid, price } = req.body;
-    let sql = `insert into cart (userid, productid, price, quantity) 
-              values (${userid}, ${productid}, ${price}, 1)`;
+    let sql = `insert into cart (userid, productid, price, quantity, subtotal) 
+              values (${userid}, ${productid}, ${price}, 1, ${price*1})`;
       try {
       await db(sql);
       let result = await db(`SELECT c.*, p.* FROM cart AS c JOIN products AS p ON c.productid = p.productid WHERE userid = ${userid}`);
@@ -23,8 +23,8 @@ router.post("/", async (req, res) => {
 
 router.patch("/:userid", async (req, res) => {
     let {userid} = req.params;
-    let { productid, quantity } = req.body;
-    let sql = `UPDATE cart SET quantity = ${quantity} WHERE userid = ${userid} AND productid = ${productid}`;
+    let { productid, quantity, price } = req.body;
+    let sql = `UPDATE cart SET quantity = ${quantity}, subtotal = ${price*quantity} WHERE userid = ${userid} AND productid = ${productid}`;
       try {
       await db(sql);
       let result = await db(`SELECT c.*, p.* FROM cart AS c JOIN products AS p ON c.productid = p.productid WHERE userid = ${userid}`);

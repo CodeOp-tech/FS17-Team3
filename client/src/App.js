@@ -230,10 +230,11 @@ function App() {
 
      return (
           <div className="App">
+               <Navbar />
                <CartContext.Provider value={contextObj}>
                     <header className="App-header">
                          <p>Items in cart: {cart.length}</p>
-                         <Navbar />
+
                          <Routes>
                               <Route path="/" element={<Home />} />
                               <Route

@@ -11,7 +11,7 @@ const UserLogin = (props) => {
     function handleSubmit(event) {
       event.preventDefault();
       props.userLogInCb(formData.username, formData.password);
-      if (props.loginError) {console.log(props.loginError)} // add MUI alerts here
+      if (props.loginError) {console.log(props.loginError)}
       setFormData(blank);
     }
   
@@ -26,8 +26,8 @@ const UserLogin = (props) => {
     return (
       <div>
       <h1>User Log In</h1>
-     <div className="UserLogin row">
-     <div className="col-4 offset-4"></div>
+     <div className="row">
+     <div className="offset-md-2 col-md-8 offset-lg-3 col-lg-6"></div>
       <form onSubmit={handleSubmit}>
       <div className="form-group">
           </div>

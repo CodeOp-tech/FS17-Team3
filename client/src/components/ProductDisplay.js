@@ -1,5 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import CartContext from '../CartContext';
+import './ProductDisplay.css';
 
 
 
@@ -11,7 +12,10 @@ function ProductDisplay({products}) {
       }
 
     return (
-          <div className="container">
+        <div>
+
+
+          {/* <div className="container">
                 <ul>
                     {products.map(p => (
                         <li key={p.productid}>
@@ -20,7 +24,28 @@ function ProductDisplay({products}) {
                         </li>
                     ))}      
                 </ul>
-          </div>
+          </div> */}
+
+        <div className="ProductCards">
+        <div className="row">
+            {products.map(p => (
+                <div className="col-sm-6 col-md-6 col-lg-4">
+                <div key={p.productid} class="card card">
+                <img src={p.imgurl} class="card-img-top" alt="..."/>
+                <div className="card-body">
+                <h5 className="card-title">{p.name}</h5>
+                <span class="badge badge-pill badge-light">£{p.price}</span>
+                <br></br>
+                <button className="btn btn-primary btn-products" onClick={e => handleAdd(p.productid, p.price)}>Add</button>
+                </div>
+                </div>
+                </div>
+             ))}
+        </div>
+        </div> 
+
+
+</div>
      );
 }
 export default ProductDisplay;

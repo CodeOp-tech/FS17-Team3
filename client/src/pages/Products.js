@@ -24,7 +24,7 @@ function Products(props) {
 
   return (
     <div className="container">
-        <h2>Category Name Goes Here</h2>
+        <h2>Category Name</h2>
         <ProductDisplay products={products} />
     </div>
   );

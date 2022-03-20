@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {useParams} from "react-router-dom";
+import './Shopfront.css';
 
 function Shopfront(props) {
 
@@ -26,13 +27,18 @@ function Shopfront(props) {
   };
 
  return (
-<div>
-<img className="shopCover" src={selectedShop.coverurl}></img>
-<img className="sellerPic" src={selectedShop.picurl}></img>
-    <ul>
-        <li>{selectedShop.shopname}</li>
-        <li>{selectedShop.description}</li>
-    </ul>
+<div className="shopfront">
+
+  <div className="profile-cover">
+    <img className="profile-cover-img" src={selectedShop.coverurl} alt="cover photo"></img>
+    <img className="profile-seller-img" src={selectedShop.picurl} alt="profile photo"></img>
+ </div>
+
+ <div className="profile-info">
+ <h2 className="shop-name">{selectedShop.shopname}</h2>
+    <p className="shop-desc">{selectedShop.description}</p>
+</div>
+
 </div>
  )
 }
@@ -42,7 +48,7 @@ export default Shopfront;
 
 
 
-// // GET one seller
+// GET one seller
 // router.get('/:sellerid', ensureSameSeller, async function(req, res, next) {
 //     let {sellerid} = req.params;
 //     let sql = 'SELECT * FROM sellers WHERE sellerid = ' + sellerid;

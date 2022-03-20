@@ -1,4 +1,60 @@
-nav {
+.navbar {
+     padding-left: 60px;
+     padding-right: 16px;
+     padding-top: 2px;
+     padding-bottom: 2px;
+     background-color: #004c99;
+   }
+ 
+.navbar-brand, .navbar-brand:hover {
+     font-family: 'allogistlight';
+     color: #fffdf3;
+     margin-right: 380px;
+     font-size: 24px;
+   }
+
+nav li {
+        color: #fffdf3;
+   }
+
+nav a.active {
+     color: #fffdf3;
+     text-decoration: underline;
+}
+
+nav a {
+     color: #fffdf3; 
+     text-decoration: none;
+     font-family: 'DM Sans', 'sans-serif';
+}
+
+nav a:hover {
+     color: #fffdf3c6; 
+     text-decoration: none;
+     font-family: 'DM Sans', 'sans-serif';
+}
+
+.dropdown-toggle, .dropdown-toggle:hover {
+     background-color: #004c99;
+     border-color: #004c99;
+     margin-top: 1px;
+     color: #fffdf3;
+}
+
+#dropdownMenuButton[aria-expanded="true"], 
+#dropdownMenuButton[aria-expanded="false"] {
+     background-color: #004c99;
+     border-color: #004c99;
+     box-shadow: none;
+ }
+
+
+ .dropdown-item {
+     color: #004c99;
+ }
+
+
+/* nav {
      border: 1px solid #ccc;
 }
 
@@ -14,9 +70,9 @@ nav li {
 
 nav a {
      padding: 10px;
-}
+} */
 
 /* 'active' class automatically added by React Router */
-nav a.active {
+/* nav a.active {
      background-color: #ccc;
-}
+} */

@@ -5,7 +5,7 @@ function Clothing(props) {
   return (
     <div className="container">
         <h2>Clothing & Accessories</h2>
-        <ProductDisplay category="Clothing" />
+        <ProductDisplay category="Clothing & Accessories" />
     </div>
   );
 }

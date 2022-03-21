@@ -28,11 +28,14 @@
      font-size: 48px;
      color: #004c99;
      letter-spacing: 1px;
-     margin-left: 90px;
 }
 
 h3, h4, h5, p {
      font-family: 'DM Sans', 'sans-serif';
+}
+
+.page-content {
+     margin-left: 50px;
 }
 
 .App-logo {
@@ -72,3 +75,23 @@ h3, h4, h5, p {
           transform: rotate(360deg);
      }
 }
+
+.btn-cart-left {
+     background-color: #004c99;
+     border-top-left-radius: 32px;
+     border-bottom-left-radius: 32px;
+  }
+
+  .btn-cart-right {
+     background-color: #004c99;
+     border-top-right-radius: 32px;
+     border-bottom-right-radius: 32px;
+  }
+
+  .cart-quantity {
+     width: 5%;
+       border-top: solid lightgrey;
+       border-bottom: solid lightgrey;
+       padding-left: 1em;
+       padding-right: 1em;
+  }

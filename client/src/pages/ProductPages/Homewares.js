@@ -3,7 +3,7 @@ import ProductDisplay from '../../components/ProductDisplay';
 
 function Homewares() {
   return (
-    <div className="container">
+    <div className="container d-flex flex-column align-items-center">
         <h2>Homewares</h2>
         <ProductDisplay category="Homewares" />
     </div>

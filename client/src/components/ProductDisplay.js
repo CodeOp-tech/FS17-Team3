@@ -61,11 +61,11 @@ function ProductDisplay({category}) {
                     (cart.filter(cartitem => cartitem.productid === p.productid).length) > 0
                     ?
                     (
-                        <div>
-                        <button className="btn btn-primary btn-products" disabled>Add</button>
-                        {/* <button className="btn btn-success btn-sm me-2" onClick={e => handleIncrease(cartitem.productid, cartitem.quantity, cartitem.price)}> + </button>
-                        <div className="me-2">{cartitem.quantity}</div>
-                        <button className="btn btn-danger btn-sm" onClick={e => handleDecrease(cartitem.productid, cartitem.quantity, cartitem.price)}>-</button> */}
+                        <div className="d-flex">
+                        <button className="btn btn-primary btn-products" disabled>Product Added!</button>
+                        <button className="btn btn-sm ms-2 btn-cart-left text-light" onClick={e => handleIncrease(p.productid, cart.filter(cartitem => cartitem.productid === p.productid)[0].quantity, p.price)}> + </button>
+                        <div className="cart-quantity d-flex align-items-center justify-content-center">{cart.filter(cartitem => cartitem.productid === p.productid)[0].quantity}</div>
+                        <button className="btn btn-sm btn-cart-right text-light" onClick={e => handleDecrease(p.productid, cart.filter(cartitem => cartitem.productid === p.productid)[0].quantity, p.price)}>-</button>
                         </div>
                     )
                     :

@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 function Navbar({user, seller}) {
      return (
      <nav className="navbar navbar-expand-lg navbar-dark">
-          <a className="navbar-brand border" href="/">Homegrown</a>
+          <a className="navbar-brand" href="/">Homegrown</a>
 
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>

@@ -43,8 +43,8 @@ const UserSettings = (props) => {
       }
 
     return (
-     <div id="user-settings" className="container">
-      <h2 className="mb-4"><MdSettings className="me-2" />My Settings</h2>
+     <div id="user-settings" className="container d-flex flex-column align-items-center">
+      <h2 className="mb-4">My Settings</h2>
       
         <div className="d-flex flex-column align-items-center">
       

@@ -2,7 +2,7 @@ import React from 'react';
 import "./Navbar.css";
 import { NavLink } from "react-router-dom";
 
-function Navbar() {
+function Navbar({user, seller}) {
      return (
      <nav className="navbar navbar-expand-lg navbar-dark">
           <a className="navbar-brand" href="/">Homegrown</a>
@@ -11,18 +11,18 @@ function Navbar() {
           <span className="navbar-toggler-icon"></span>
           </button>
 
-     <div className="collapse navbar-collapse" id="navbarNav">
-     <ul className="navbar-nav">
-                    
-                    <li className="nav-link">
-                         <NavLink to="/cart">Cart</NavLink>
-                    </li>
-                    <li className="nav-link">
+     <div className="collapse navbar-collapse justify-content-end" id="navbarNav">                    
+                    {
+                         !user && !seller
+                         ?
+                         (
+                         <div className="navbar-nav">
+                         <div className="nav-link">
                          <NavLink to="/user/login">Log In</NavLink>
-                    </li>
-                    <li className="nav-link">
+                         </div>
+                         <div className="nav-link">
                          <NavLink to="/seller/login">Seller Log In</NavLink>
-                    </li>
+                         </div>
 
                          <div className="dropdown">
                          <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -32,8 +32,35 @@ function Navbar() {
                          <a className="dropdown-item" href="/user/signup">User</a>
                          <a className="dropdown-item" href="/seller/signup">Seller</a>
                          </div>
-</div>
-    </ul>
+                         </div>
+                         </div>)
+                         :
+                         user && !seller
+                         ?
+                         (
+                         <div className="navbar-nav">
+                         <div className="nav-link">
+                         <NavLink to="/cart">Cart</NavLink>
+                         </div>
+                         <div className="nav-link">
+                         <NavLink to="/usersettings">User Settings</NavLink>
+                         </div>     
+                         <div className="nav-link">
+                         <NavLink to="/orderhistory">Order History</NavLink>
+                         </div>  
+                         </div>
+                         )
+                         :
+                         <div className="navbar-nav">
+                         <div className="nav-link">
+                         <NavLink to={`/shop/${seller.sellerid}`}>My Shop</NavLink>
+                         </div>
+                         <div className="nav-link">
+                         <NavLink to="/shopsettings">Shop Settings</NavLink>
+                         </div>
+                         </div>
+                    }
+
   </div>
 </nav>
      );

@@ -272,7 +272,7 @@ function App() {
           <div className="App">
                <CartContext.Provider value={contextObj}>
                     <header className="App-header">
-                         <Navbar />
+                         <Navbar user={user} seller={seller} />
                     </header>
 
                     <div className="d-flex">

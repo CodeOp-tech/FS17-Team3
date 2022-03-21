@@ -47,7 +47,6 @@ function ensureSameSeller(req, res, next) {
 
     try {
         let payload = jwt.verify(token, SECRET_KEY);
-        console.log("token where r u", payload);
         if (payload.sellerid === Number(req.params.sellerid)) {
             next();
         } else {

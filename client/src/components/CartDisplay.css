@@ -1,4 +1,21 @@
-.img-container {
-    width: 100px;
+#total-box {
+    height: 200px;
+}
+
+#checkout-button {
+    border-radius: 32px;
+    background-color: #004c99;
+    border-color: #004c99;
+    color: #fffdf3;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+#quantity {
+    height: 100%
+}
+
+#img-box {
+    width: 15vw;
     height: auto;
 }

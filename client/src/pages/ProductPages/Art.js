@@ -4,7 +4,7 @@ import ProductDisplay from '../../components/ProductDisplay';
 function Art(props) {
   return (
     <div className="container">
-        <h2>Art</h2>
+        <h2 className="page-content">Art</h2>
         <ProductDisplay category="Art" />
     </div>
   );

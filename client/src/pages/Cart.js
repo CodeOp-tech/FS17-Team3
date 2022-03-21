@@ -2,6 +2,7 @@ import React, {useEffect, useState, useContext} from 'react';
 import { propTypes } from 'react-bootstrap/esm/Image';
 import CartDisplay from '../components/CartDisplay';
 import CartContext from '../CartContext';
+import {Link} from 'react-router-dom';
 
   const Message = ({ message }) => (
     <section>
@@ -35,10 +36,26 @@ function Cart( {user, increaseOrderCountCB} ) {
     }
 
 
-    return message ? (
-        <Message message={message} />
-      ) : 
-        <CartDisplay user={user}/>
+    return (
+      <div className="container d-flex flex-column align-items-center">
+        <h2>Cart</h2>
+        {
+          cart.length === 0 && !message
+          ?
+          (<div>
+          <p>You don't have anything in your cart right now!</p>
+          <Link to="/products/all">Keep Browsing</Link>
+          </div>)
+          :
+          message 
+          ?
+          <Message message={message} />
+          :
+          <CartDisplay user={user}/>
+        }
+
+      </div>
+    )
     }
 
 export default Cart;

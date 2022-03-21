@@ -56,10 +56,8 @@ h3, h4, h5, p {
      color: white;
 } */
 
-#sidebar {
-     height: 100vh;
-     background-color: #282c34;
-     color: white;
+.App-body {
+     height: 100%;
 }
 
 .App-link {

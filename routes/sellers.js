@@ -39,6 +39,8 @@ router.patch('/:sellerid', ensureSameSeller, async (req, res) => {
 });
 
 
+
+
 // GET all products where listedby = sellerid
 
 // router.get("/", function(req, res, next) {

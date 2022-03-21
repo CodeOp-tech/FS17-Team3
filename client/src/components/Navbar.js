@@ -5,24 +5,24 @@ import { NavLink } from "react-router-dom";
 function Navbar({user, seller}) {
      return (
      <nav className="navbar navbar-expand-lg navbar-dark">
-          <a className="navbar-brand" href="/">Homegrown</a>
+          <a className="navbar-brand border" href="/">Homegrown</a>
 
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
           </button>
 
-     <div className="collapse navbar-collapse" id="navbarNav">                    
+     <div className="collapse navbar-collapse justify-content-end" id="navbarNav">                    
                     {
                          !user && !seller
                          ?
                          (
-                         <ul className="navbar-nav">
-                         <li className="nav-link">
+                         <div className="navbar-nav">
+                         <div className="nav-link">
                          <NavLink to="/user/login">Log In</NavLink>
-                         </li>
-                         <li className="nav-link">
+                         </div>
+                         <div className="nav-link">
                          <NavLink to="/seller/login">Seller Log In</NavLink>
-                         </li>
+                         </div>
 
                          <div className="dropdown">
                          <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -33,32 +33,32 @@ function Navbar({user, seller}) {
                          <a className="dropdown-item" href="/seller/signup">Seller</a>
                          </div>
                          </div>
-                         </ul>)
+                         </div>)
                          :
                          user && !seller
                          ?
                          (
-                         <ul className="navbar-nav">
-                         <li className="nav-link">
+                         <div className="navbar-nav">
+                         <div className="nav-link">
                          <NavLink to="/cart">Cart</NavLink>
-                         </li>
-                         <li className="nav-link">
+                         </div>
+                         <div className="nav-link">
                          <NavLink to="/usersettings">User Settings</NavLink>
-                         </li>     
-                         <li className="nav-link">
+                         </div>     
+                         <div className="nav-link">
                          <NavLink to="/orderhistory">Order History</NavLink>
-                         </li>  
-                         </ul>
+                         </div>  
+                         </div>
                          )
                          :
-                         <ul className="navbar-nav">
-                         <li className="nav-link">
+                         <div className="navbar-nav">
+                         <div className="nav-link">
                          <NavLink to={`/shop/${seller.sellerid}`}>My Shop</NavLink>
-                         </li>
-                         <li className="nav-link">
+                         </div>
+                         <div className="nav-link">
                          <NavLink to="/shopsettings">Shop Settings</NavLink>
-                         </li>
-                         </ul>
+                         </div>
+                         </div>
                     }
 
   </div>

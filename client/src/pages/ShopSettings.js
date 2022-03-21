@@ -7,6 +7,7 @@ const blank = {
 
 const ShopSettings = (props) => {
     const [formData, setFormData] = useState(blank);
+    const [file, setFile] = useState(null);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -26,6 +27,23 @@ const ShopSettings = (props) => {
           ...data,
           [name]: value
         }));
+      }
+
+      //handlesubmit for file upload form
+      function handleUpload(event) { 
+        event.preventDefault();
+      
+        let formData = new FormData();
+        formData.append('myfile', file, file.name);
+
+        props.uploadCb(formData);
+        setFile(null);
+        event.target.reset();
+    }
+    
+      //handlechange for file upload form
+      function handleFileChange(event) {
+        setFile(event.target.files[0]);
       }
 
     return (
@@ -56,6 +74,22 @@ const ShopSettings = (props) => {
   
               </div>
           </form>
+
+          {/* <div className="UploadForm">
+            <form onSubmit={handleUpload}>
+              <label>
+                File
+              </label>
+              <input
+              type="file"
+              value={picurl}
+              onChange={handleFileChange}
+              required
+              />
+              <button type="submit"></button>
+            </form>
+          </div> */}
+
           </div>
   )
 }

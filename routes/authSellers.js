@@ -18,6 +18,7 @@ router.post('/seller/register', async (req, res) => {
         VALUES ('${username}', '${hashedPassword}', '${email}')
         `;
         await db(sql);
+        console.log(hashedPassword)
         res.send({message: 'Registration successful'});
     } catch (err) {
         res.status(500).send({error: err.message});

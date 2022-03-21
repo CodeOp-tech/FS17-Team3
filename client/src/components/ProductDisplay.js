@@ -34,7 +34,7 @@ function ProductDisplay({products}) {
                 <img src={p.imgurl} class="card-img-top" alt="..."/>
                 <div className="card-body">
                 <h5 className="card-title">{p.name}</h5>
-                <span class="badge badge-pill badge-light">£{p.price}</span>
+                <span class="badge badge-pill badge-light">€{p.price}</span>
                 <br></br>
                 <button className="btn btn-primary btn-products" onClick={e => handleAdd(p.productid, p.price)}>Add</button>
                 </div>

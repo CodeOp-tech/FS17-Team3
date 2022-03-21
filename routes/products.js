@@ -101,7 +101,7 @@ router.post("/", async (req, res) => {
     let { name, description, imgurl, category, price, listedby } = req.body;
       try {
         // First, create the product id and price id using the Stripe API
-        let stripeProd = await stripe.products.create({name: name});
+        let stripeProd = await stripe.products.create({name: name, images: [imgurl]});
         let productid = stripeProd.id;
         let stripePrice = await stripe.prices.create(
           {

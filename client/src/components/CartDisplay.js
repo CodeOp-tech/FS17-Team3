@@ -56,7 +56,6 @@ const CartDisplay = ({user}) => {
         <button type="submit" id="checkout-button">Checkout</button>
         </form>
 
-        {/* <button type="submit" onClick={e => handleCheckout(e)} className="btn btn-primary">Checkout</button> */}
     </section>
     )
 }

@@ -8,7 +8,7 @@ function Navbar() {
           <a className="navbar-brand" href="/">Homegrown</a>
 
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
           </button>
 
      <div className="collapse navbar-collapse" id="navbarNav">
@@ -26,13 +26,13 @@ function Navbar() {
                          <NavLink to="/seller/login">Seller Log In</NavLink>
                     </li>
 
-                         <div class="dropdown">
-                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         <div className="dropdown">
+                         <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                          Sign Up
                          </button>
-                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                         <a class="dropdown-item" href="/user/signup">User</a>
-                         <a class="dropdown-item" href="/seller/signup">Seller</a>
+                         <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                         <a className="dropdown-item" href="/user/signup">User</a>
+                         <a className="dropdown-item" href="/seller/signup">Seller</a>
                          </div>
 </div>
     </ul>

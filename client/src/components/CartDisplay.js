@@ -43,7 +43,7 @@ const CartDisplay = ({user}) => {
                 <p className="text-start fs-6">{cartitem.description.substring(0,100)}...<Link to="/">View full description</Link></p>
                 </div>
                 <div className="d-flex flex-column align-items-center justify-content-center">
-                <div>€{cartitem.subtotal/100}</div>  
+                <div>€{(cartitem.subtotal/100).toFixed(2)}</div>  
                 <div className="d-flex align-items-center justify-content-center"><button className="btn btn-success btn-sm me-2" onClick={e => handleIncrease(cartitem.productid, cartitem.quantity, cartitem.price)}> + </button><div className="me-2">{cartitem.quantity}</div><button className="btn btn-danger btn-sm" onClick={e => handleDecrease(cartitem.productid, cartitem.quantity, cartitem.price)}>-</button></div>
                 <button className="btn btn-danger mt-2"onClick={e => handleDelete(cartitem.productid)}>Delete</button></div>
             </div>
@@ -51,7 +51,7 @@ const CartDisplay = ({user}) => {
             </div>
         ))}
 
-        <div className="d-flex justify-content-end">TOTAL: €{cartTotal/100}</div>
+        <div className="d-flex justify-content-end">TOTAL: €{(cartTotal/100).toFixed(2)}</div>
         <form action="/create-checkout-session" method="POST">
         <button type="submit" id="checkout-button">Checkout</button>
         </form>

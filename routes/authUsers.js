@@ -12,7 +12,6 @@ const {ensureUserLoggedIn} = require('../middleware/guards');
 router.post('/user/register', async (req, res) => {
     let {username, password, email} = req.body;
     let hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
-
     try {
         let sql = `
         INSERT INTO users (username, password, email)

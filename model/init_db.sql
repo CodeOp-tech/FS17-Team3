@@ -33,9 +33,17 @@ CREATE TABLE `Sellers` (
 INSERT INTO `Sellers` VALUES 
     (1,'seller1','$2b$12$eFzMWbS9SogNtxkmo3J7aO8FQMFQSKbtpwLMIOVsF6GGKpTQdgq.W','seller1@example.com', 'https://images.unsplash.com/photo-1528466829416-7c2576152a09?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80', 'https://images.unsplash.com/photo-1582131503261-fca1d1c0589f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80', 'Gracia Wooden Goods', 'Welcome to Gracia Wooden Goods. All pieces are crafted with the utmost care in Gracia.' ),
     (2,'seller2','$2b$12$WZcGPyrkCvD5e8m0Qz/nFOdBryUcsp6uDlE2MDo/AjuBhPrQBCfI6','seller2@example.com', null, null, null, null),
-    (3,'seller3','$2b$12$tiAz4eaXlpU.CdltUVvw6udLA2BWsitk5zXM2XOm2IpAeAiFfMCdy','seller3@example.com', null, null, null, null);
-	(4,'seller4','','seller4@example.com', null, null, null, null);
-	(5,'seller5','','seller5@example.com', null, null, null, null);
+    (3,'seller3','$2b$12$tiAz4eaXlpU.CdltUVvw6udLA2BWsitk5zXM2XOm2IpAeAiFfMCdy','seller3@example.com', null, null, null, null),
+	(4,'seller4','$2b$12$LJpHMh4/rP4HskaBxdbBUetY8kjTq5gR/FsIUAro.VoleThcXGemu','seller4@example.com', null, null, null, null),
+	(5,'seller5','$2b$12$7lseatmkQ/jkxdX33yq0KeT5Z/C4OwYZj2LyNjFGb80Hqz971ha3O','seller5@example.com', null, null, null, null),
+	(6,'seller6','$2b$12$7oekZzEeHgA7WDzZGk08I.K9USbsUhRfsaGI6.UV4VXqF3wrJVoZC','seller6@example.com', null, null, null, null),
+	(7,'seller7','$2b$12$CkCfsA0r4Z4DxFektkDbO.NGb/4aCJDtrQtMpWOgpiB.npivipuyW','seller7@example.com', null, null, null, null),
+	(8,'seller8','$2b$12$XClWpbvFzaWfL3dbfU/r8OS8Y87KjAb6dndpMMakCXy5FZo.YkcHG','seller8@example.com', null, null, null, null),
+	(9,'seller9','$2b$12$agxVVfQgU9fmmwF34UyPi.qDe5/kuFFMMUZnYKrMtxoVj7fWHaZK.','seller9@example.com', null, null, null, null),
+	(10,'seller10','$2b$12$41nStWBSUMvXSLMMUDTq.uhF8PSHWquUfa7X6DOhyYhE9AncY3b1y','seller10@example.com', null, null, null, null),
+	(11,'seller11','$2b$12$C7tuqJDqQdw5xAUxLp3pFOma0fejC0F3Cv7Jejr2hE4IIIr76U5ru','seller11@example.com', null, null, null, null),
+	(12,'seller12','$2b$12$kHjMJvcNN3FhghBD.hHg2.777z2k5TZ8iK8hYBXErPUOpRFWMOtx.','seller12@example.com', null, null, null, null),
+	(13,'seller13','$2b$12$GvqvJueflBoXzsdhJ9wrBOFqy29Ky4cu4q.Es9BmQ35sDJTrvqIYa','seller13@example.com', null, null, null, null);
 
 CREATE TABLE `Cart` (
 	`userid` INT NOT NULL,
@@ -89,7 +97,7 @@ INSERT INTO `Products` VALUES
 	(4,'Soy wax candles','Our soy wax candles are infused with organic ingredients including shea butter, coconut oil, jojoba, and cocoa butter! All candles are 13 ounces (375g) and made with 100% soy wax, wood wicks, and premium essential oils that are ethically sourced.','https://i.etsystatic.com/29637539/r/il/0b7500/3283471533/il_1588xN.3283471533_ss8g.jpg', 'Homewares', 2500, 4, 'prod_LLhsu9eqVgWvfM', 'price_1Kf0SKKmdPIQ5CnWqTrlciAH'),
 	(5,'Decorative Candles','Made with 100% soy wax and hand poured in Barcelona. 11cm height. A soft and pleasant aroma to fill your home. Our candles have a very slow combustion time, so you can use time and time again. Trim the wick each time before lighting.','https://i.etsystatic.com/33022570/r/il/5b9690/3677246273/il_1588xN.3677246273_negk.jpg', 'Homewares', 900, 4, 'prod_LLhz62CESciGMF', 'price_1Kf0ZlKmdPIQ5CnWGOOw8byH'),
 	(6,'Ceramic mug','Handcrafted on a wheel with white stoneware, fired at high temperature and decorated with colored pigments under glossy enamel. Each piece is made by hand individually, so no two are the same. Dishwasher and microwave safe.','https://i.etsystatic.com/22488933/r/il/70dafd/3695573399/il_1588xN.3695573399_pbm3.jpg', 'Homewares', 1000, 4, 'prod_LLiDEzk97CYIhI', 'price_1Kf0nXKmdPIQ5CnWEf6rls6i'),
-	(7,'Ceramic travel mug',`These travel mugs are a solid step towards a less wasteful lifestyle. Created on the potter's wheel and hand molded from beautiful speckled stoneware clay and glazed with a clear glaze. Enamelled inside and out. Hand wash only. 10.5cm x Ø 8.5cm.`,'https://i.etsystatic.com/26179465/r/il/df52f3/3560463487/il_1588xN.3560463487_jb4d.jpg', 'Homewares', 4000, 4, 'prod_LLiMTkcsKObcBo', 'price_1Kf0vSKmdPIQ5CnWtYQQpyQP'),
+	(7,'Ceramic travel mug','These travel mugs are a solid step towards a less wasteful lifestyle. Created on the potters wheel and hand molded from beautiful speckled stoneware clay and glazed with a clear glaze. Enamelled inside and out. Hand wash only. 10.5cm x Ø 8.5cm.','https://i.etsystatic.com/26179465/r/il/df52f3/3560463487/il_1588xN.3560463487_jb4d.jpg', 'Homewares', 4000, 4, 'prod_LLiMTkcsKObcBo', 'price_1Kf0vSKmdPIQ5CnWtYQQpyQP'),
 	(8,'Colorful Scandi style vases','These flower vases are so beautifully sculptural and pretty that they would certainly brighten up any room. Inspired by vintage art nouveau housewares. Use as a sculptural piece, flower stand, incense holder, or candle holder!','https://i.etsystatic.com/26042245/r/il/c2f858/3489338565/il_1588xN.3489338565_axdu.jpg', 'Homewares', 3000, 5, 'prod_LLiYnNUd5of9I1', 'price_1Kf17YKmdPIQ5CnWdhZqRUiP'),
 	(9,'Groovy candle holder','So stunning and elegant, these beautiful orange glass candle holders come in many beautiful designs and styles. Place a few together to create an eclectic mismatched feel or use them alone to hold a statement candle. Very chic.','https://i.etsystatic.com/26042245/r/il/9e2c8e/3046537405/il_1588xN.3046537405_fbbz.jpg', 'Homewares', 3000, 5, 'prod_LLic92gdeO08Pt', 'price_1Kf1BVKmdPIQ5CnWlxCdM7MH'),
 	(10,'Wood desk lamp','Handcrafted from sustainable agave wood sourced from Spain, this unique Edison Bulb desk lamp casts a warm glow and adds organic beauty to your carefully curated space. A perfect addition to your bedroom, living room, entryway, or home office.','https://i.etsystatic.com/14540775/r/il/682062/1898908238/il_1588xN.1898908238_4jm1.jpg', 'Homewares', 4900, 1, 'prod_LLikapFXfVuJR0', 'price_1Kf1JNKmdPIQ5CnW8RuFwhFu'),

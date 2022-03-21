@@ -3,8 +3,8 @@ import ProductDisplay from '../../components/ProductDisplay';
 
 function Art(props) {
   return (
-    <div className="container">
-        <h2 className="page-content">Art</h2>
+    <div className="container d-flex flex-column align-items-center">
+        <h2>Art</h2>
         <ProductDisplay category="Art" />
     </div>
   );

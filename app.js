@@ -42,7 +42,7 @@ app.use('/orderitems', orderItemsRouter);
 
 app.use(express.static('public'));
 
-const YOUR_DOMAIN = 'http://localhost:3000/checkout';
+const YOUR_DOMAIN = 'http://localhost:3000/cart';
 
 app.post('/create-checkout-session', async (req, res) => {
   try {

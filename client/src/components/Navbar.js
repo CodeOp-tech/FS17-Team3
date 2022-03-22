@@ -2,7 +2,7 @@ import React from 'react';
 import "./Navbar.css";
 import { NavLink } from "react-router-dom";
 
-function Navbar({user, seller}) {
+function Navbar({user, seller, userLogoutCb, sellerLogoutCb}) {
      return (
      <nav className="navbar navbar-expand-lg navbar-dark">
           <a className="navbar-brand" href="/">Homegrown</a>
@@ -47,6 +47,9 @@ function Navbar({user, seller}) {
                          </div>     
                          <div className="nav-link">
                          <NavLink to="/orderhistory">Order History</NavLink>
+                         </div> 
+                         <div className="nav-link nav-logout">
+                         <NavLink onClick={userLogoutCb} to="/">Logout</NavLink>
                          </div>  
                          </div>
                          )
@@ -58,6 +61,9 @@ function Navbar({user, seller}) {
                          <div className="nav-link">
                          <NavLink to="/shopsettings">Shop Settings</NavLink>
                          </div>
+                         <div className="nav-link nav-logout">
+                         <NavLink onClick={sellerLogoutCb} to="/">Logout</NavLink>
+                         </div> 
                          </div>
                     }
 

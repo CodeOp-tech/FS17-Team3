@@ -47,7 +47,7 @@ function App() {
 
      useEffect(() => {
           getCart();
-     }, []);
+     }, [user]);
 
      const getCart = async () => {
           if (user) {
@@ -338,8 +338,11 @@ function App() {
 
                                    <Route
                                         path="/cart"
-                                        element={<Cart user={user} />}
+                                        element={<PrivateRouteUsers>
+                                             <Cart user={user} />
+                                        </PrivateRouteUsers>}
                                    />
+
                                    <Route
                                         path="/user/login"
                                         element={

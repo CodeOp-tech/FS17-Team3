@@ -57,7 +57,8 @@ const YOUR_DOMAIN = 'http://localhost:3000/cart';
 
 app.post('/create-checkout-session', async (req, res) => {
   try {
-    let cart = await db(`SELECT c.quantity, p.stripe_priceid AS price FROM cart AS c JOIN products AS p ON c.productid = p.productid WHERE userid = 1`);
+    let {userid} = req.body;
+    let cart = await db(`SELECT c.quantity, p.stripe_priceid AS price FROM cart AS c JOIN products AS p ON c.productid = p.productid WHERE userid = ${userid}`);
     let line_items = cart.data;
     console.log(line_items);
     if (line_items.length === 0) {

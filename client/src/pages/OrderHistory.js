@@ -41,8 +41,8 @@ function OrderHistory({user}) {
    }; 
     
     return (
-          <div className="container d-flex flex-column align-items-center mt-3">
-               <h1 className="mb-3">Order History</h1>
+          <div className="container d-flex flex-column align-items-center">
+               <h2 className="mb-3">Order History</h2>
 
                 {orders.length > 0 
                 ? orders.map(order =>  (

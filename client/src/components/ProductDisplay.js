@@ -1,42 +1,78 @@
 import React, {useContext, useEffect, useState} from "react";
 import CartContext from '../CartContext';
+import Api from '../helpers/Api';
 import './ProductDisplay.css';
 
+function ProductDisplay({category}) {
+    const [products, setProducts] = useState([]);
+    const [errorMsg, setErrorMsg] = useState([]);
 
-
-function ProductDisplay({products}) {
-    let { addToCartCB } = useContext(CartContext); 
+    useEffect(() => {
+        getProducts();
+      }, []);
+    
+      const getProducts = async () => {
+          let response = await Api.getContent('/products');
+          if (response.ok) {
+            let productData = response.data;
+            if (category === "All") {
+              setProducts(productData);
+            }
+            else {
+              setProducts(productData.filter(product => product.category === category));
+            }
+            
+          }
+          else {
+            setErrorMsg("Uh oh! Something went wrong.")
+          }
+        };
+    
+    let { cart, addToCartCB, increaseOrderCountCB, decreaseOrderCountCB, deleteFromCartCB } = useContext(CartContext); 
     
     const handleAdd = (id, price) => {
         addToCartCB(id, price);
+        console.log(cart);
       }
+
+    const handleIncrease = (id, current, price) => {
+        increaseOrderCountCB(id, current, price);
+    }
+    
+    const handleDecrease = (id, current, price) => {
+        decreaseOrderCountCB(id, current, price);
+    }
 
     return (
         <div>
 
-
-          {/* <div className="container">
-                <ul>
-                    {products.map(p => (
-                        <li key={p.productid}>
-                        <span className="me-2">{p.name}</span> 
-                        <button className="btn btn-primary" onClick={e => handleAdd(p.productid, p.price)}>Add to cart</button>
-                        </li>
-                    ))}      
-                </ul>
-          </div> */}
-
         <div className="ProductCards">
         <div className="row">
             {products.map(p => (
-                <div className="col-sm-6 col-md-6 col-lg-4">
-                <div key={p.productid} class="card card">
-                <img src={p.imgurl} class="card-img-top" alt="..."/>
+                <div key={p.productid} className="col-sm-6 col-md-6 col-lg-4">
+                <div className="card card">
+                <img src={p.imgurl} className="card-img-top" alt="..."/>
                 <div className="card-body">
                 <h5 className="card-title">{p.name}</h5>
-                <span class="badge badge-pill badge-light">€{p.price}</span>
+                <span className="badge badge-pill badge-light">€{(p.price/100).toFixed(2)}</span>
                 <br></br>
-                <button className="btn btn-primary btn-products" onClick={e => handleAdd(p.productid, p.price)}>Add</button>
+
+                {   
+                    (cart.filter(cartitem => cartitem.productid === p.productid).length) > 0
+                    ?
+                    (
+                        <div className="d-flex">
+                        <button className="btn btn-primary btn-products" disabled>Product Added!</button>
+                        <button className="btn btn-sm ms-2 btn-cart-left text-light" onClick={e => handleIncrease(p.productid, cart.filter(cartitem => cartitem.productid === p.productid)[0].quantity, p.price)}> + </button>
+                        <div className="cart-quantity d-flex align-items-center justify-content-center">{cart.filter(cartitem => cartitem.productid === p.productid)[0].quantity}</div>
+                        <button className="btn btn-sm btn-cart-right text-light" onClick={e => handleDecrease(p.productid, cart.filter(cartitem => cartitem.productid === p.productid)[0].quantity, p.price)}>-</button>
+                        </div>
+                    )
+                    :
+                    (<button className="btn btn-primary btn-products" onClick={e => handleAdd(p.productid, p.price)}>Add</button>)
+                }
+                
+                
                 </div>
                 </div>
                 </div>

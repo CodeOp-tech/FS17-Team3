@@ -18,7 +18,6 @@ import SellerLogin from "./pages/SellerLogin";
 import UserSignUp from "./pages/UserSignUp";
 import SellerSignUp from "./pages/SellerSignUp";
 import ErrorPage from "./pages/ErrorPage";
-import Products from "./pages/Products";
 import TestPrivateUsers from "./pages/TestPrivateUsers";
 import TestPrivateSellers from "./pages/TestPrivateSellers";
 import PrivateRouteUsers from "./components/PrivateRouteUsers";
@@ -27,6 +26,13 @@ import ShopSettings from "./pages/ShopSettings";
 import Shopfront from "./pages/Shopfront";
 import UserSettings from "./pages/UserSettings";
 import OrderHistory from "./pages/OrderHistory";
+
+// Product pages
+import AllProducts from "./pages/ProductPages/AllProducts";
+import Homewares from "./pages/ProductPages/Homewares";
+import Art from "./pages/ProductPages/Art";
+import Jewellry from "./pages/ProductPages/Jewellry";
+import Clothing from "./pages/ProductPages/Clothing";
 
 function App() {
      const [user, setUser] = useState(Local.getUser());
@@ -262,21 +268,40 @@ function App() {
                {/* <Navbar /> */}
                <CartContext.Provider value={contextObj}>
                     <header className="App-header">
-                         <Navbar />
+                         <Navbar user={user} seller={seller} />
                     </header>
 
-                    <div className="App-body d-flex">
-                         <div id="sidebar" className="px-3">
-                              <Sidebar />
-                         </div>
+                    <div className="d-flex">
+                         <Sidebar />
 
                          <div className="App-content d-flex container">
                               <Routes>
                                    <Route path="/" element={<Home />} />
                                    <Route
-                                        path="/products"
-                                        element={<Products user={user} />}
+                                        path="/products/all"
+                                        element={<AllProducts user={user} />}
                                    />
+
+                                   <Route
+                                        path="/products/art"
+                                        element={<Art user={user} />}
+                                   />
+
+                                   <Route
+                                        path="/products/clothing"
+                                        element={<Clothing user={user} />}
+                                   />
+
+                                   <Route
+                                        path="/products/homewares"
+                                        element={<Homewares user={user} />}
+                                   />
+
+                                   <Route
+                                        path="/products/jewellry"
+                                        element={<Jewellry user={user} />}
+                                   />
+
                                    <Route
                                         path="/cart"
                                         element={<Cart user={user} />}

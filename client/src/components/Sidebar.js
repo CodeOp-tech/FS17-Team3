@@ -1,11 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import './Sidebar.css';
 
 function Sidebar() {
      return (
-          <nav className="Sidebar">
-               <p>Sidebar placeholder</p>
-          </nav>
+          <div className="sidebar d-flex flex-column p-3">
+               <NavLink className={({ isActive }) => (isActive ? 'sb-active sb-link text-light ps-3' : 'sb-link text-light ps-3')} to="/products/all">View All Products</NavLink>
+               <NavLink className={({ isActive }) => (isActive ? 'sb-active sb-link text-light ps-3' : 'sb-link text-light ps-3')} to="/products/art">Art</NavLink>
+               <NavLink className={({ isActive }) => (isActive ? 'sb-active sb-link text-light ps-3' : 'sb-link text-light ps-3')} to="/products/clothing">Clothing & Accessories</NavLink>
+               <NavLink className={({ isActive }) => (isActive ? 'sb-active sb-link text-light ps-3' : 'sb-link text-light ps-3')} to="/products/homewares">Homewares</NavLink>
+               <NavLink className={({ isActive }) => (isActive ? 'sb-active sb-link text-light ps-3' : 'sb-link text-light ps-3')} to="/products/jewellry">Jewellry</NavLink>
+          </div>
      );
 }
 export default Sidebar;

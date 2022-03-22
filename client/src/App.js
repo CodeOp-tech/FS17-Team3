@@ -26,6 +26,7 @@ import ShopSettings from "./pages/ShopSettings";
 import Shopfront from "./pages/Shopfront";
 import UserSettings from "./pages/UserSettings";
 import OrderHistory from "./pages/OrderHistory";
+import AddProduct from "./pages/AddProduct";
 
 // Product pages
 import AllProducts from "./pages/ProductPages/AllProducts";
@@ -100,16 +101,6 @@ function App() {
           setSeller(null);
      }
 
-     // async function handleUserLogout() {
-     //      Local.removeUserInfo();
-     //      setUser(Local.getUser());
-     // }
-
-     // async function handleSellerLogout() {
-     //      Local.removeSellerInfo();
-     //      setSeller(Local.getSeller());
-     // }
-
      const handleUserSignUp = async (newUser) => {
           let response = await Api.userSignUp(
                newUser.username,
@@ -154,6 +145,8 @@ function App() {
                console.log(loginError);
           }
      }
+
+     // Change seller info
 
      async function updateSellerData(sellerObj, route) {
           let response = await Api.updateSellerData(sellerObj, route);
@@ -266,6 +259,8 @@ function App() {
           }
      }
 
+     // update shop info
+
      async function updateShopInfo(shopObj, route) {
           let response = await Api.patchContent(route, shopObj);
           if (response.ok) {
@@ -275,6 +270,24 @@ function App() {
                setErrorMsg(response.error);
           }
      }
+
+     const addProduct = async ({name, description, imgurl, category, price, listedby}) => {
+               let newProductObj = {
+                    name: name,
+                    description: description,
+                    imgurl: imgurl,
+                    category: category,
+                    price: price,
+                    listedby: seller.sellerid,
+               };
+               let response = await Api.addContent('/products/', newProductObj);
+               if (response.ok) {
+                    console.log('Product added!');
+               } else {
+                    setErrorMsg(response.error);
+                    console.log(response.error);
+          }
+     };
 
      return (
           <div className="App">
@@ -399,6 +412,7 @@ function App() {
                                    <Route
                                         path="/shopsettings"
                                         element={
+                                             <PrivateRouteSellers>
                                              <ShopSettings
                                                   seller={seller}
                                                   updateShopCB={(
@@ -411,7 +425,27 @@ function App() {
                                                        )
                                                   }
                                              />
+                                        </PrivateRouteSellers>
                                         }
+                                   />
+
+                                   <Route
+                                        path="/addproduct"
+                                        element={
+                                             <PrivateRouteSellers>
+                                             <AddProduct
+                                                  seller={seller}
+                                                  addProductCB={(
+                                                       newProductObject,
+                                                       route
+                                                  ) =>
+                                                       addProduct(
+                                                            newProductObject,
+                                                            route
+                                                       )
+                                                  }
+                                             />
+                                        </PrivateRouteSellers>}
                                    />
 
                                    <Route

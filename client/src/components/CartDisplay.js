@@ -38,7 +38,11 @@ const CartDisplay = ({user}) => {
             key={cartitem.productid}
             className="d-flex mb-3 bg-light p-3 shadow-sm">
             
-            <div id="img-box" className="d-flex justify-content-center"><img className="img-fluid" src={cartitem.imgurl} /></div>
+            <div className="border img-box d-flex justify-content-center"><img className="img-fluid" src={cartitem.imgurl} /></div>
+
+            {/* // Contain or cover -- on the image itself  object-fit */}
+
+
             <div className="text-dark d-flex">
                 <div className="ms-3 d-flex flex-column align-items-start">
                 <h5>{cartitem.name}</h5>

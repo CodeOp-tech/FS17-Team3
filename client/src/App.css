@@ -95,3 +95,13 @@ h3, h4, h5, p {
        padding-left: 1em;
        padding-right: 1em;
   }
+
+  .btn-products {
+     border-radius: 32px;
+     background-color: #004c99;
+     border-color: #004c99;
+     color: #fffdf3;
+     font-size: 14px;
+     font-weight: 400;
+     margin-left: -10px;
+}

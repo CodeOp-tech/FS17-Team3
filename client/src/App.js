@@ -33,6 +33,7 @@ import Homewares from "./pages/ProductPages/Homewares";
 import Art from "./pages/ProductPages/Art";
 import Jewellry from "./pages/ProductPages/Jewellry";
 import Clothing from "./pages/ProductPages/Clothing";
+import ProductDetail from "./pages/ProductPages/ProductDetail";
 
 function App() {
      const [user, setUser] = useState(Local.getUser());
@@ -274,13 +275,18 @@ function App() {
                     <div className="d-flex flex-column align-items-center" >
                          <Sidebar />
 
-                         <div className="App-content d-flex container">
+                         <div className="App-content d-flex container justify-content-center">
                               <Routes>
                                    <Route path="/" element={<Home />} />
                                    <Route
                                         path="/products/all"
                                         element={<AllProducts user={user} />}
                                    />
+
+                                   <Route
+                                        path="/products/:productid"
+                                        element={<ProductDetail user={user} />}
+                                   />  
 
                                    <Route
                                         path="/products/art"

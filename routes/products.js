@@ -82,7 +82,7 @@ router.get('/', function(req, res, next) {
 
 router.get("/:productid", async (req, res) => {
     let id = req.params.productid;
-    let sqlCheckID = `SELECT * from products WHERE productid = ${id}`;
+    let sqlCheckID = `SELECT p.*, s.username FROM products as p JOIN sellers AS s ON p.listedby = s.sellerid WHERE productid = ${id}`;
     try {
       let result = await db(sqlCheckID);
       if (result.data.length === 0) {

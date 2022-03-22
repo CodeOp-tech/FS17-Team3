@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 });
 
 // GET one seller
-router.get('/:sellerid', ensureSameSeller, async function(req, res, next) {
+router.get('/:sellerid', async function(req, res, next) {
   let {sellerid} = req.params;
   let sql = 'SELECT * FROM sellers WHERE sellerid = ' + sellerid;
 
@@ -37,6 +37,31 @@ router.patch('/:sellerid', ensureSameSeller, async (req, res) => {
     res.status(500).send({error: err.messsage})
   }
 });
+
+
+
+
+// GET all products where listedby = sellerid
+
+// router.get("/", function(req, res, next) {
+//   // console.log(req.query);
+//   let { productid } = req.query;
+//   if (productid) {
+//     db(`SELECT * FROM products 
+//     WHERE listedby = '${sellerid}';`)
+//     .then(results => {
+//       console.log(results);
+//       res.send(results.data);
+//     })
+//     .catch(err => res.status(500).send(err));
+//   } else {
+//     db("SELECT * FROM products;")
+//     .then(results => {
+//       res.send(results.data);
+//     })
+//     .catch(err => res.status(500).send(err));
+//   }
+// });
 
 
 module.exports = router;

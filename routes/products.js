@@ -101,7 +101,7 @@ router.post("/", async (req, res) => {
     let { name, description, imgurl, category, price, listedby } = req.body;
       try {
         // First, create the product id and price id using the Stripe API
-        let stripeProd = await stripe.products.create({name: name});
+        let stripeProd = await stripe.products.create({name: name, images: [imgurl]});
         let productid = stripeProd.id;
         let stripePrice = await stripe.prices.create(
           {
@@ -160,25 +160,25 @@ router.put("/:productid", async (req, res) => {
 
 // Delete product
 
-router.delete("/:productid", async (req, res) => {
-    let id = req.params.productid;
-    let sqlCheckID = `SELECT * FROM products WHERE productid = ${id}`;
-    let sqlDelete = `DELETE FROM products WHERE productid = ${id}`;
-    try {
-      let result = await db(sqlCheckID);
-      if (result.data.length === 0) {
-        res.status(404).send({ error: "Product not found!" });
-      } else {
-        await db(sqlDelete);
-        let result = await db(`SELECT p.*, s.username 
-        FROM products as p
-        JOIN sellers AS s ON p.listedby = s.sellerid`);
-        let products = result.data;
-        res.status(201).send(products);
-      }
-    } catch (err) {
-      res.status(500).send({ error: err.message });
-    }
-  });
+// router.delete("/:productid", async (req, res) => {
+//     let id = req.params.productid;
+//     let sqlCheckID = `SELECT * FROM products WHERE productid = ${id}`;
+//     let sqlDelete = `DELETE FROM products WHERE productid = ${id}`;
+//     try {
+//       let result = await db(sqlCheckID);
+//       if (result.data.length === 0) {
+//         res.status(404).send({ error: "Product not found!" });
+//       } else {
+//         await db(sqlDelete);
+//         let result = await db(`SELECT p.*, s.username 
+//         FROM products as p
+//         JOIN sellers AS s ON p.listedby = s.sellerid`);
+//         let products = result.data;
+//         res.status(201).send(products);
+//       }
+//     } catch (err) {
+//       res.status(500).send({ error: err.message });
+//     }
+//   });
 
 module.exports = router;

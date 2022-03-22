@@ -1,5 +1,38 @@
-.App {
-     text-align: center;
+@font-face {
+     font-family: 'allogistlight';
+     src: url('../src/fonts/allogist-light-webfont.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+ 
+ }
+
+ .container {
+      margin: 0;
+      padding: 0;
+ }
+
+ h1 {
+      text-align: left;
+      margin-top: 40px;
+      font-family: 'allogistlight';
+      font-size: 60px;
+      color: #004c99;
+      letter-spacing: 1px;
+ }
+
+ h2 {
+     text-align: left;
+     margin-top: 40px;
+     margin-bottom: 40px;
+     font-family: 'allogistlight';
+     font-size: 48px;
+     color: #004c99;
+     letter-spacing: 1px;
+     margin-left: 90px;
+}
+
+h3, h4, h5, p {
+     font-family: 'DM Sans', 'sans-serif';
 }
 
 .App-logo {
@@ -13,14 +46,19 @@
      }
 }
 
-.App-header {
+/* .App-header {
      background-color: #282c34;
-     min-height: 100vh;
      display: flex;
      flex-direction: column;
      align-items: center;
      justify-content: center;
      font-size: calc(10px + 2vmin);
+     color: white;
+} */
+
+#sidebar {
+     height: 100vh;
+     background-color: #282c34;
      color: white;
 }
 

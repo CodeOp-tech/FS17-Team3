@@ -1,7 +1,3 @@
-#total-box {
-    height: 200px;
-}
-
 #checkout-button {
     border-radius: 32px;
     background-color: #004c99;
@@ -15,7 +11,43 @@
     height: 100%
 }
 
-.img-box {
-    width: 15vw;
-    height: auto;
+.cart-thumb {
+    width: 50%;
+    height: 50%;
 }
+
+.cart-item {
+    flex-direction: column;
+}
+
+.cart-buttons {
+    flex-direction: row;
+}
+
+/* // Small devices (landscape phones, 576px and up) */
+/* @media (min-width: 576px) { ... } */
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) { 
+    .cart-item {
+        flex-direction: row;
+    }
+
+    .cart-buttons {
+        flex-direction: column;
+    }
+
+    .cart-thumb {
+        width: 25%;
+        height: auto;
+    }
+ }
+
+/* // Large devices (desktops, 992px and up) */
+/* @media (min-width: 992px) { ... } */
+
+/* // X-Large devices (large desktops, 1200px and up) */
+/* @media (min-width: 1200px) { ... } */
+
+/* // XX-Large devices (larger desktops, 1400px and up) */
+/* @media (min-width: 1400px) { ... } */ 

@@ -1,0 +1,25 @@
+.highlight-image {
+    width: 300px;
+    height: auto
+}
+
+.product-detail-page {
+    margin-top: 30px;
+    width: 75vw;
+}
+
+.highlight-text {
+    padding-left: 50px;
+}
+
+.btn-add-to-cart {
+    border-radius: 32px;
+    background-color: #004c99;
+    border-color: #004c99;
+    color: #fffdf3;
+    font-weight: 400;
+    margin-left: -10px;
+}
+.btn-add-to-cart:hover {
+    color: #fffdf3;
+}

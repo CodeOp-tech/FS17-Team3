@@ -28,11 +28,10 @@ function ProductDisplay({category}) {
           }
         };
     
-    let { cart, addToCartCB, increaseOrderCountCB, decreaseOrderCountCB, deleteFromCartCB } = useContext(CartContext); 
+    let { cart, addToCartCB, increaseOrderCountCB, decreaseOrderCountCB } = useContext(CartContext); 
     
     const handleAdd = (id, price) => {
         addToCartCB(id, price);
-        console.log(cart);
       }
 
     const handleIncrease = (id, current, price) => {

@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState} from "react";
 import CartContext from '../CartContext';
 import Api from '../helpers/Api';
 import './ProductDisplay.css';
+import {Link} from 'react-router-dom';
 
 function ProductDisplay({category}) {
     const [products, setProducts] = useState([]);
@@ -49,12 +50,18 @@ function ProductDisplay({category}) {
         <div className="row">
             {products.map(p => (
                 <div key={p.productid} className="col-sm-6 col-md-6 col-lg-4">
-                <div className="card card">
+                
+                <div className="card">
+
+                <Link to={`/products/${p.productid}`}>
                 <img src={p.imgurl} className="card-img-top" alt="..."/>
+                </Link>
+
                 <div className="card-body">
                 <h5 className="card-title">{p.name}</h5>
                 <span className="badge badge-pill badge-light">€{(p.price/100).toFixed(2)}</span>
                 <br></br>
+                
 
                 {   
                     (cart.filter(cartitem => cartitem.productid === p.productid).length) > 0

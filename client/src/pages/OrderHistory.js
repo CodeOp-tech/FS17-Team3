@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from "react";
 import Api from '../helpers/Api';
 import './OrderHistory.css';
+import Loading from '../components/Loading';
 
 function OrderHistory({user}) {
     const [orders, setOrders] = useState([]);
     const [errorMsg, setErrorMsg] = useState("");
+    const [loading, setLoading] = useState(true);
     
     useEffect(() => {
         getOrders();
@@ -33,6 +35,7 @@ function OrderHistory({user}) {
                 } 
                 
                 setOrders(orders);
+                setLoading(false);
 
              } else {
                   setErrorMsg(response.error);
@@ -44,7 +47,12 @@ function OrderHistory({user}) {
           <div className="container d-flex flex-column align-items-center">
                <h2 className="mb-3">Order History</h2>
 
-                {orders.length > 0 
+                {
+                loading
+                ?
+                <Loading />
+                :
+                orders.length > 0 
                 ? orders.map(order =>  (
                 
                     <div key={order.orderid} className="order-display mb-3">

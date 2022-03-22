@@ -265,13 +265,13 @@ function App() {
 
      return (
           <div className="App">
-               {/* <Navbar /> */}
+
                <CartContext.Provider value={contextObj}>
                     <header className="App-header">
                          <Navbar user={user} seller={seller} />
                     </header>
 
-                    <div className="d-flex">
+                    <div className="d-flex flex-column align-items-center" >
                          <Sidebar />
 
                          <div className="App-content d-flex container">

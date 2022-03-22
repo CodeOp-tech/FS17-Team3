@@ -7,7 +7,7 @@ const cors = require('cors');  // add at the top
 const { STRIPE_SECRET_KEY } = require('./config');
 const stripe = require('stripe')(STRIPE_SECRET_KEY);
 const db = require('./model/helper');
-const fileUpload = require('express-fileupload');
+// const fileUpload = require('express-fileupload');
 
 
 var indexRouter = require('./routes/index');
@@ -29,12 +29,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(
-  fileUpload({
-    useTempFiles: true,
-    tempFileDir: '/tmp/'
-  })
-);
+// app.use(
+//   fileUpload({
+//     useTempFiles: true,
+//     tempFileDir: '/tmp/'
+//   })
+// );
 
 app.use(express.static('public'));
 

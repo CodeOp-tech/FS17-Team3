@@ -30,9 +30,9 @@ const CartDisplay = ({user}) => {
     }
 
     return (
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8">
+        <div className="container">
+            <div className="row">
+                <div className="col-md-8">
 
                 {cart.map(cartitem => (
             <div 
@@ -56,11 +56,12 @@ const CartDisplay = ({user}) => {
             </div>
         ))}
                 </div>
-                <div class="col-md-4">
+                <div className="col-md-4">
 
                 <div className="bg-light rounded d-flex flex-column align-items-center justify-content-center shadow-sm py-3">
                 <div className="d-flex justify-content-end fw-bold fs-4">TOTAL: €{(cartTotal/100).toFixed(2)}</div>
                 <form action="/create-checkout-session" method="POST">
+                <input name="userid" value={user.userid} readOnly className="d-none" />
                 <button type="submit" id="checkout-button" className="btn mt-3 px-3 py-2 fs-5">Checkout</button>
                 </form>
                 </div>

@@ -3,12 +3,12 @@ function makePatchSQL(body, sellerid) {
     let parts = [];
     console.log("body", body);
     // Check each of the possible properties
-    if ('picurl' in body) {
-        parts.push( `picurl = '${body['picurl']}'` );
-    }
-    if ('coverurl' in body) {
-        parts.push( `coverurl = '${body['coverurl']}'` );
-    }
+    // if ('picurl' in body) {
+    //     parts.push( `picurl = '${body['picurl']}'` );
+    // }
+    // if ('coverurl' in body) {
+    //     parts.push( `coverurl = '${body['coverurl']}'` );
+    // }
     if ('shopname' in body) {
         parts.push( `shopname = '${body['shopname']}'` );
     }

@@ -1,4 +1,31 @@
 h1 {
      border-bottom: 1px solid teal;
+     text-align: left;
+     padding-bottom: 1px;
+     padding-top: 0px;
+     padding-left: 50px;
+}
+
+.container {
+     width: 800px;
+     margin: 0 auto;
      text-align: center;
+}
+
+.grid {
+     display: grid;
+     grid-template-columns: repeat(2, 1fr);
+     gap: 20px;
+}
+.image {
+     width: 200%;
+     height: 100%;
+     object-fit: cover;
+     padding-right: 500px;
+}
+.details {
+     margin-top: 100%;
+}
+button {
+     border-radius: 12px;
 }

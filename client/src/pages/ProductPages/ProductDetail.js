@@ -3,6 +3,7 @@ import {useParams, Link} from "react-router-dom";
 import Api from '../../helpers/Api';
 import './ProductDetail.css';
 import CartContext from '../../CartContext';
+import Loading from '../../components/Loading';
 
 function ProductDetail() {
     const {productid} = useParams();
@@ -79,7 +80,7 @@ function ProductDetail() {
                    </div>
                    </div>
                    :
-                   <div>Product not loaded yet</div>
+                   <Loading />
 
                }
                

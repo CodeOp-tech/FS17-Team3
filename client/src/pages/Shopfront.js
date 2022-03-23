@@ -45,10 +45,10 @@ function Shopfront(props) {
         </div>
 
         <div className="container mt-5">
-          <div className="row gy-5 justify-content-center">
+          <div className="row">
             {
               selectedShop.products.map(prod => (
-                <div className="col-lg-4 col-md-6 gx-2 d-flex flex-column align-items-center" key={prod.productid}>
+                <div className="col-md-6 d-flex flex-column align-items-center" key={prod.productid}>
                   
                   <Link to={`/products/${prod.productid}`}>
                   <div className="prod-card d-flex flex-column p-2 rounded">

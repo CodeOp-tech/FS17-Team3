@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import UploadForm from '../components/UploadForm';
 
 const blank = {
     shopname: '',
@@ -28,6 +29,45 @@ const ShopSettings = (props) => {
         }));
       }
 
+      async function uploadProfile(fd) {
+        let options = {
+          method: 'PATCH',
+          body: fd
+        };
+
+        try {
+          let response = await fetch(`sellers/profile/${props.seller.sellerid}`, options);
+          if (response.ok) {
+            let data = await response.json();
+            props.setProfileFile(data);
+          } else {
+            console.log(`Server error: ${response.status}: ${response.statusText}`);
+          }
+        } catch (err) {
+          console.log(`Network error:${err.message}`);
+        }
+      }
+
+      async function uploadCover(fd) {
+        let options = {
+          method: 'PATCH',
+          body: fd
+        };
+
+        try {
+          let response = await fetch(`sellers/cover/${props.seller.sellerid}`, options);
+          if (response.ok) {
+            let data = await response.json();
+            props.setCoverFile(data);
+          } else {
+            console.log(`Server error: ${response.status}: ${response.statusText}`);
+          }
+        } catch (err) {
+          console.log(`Network error:${err.message}`);
+        }
+      }
+
+
     return (
       <div>
       <form className="row" onSubmit={handleSubmit}>
@@ -56,6 +96,8 @@ const ShopSettings = (props) => {
   
               </div>
           </form>
+
+          <UploadForm uploadProfileCb={fd => uploadProfile(fd)} uploadCoverCb={fd => uploadCover(fd)} />
           </div>
   )
 }

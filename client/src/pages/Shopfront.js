@@ -30,8 +30,8 @@ function Shopfront(props) {
 <div className="shopfront">
 
   <div className="profile-cover">
-    <img className="profile-cover-img" src={selectedShop.coverurl} alt="cover photo"></img>
-    <img className="profile-seller-img" src={selectedShop.picurl} alt="profile photo"></img>
+    <img className="profile-cover-img" src={`/images/sellers/${selectedShop.coverurl}`} alt="cover photo"></img>
+    <img className="profile-seller-img" src={`/images/sellers/${selectedShop.picurl}`} alt="profile photo"></img>
  </div>
 
  <div className="profile-info">

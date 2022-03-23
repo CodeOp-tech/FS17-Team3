@@ -69,7 +69,7 @@ function ProductDisplay({category}) {
   
                   <div className="card-body">
                   <h5 className="card-title">{p.name}</h5>
-                  <span className="badge badge-pill badge-light">€{(p.price/100).toFixed(2)}</span>
+                  <span className="prod-price badge badge-pill badge-light">€{(p.price/100).toFixed(2)}</span>
                   <br></br>
                   
   

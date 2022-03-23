@@ -43,7 +43,7 @@ function ProductDetail() {
                 <div aria-label="breadcrumb" className="py-3">
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item"><Link to="/products/all">All Products</Link></li>
-                        <li className="breadcrumb-item"><Link to={`/products/${highlightedProduct.category}`} >{highlightedProduct.category}</Link></li>
+                        <li className="breadcrumb-item"><Link to={highlightedProduct.category === 'Clothing & Accessories' ? '/products/Clothing' : `/products/${highlightedProduct.category}`} >{highlightedProduct.category}</Link></li>
                         <li className="breadcrumb-item active" aria-current="page">{highlightedProduct.name}</li>
                     </ol>
                 </div>

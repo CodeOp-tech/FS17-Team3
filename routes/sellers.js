@@ -15,11 +15,15 @@ router.get('/', function(req, res, next) {
 // GET one seller
 router.get('/:sellerid', async function(req, res, next) {
   let {sellerid} = req.params;
-  let sql = 'SELECT * FROM sellers WHERE sellerid = ' + sellerid;
+  let sqlSeller = `select * from sellers WHERE sellerid = ${sellerid}`;
+  let sqlProds = `select * from products WHERE listedby = ${sellerid}`;
   try {
-    let results = await db(sql);
-    let seller = results.data[0];
+    let sellerResults = await db(sqlSeller);
+    let prodResults = await db(sqlProds);
+    let seller = sellerResults.data[0];
+    let prods = prodResults.data;
     delete seller.password;
+    seller.products = prods;
     res.send(seller);
   } catch (err) {
     res.status(500).send({error: err.message});
@@ -40,7 +44,6 @@ router.patch('/:sellerid', ensureSameSeller, async (req, res) => {
     res.status(500).send({error: err.messsage})
   }
 });
-
 
 /* Patch profile image
 
@@ -122,6 +125,5 @@ router.patch('/cover/:sellerid', async function (req, res) { //removed ensureSam
 //     .catch(err => res.status(500).send(err));
 //   }
 // });
-
 
 module.exports = router;

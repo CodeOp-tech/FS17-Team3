@@ -4,11 +4,19 @@ import Api from '../helpers/Api';
 import './ProductDisplay.css';
 import {Link} from 'react-router-dom';
 import Loading from './Loading';
+import Modal from './Modal';
 
-function ProductDisplay({category}) {
+function ProductDisplay({category, user}) {
     const [products, setProducts] = useState([]);
     const [errorMsg, setErrorMsg] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [modalShow, setModalShow] = useState(false);
+    const modalInfo = {
+      title: 'Sorry, you must be logged in to add items to your cart!',
+      closetext: 'Keep browsing',
+      backtext: 'Log in',
+      backpath: '/user/login'
+    }
 
     useEffect(() => {
         getProducts();
@@ -37,7 +45,8 @@ function ProductDisplay({category}) {
     let { cart, addToCartCB, increaseOrderCountCB, decreaseOrderCountCB } = useContext(CartContext); 
     
     const handleAdd = (id, price) => {
-        addToCartCB(id, price);
+        if (user) {addToCartCB(id, price)}
+        else {setModalShow(true)};
       }
 
     const handleIncrease = (id, current, price) => {
@@ -69,12 +78,12 @@ function ProductDisplay({category}) {
   
                   <div className="card-body">
                   <h5 className="card-title">{p.name}</h5>
-                  <span className="badge badge-pill badge-light">€{(p.price/100).toFixed(2)}</span>
+                  <span className="prod-price badge badge-pill badge-light">€{(p.price/100).toFixed(2)}</span>
                   <br></br>
                   
   
                   {   
-                      (cart.filter(cartitem => cartitem.productid === p.productid).length) > 0
+                      (cart.filter(cartitem => cartitem.productid === p.productid).length) > 0 && user
                       ?
                       (
                           <div className="d-flex">
@@ -96,6 +105,11 @@ function ProductDisplay({category}) {
           </div>
           </div> )
         }
+        <Modal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+                modalInfo={modalInfo}
+            />
 </div>
      );
 }

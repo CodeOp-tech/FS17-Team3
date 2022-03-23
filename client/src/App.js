@@ -229,8 +229,7 @@ function App() {
 
      const createOrder = async () => {
           let response = await Api.addContent(`/orders/create`, {
-               userid: user.userid,
-               cart: cart,
+               userid: user.userid
           });
           if (response.ok) {
                setCart([]);
@@ -244,8 +243,7 @@ function App() {
           increaseOrderCountCB: increaseOrderCount,
           decreaseOrderCountCB: decreaseOrderCount,
           deleteFromCartCB: deleteFromCart,
-          addToCartCB: addToCart,
-          createOrderCB: createOrder,
+          addToCartCB: addToCart
      };
 
      async function updateUserInfo(userObj, route) {

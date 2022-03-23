@@ -12,12 +12,15 @@ router.get('/', function(req, res, next) {
 // GET one seller
 router.get('/:sellerid', async function(req, res, next) {
   let {sellerid} = req.params;
-  let sql = 'SELECT * FROM sellers WHERE sellerid = ' + sellerid;
-
+  let sqlSeller = `select * from sellers WHERE sellerid = ${sellerid}`;
+  let sqlProds = `select * from products WHERE listedby = ${sellerid}`;
   try {
-    let results = await db(sql);
-    let seller = results.data[0];
+    let sellerResults = await db(sqlSeller);
+    let prodResults = await db(sqlProds);
+    let seller = sellerResults.data[0];
+    let prods = prodResults.data;
     delete seller.password;
+    seller.products = prods;
     res.send(seller);
   } catch (err) {
     res.status(500).send({error: err.message});
@@ -37,31 +40,5 @@ router.patch('/:sellerid', ensureSameSeller, async (req, res) => {
     res.status(500).send({error: err.messsage})
   }
 });
-
-
-
-
-// GET all products where listedby = sellerid
-
-// router.get("/", function(req, res, next) {
-//   // console.log(req.query);
-//   let { productid } = req.query;
-//   if (productid) {
-//     db(`SELECT * FROM products 
-//     WHERE listedby = '${sellerid}';`)
-//     .then(results => {
-//       console.log(results);
-//       res.send(results.data);
-//     })
-//     .catch(err => res.status(500).send(err));
-//   } else {
-//     db("SELECT * FROM products;")
-//     .then(results => {
-//       res.send(results.data);
-//     })
-//     .catch(err => res.status(500).send(err));
-//   }
-// });
-
 
 module.exports = router;

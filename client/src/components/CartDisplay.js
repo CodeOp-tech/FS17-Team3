@@ -30,38 +30,45 @@ const CartDisplay = ({user}) => {
     }
 
     return (
-    <section className="container w-75 d-flex">
+        <div className="container">
+            <div className="row">
+                <div className="col-md-8">
 
-        <div className="w-75">
-        {cart.map(cartitem => (
+                {cart.map(cartitem => (
             <div 
             key={cartitem.productid}
-            className="d-flex mb-3 bg-light p-3 shadow-sm">
+            className="cart-item d-flex mb-3 bg-light p-3 shadow-sm text-dark">
             
-            <div id="img-box" className="d-flex justify-content-center"><img className="img-fluid" src={cartitem.imgurl} /></div>
-            <div className="text-dark d-flex">
-                <div className="ms-3 d-flex flex-column align-items-start">
-                <h5>{cartitem.name}</h5>
-                <p className="text-start fs-6">{cartitem.description.substring(0,100)}...<Link to="/">View full description</Link></p>
-                </div>
-                <div className="d-flex flex-column align-items-center justify-content-center">
-                <div>€{(cartitem.subtotal/100).toFixed(2)}</div>  
-                <div className="d-flex align-items-center justify-content-center mt-2"><button className="btn btn-cart-left btn-sm text-light" onClick={e => handleIncrease(cartitem.productid, cartitem.quantity, cartitem.price)}> + </button><div id="quantity" className="cart-quantity d-flex align-items-center justify-content-center">{cartitem.quantity}</div><button className="btn btn-cart-right btn-sm text-light" onClick={e => handleDecrease(cartitem.productid, cartitem.quantity, cartitem.price)}>-</button></div>
-                <button className="btn btn-danger mt-2"onClick={e => handleDelete(cartitem.productid)}>Delete</button></div>
+            <div className="cart-img-and-text d-flex">        
+            <img className="cart-thumb" src={cartitem.imgurl} />
+            <div className="ms-3 d-flex flex-column align-items-start">
+            <h5>{cartitem.name}</h5>
+            <p className="text-start fs-6">{cartitem.description.substring(0,100)}...<Link to="/">View full description</Link></p>
             </div>
+            </div>
+
+            <div className="cart-buttons d-flex align-items-center justify-content-center">
+            <div>€{(cartitem.subtotal/100).toFixed(2)}</div>  
+            <div className="d-flex align-items-center justify-content-center mt-2"><button className="btn btn-cart-left btn-sm text-light" onClick={e => handleIncrease(cartitem.productid, cartitem.quantity, cartitem.price)}> + </button><div id="quantity" className="cart-quantity d-flex align-items-center justify-content-center">{cartitem.quantity}</div><button className="btn btn-cart-right btn-sm text-light" onClick={e => handleDecrease(cartitem.productid, cartitem.quantity, cartitem.price)}>-</button></div>
+            <button className="btn btn-danger mt-2"onClick={e => handleDelete(cartitem.productid)}>Delete</button></div>
+
 
             </div>
         ))}
-        </div>
+                </div>
+                <div className="col-md-4">
 
-        <div id="total-box" className="bg-light rounded w-25 ms-3 d-flex flex-column align-items-center justify-content-center shadow-sm">
-        <div className="d-flex justify-content-end fw-bold fs-4">TOTAL: €{(cartTotal/100).toFixed(2)}</div>
-        <form action="/create-checkout-session" method="POST">
-        <button type="submit" id="checkout-button" className="btn mt-3 px-3 py-2 fs-5">Checkout</button>
-        </form>
-        </div>
+                <div className="bg-light rounded d-flex flex-column align-items-center justify-content-center shadow-sm py-3">
+                <div className="d-flex justify-content-end fw-bold fs-4">TOTAL: €{(cartTotal/100).toFixed(2)}</div>
+                <form action="/create-checkout-session" method="POST">
+                <input name="userid" value={user.userid} readOnly className="d-none" />
+                <button type="submit" id="checkout-button" className="btn mt-3 px-3 py-2 fs-5">Checkout</button>
+                </form>
+                </div>
 
-    </section>
+                </div>
+            </div>
+        </div>
     )
 }
 

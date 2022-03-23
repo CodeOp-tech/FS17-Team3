@@ -45,13 +45,14 @@ nav a:hover {
      background-color: #004c99;
      border-color: #004c99;
      box-shadow: none;
+     font-family: 'DM Sans', 'sans-serif';
+     font-size: 16px;
  }
 
 
  .dropdown-item {
      color: #004c99;
  }
-
 
 /* nav {
      border: 1px solid #ccc;

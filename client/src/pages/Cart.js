@@ -13,7 +13,7 @@ import {Link} from 'react-router-dom';
 function Cart( {user, increaseOrderCountCB} ) {
     const [message, setMessage] = useState("");
 
-    let { cart, createOrderCB } = useContext(CartContext);
+    let { cart } = useContext(CartContext);
     
     useEffect(() => {
         // Check to see if this is a redirect back from Checkout
@@ -21,7 +21,6 @@ function Cart( {user, increaseOrderCountCB} ) {
     
         if (query.get("success")) {
           setMessage("Order placed! You will receive an email confirmation.");
-          processOrder();
         }
     
         if (query.get("canceled")) {
@@ -30,11 +29,6 @@ function Cart( {user, increaseOrderCountCB} ) {
           );
         }
       }, []);
-
-    const processOrder = () => {
-      createOrderCB()
-    }
-
 
     return (
       <div className="container d-flex flex-column align-items-center">

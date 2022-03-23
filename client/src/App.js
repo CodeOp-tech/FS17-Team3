@@ -26,6 +26,7 @@ import ShopSettings from "./pages/ShopSettings";
 import Shopfront from "./pages/Shopfront";
 import UserSettings from "./pages/UserSettings";
 import OrderHistory from "./pages/OrderHistory";
+import AddProduct from "./pages/AddProduct";
 
 // Product pages
 import AllProducts from "./pages/ProductPages/AllProducts";
@@ -33,6 +34,7 @@ import Homewares from "./pages/ProductPages/Homewares";
 import Art from "./pages/ProductPages/Art";
 import Jewellry from "./pages/ProductPages/Jewellry";
 import Clothing from "./pages/ProductPages/Clothing";
+import ProductDetail from "./pages/ProductPages/ProductDetail";
 
 function App() {
      const [user, setUser] = useState(Local.getUser());
@@ -45,7 +47,7 @@ function App() {
 
      useEffect(() => {
           getCart();
-     }, []);
+     }, [user]);
 
      const getCart = async () => {
           if (user) {
@@ -100,16 +102,6 @@ function App() {
           setSeller(null);
      }
 
-     // async function handleUserLogout() {
-     //      Local.removeUserInfo();
-     //      setUser(Local.getUser());
-     // }
-
-     // async function handleSellerLogout() {
-     //      Local.removeSellerInfo();
-     //      setSeller(Local.getSeller());
-     // }
-
      const handleUserSignUp = async (newUser) => {
           let response = await Api.userSignUp(
                newUser.username,
@@ -154,6 +146,8 @@ function App() {
                console.log(loginError);
           }
      }
+
+     // Change seller info
 
      async function updateSellerData(sellerObj, route) {
           let response = await Api.updateSellerData(sellerObj, route);
@@ -235,8 +229,7 @@ function App() {
 
      const createOrder = async () => {
           let response = await Api.addContent(`/orders/create`, {
-               userid: user.userid,
-               cart: cart,
+               userid: user.userid
           });
           if (response.ok) {
                setCart([]);
@@ -250,8 +243,7 @@ function App() {
           increaseOrderCountCB: increaseOrderCount,
           decreaseOrderCountCB: decreaseOrderCount,
           deleteFromCartCB: deleteFromCart,
-          addToCartCB: addToCart,
-          createOrderCB: createOrder,
+          addToCartCB: addToCart
      };
 
      async function updateUserInfo(userObj, route) {
@@ -266,6 +258,8 @@ function App() {
           }
      }
 
+     // update shop info
+
      async function updateShopInfo(shopObj, route) {
           let response = await Api.patchContent(route, shopObj);
           if (response.ok) {
@@ -275,6 +269,24 @@ function App() {
                setErrorMsg(response.error);
           }
      }
+
+     const addProduct = async ({name, description, imgurl, category, price, listedby}) => {
+               let newProductObj = {
+                    name: name,
+                    description: description,
+                    imgurl: imgurl,
+                    category: category,
+                    price: price,
+                    listedby: seller.sellerid,
+               };
+               let response = await Api.addContent('/products/', newProductObj);
+               if (response.ok) {
+                    console.log('Product added!');
+               } else {
+                    setErrorMsg(response.error);
+                    console.log(response.error);
+          }
+     };
 
      return (
           <div className="App">
@@ -289,13 +301,18 @@ function App() {
                     <div className="d-flex flex-column align-items-center" >
                          <Sidebar />
 
-                         <div className="App-content d-flex container">
+                         <div className="App-content d-flex container justify-content-center">
                               <Routes>
                                    <Route path="/" element={<Home />} />
                                    <Route
                                         path="/products/all"
                                         element={<AllProducts user={user} />}
                                    />
+
+                                   <Route
+                                        path="/products/:productid"
+                                        element={<ProductDetail user={user} />}
+                                   />  
 
                                    <Route
                                         path="/products/art"
@@ -319,8 +336,11 @@ function App() {
 
                                    <Route
                                         path="/cart"
-                                        element={<Cart user={user} />}
+                                        element={<PrivateRouteUsers>
+                                             <Cart user={user} />
+                                        </PrivateRouteUsers>}
                                    />
+
                                    <Route
                                         path="/user/login"
                                         element={
@@ -399,6 +419,7 @@ function App() {
                                    <Route
                                         path="/shopsettings"
                                         element={
+                                             <PrivateRouteSellers>
                                              <ShopSettings
                                                   seller={seller}
                                                   updateShopCB={(
@@ -411,7 +432,27 @@ function App() {
                                                        )
                                                   }
                                              />
+                                        </PrivateRouteSellers>
                                         }
+                                   />
+
+                                   <Route
+                                        path="/addproduct"
+                                        element={
+                                             <PrivateRouteSellers>
+                                             <AddProduct
+                                                  seller={seller}
+                                                  addProductCB={(
+                                                       newProductObject,
+                                                       route
+                                                  ) =>
+                                                       addProduct(
+                                                            newProductObject,
+                                                            route
+                                                       )
+                                                  }
+                                             />
+                                        </PrivateRouteSellers>}
                                    />
 
                                    <Route

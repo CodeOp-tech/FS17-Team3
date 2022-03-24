@@ -79,12 +79,6 @@ const ShopSettings = (props) => {
           }));
         }
 
-      async function uploadProfile(fd) {
-        let options = {
-          method: 'PATCH',
-          body: fd
-        };
-
      async function uploadProfile(fd) {
           let options = {
                method: "PATCH",
@@ -133,20 +127,6 @@ const ShopSettings = (props) => {
           }
      }
 
-     return (
-          <div>
-               <form className="row" onSubmit={handleSubmit}>
-                    <div className="offset-md-2 col-md-8 offset-lg-3 col-lg-6">
-                         <div className="UpdateShopForm">
-                              <label className="form-label">Shop Name</label>
-                              <input
-                                   type="text"
-                                   name="shopname"
-                                   value={formData.shopname}
-                                   className="form-control"
-                                   onChange={handleChange}
-                              />
-
     return (
       <div>
         <h2>Shop Settings</h2>
@@ -167,8 +147,8 @@ const ShopSettings = (props) => {
                  name="shopname"
                  value={formData.shopname}
                  className="form-control"
-                 onChange={handleNameChange}
-                  />
+                 onChange={handleNameChange}>
+                 </input>
                  <div>
                 <button onClick={notifyName}type="submit" className="btn btn-primary formbutton">Update</button>
               </div>
@@ -184,8 +164,8 @@ const ShopSettings = (props) => {
                  name="description"
                  value={formData.description}
                  className="form-control"
-                 onChange={handleDescChange}
-                />
+                 onChange={handleDescChange}>
+                </input>
               <div>
               <button onClick={notifyDesc}type="submit" className="btn btn-primary formbutton">Update</button>
               </div>

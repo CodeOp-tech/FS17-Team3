@@ -26,7 +26,7 @@ function Home({ user, seller }) {
                </div>
                <h3>Top Products</h3>
                <div className="row">
-                    <div class="col">
+                    <div className="col">
                          <img
                               className="col"
                               src="https://i.etsystatic.com/12397853/r/il/505fa0/2426681051/il_1588xN.2426681051_mocv.jpg"
@@ -34,14 +34,14 @@ function Home({ user, seller }) {
                          ></img>
                     </div>
 
-                    <div class="col">
+                    <div className="col">
                          <img
                               className="col"
                               src="https://i.etsystatic.com/20105212/r/il/99e7ee/3700655518/il_1588xN.3700655518_tpti.jpg"
                               width="200px"
                          ></img>
                     </div>
-                    <div class="col">
+                    <div className="col">
                          <img
                               className="col"
                               src="https://i.etsystatic.com/12397853/r/il/505fa0/2426681051/il_1588xN.2426681051_mocv.jpg"

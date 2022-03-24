@@ -27,6 +27,7 @@ import Shopfront from "./pages/Shopfront";
 import UserSettings from "./pages/UserSettings";
 import OrderHistory from "./pages/OrderHistory";
 import AddProduct from "./pages/AddProduct";
+import SellerOrders from './pages/SellerOrders';
 
 // Product pages
 import AllProducts from "./pages/ProductPages/AllProducts";
@@ -487,6 +488,16 @@ function App() {
                                                   <OrderHistory user={user} />
                                              </PrivateRouteUsers>
                                         }
+                                   />
+
+                                   <Route
+                                        path="/orders/:sellerid"
+                                        element={
+                                             <PrivateRouteSellers>
+                                             <SellerOrders
+                                                  seller={seller}
+                                             />
+                                        </PrivateRouteSellers>}
                                    />
                               </Routes>
                          </div>

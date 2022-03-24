@@ -23,7 +23,6 @@ function SellerSignUp(props) {
       props.addSellerCb(formData);
       setModalShow(true);
       setFormData(blank);
-      // add MUI alerts here depending on success or not.
     }
   
     function handleChange(event) {

@@ -29,8 +29,8 @@ function Shopfront(props) {
  return (
 <div className="shopfront d-flex flex-column align-items-center">
 
-          {
-            Object.keys(selectedShop).length > 0
+{
+            Object.keys(selectedShop.coverurl !== null && selectedShop.picurl !== null && selectedShop).length > 0
             ?
             (
               <div>
@@ -67,6 +67,26 @@ function Shopfront(props) {
         </div>
             )
             :
+
+            Object.keys(selectedShop).length > 0
+            ?
+            (
+              <div>
+              <h3>Your shop doesn't have any information yet.
+              </h3>
+              <br></br>
+              <h3>Would you like to add some?
+              </h3>
+              <Link className="" to="/shopsettings">
+                              <button>Get started</button>
+                         </Link>
+        </div>
+            )
+            :
+
+
+
+
             <Loading />
           }
 

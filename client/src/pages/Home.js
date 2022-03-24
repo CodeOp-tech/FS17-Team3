@@ -1,8 +1,27 @@
 import React from "react";
+import { useState, useEffect } from "react";
+import Api from "../helpers/Api";
 import "./Home.css";
 import { Link } from "react-router-dom";
 
-function Home({ user, seller }) {
+function Home() {
+     const [products, setProducts] = useState([]);
+     const [errorMsg, setErrorMsg] = useState([]);
+
+     useEffect(() => {
+          getProducts();
+     }, []);
+
+     const getProducts = async () => {
+          let response = await Api.getContent("/products");
+          if (response.ok) {
+               let productData = response.data;
+               setProducts(productData.filter((product, index) => index <= 2));
+          } else {
+               setErrorMsg("Uh oh! Something went wrong.");
+          }
+     };
+
      return (
           <div className="container">
                <h1>Homegrown</h1>
@@ -24,29 +43,36 @@ function Home({ user, seller }) {
                          </Link>
                     </div>
                </div>
-               <h3>Top Products</h3>
-               <div className="row">
-                    <div class="col">
-                         <img
-                              className="col"
-                              src="https://i.etsystatic.com/12397853/r/il/505fa0/2426681051/il_1588xN.2426681051_mocv.jpg"
-                              width="200px"
-                         ></img>
-                    </div>
 
-                    <div class="col">
-                         <img
-                              className="col"
-                              src="https://i.etsystatic.com/20105212/r/il/99e7ee/3700655518/il_1588xN.3700655518_tpti.jpg"
-                              width="200px"
-                         ></img>
-                    </div>
-                    <div class="col">
-                         <img
-                              className="col"
-                              src="https://i.etsystatic.com/12397853/r/il/505fa0/2426681051/il_1588xN.2426681051_mocv.jpg"
-                              width="200px"
-                         ></img>
+               <h3>Top Products</h3>
+               <div className="ProductCards">
+                    <div className="row">
+                         {products.map((p) => (
+                              <div
+                                   key={p.productid}
+                                   className="col-sm-6 col-md-6 col-lg-4"
+                              >
+                                   <div className="card">
+                                        <Link to={`/products/${p.productid}`}>
+                                             <img
+                                                  src={p.imgurl}
+                                                  className="card-img-top"
+                                                  alt="..."
+                                             />
+                                        </Link>
+
+                                        <div className="card-body">
+                                             <h5 className="card-title">
+                                                  {p.name}
+                                             </h5>
+                                             <span className="prod-price badge badge-pill badge-light">
+                                                  €{(p.price / 100).toFixed(2)}
+                                             </span>
+                                        </div>
+                                   </div>
+                              </div>
+                         ))}
+                         ;
                     </div>
                </div>
           </div>

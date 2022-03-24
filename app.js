@@ -7,7 +7,7 @@ const cors = require('cors');  // add at the top
 const { STRIPE_SECRET_KEY } = require('./config');
 const stripe = require('stripe')(STRIPE_SECRET_KEY);
 const db = require('./model/helper');
-// const fileUpload = require('express-fileupload');
+const fileUpload = require('express-fileupload');
 
 
 var indexRouter = require('./routes/index');
@@ -35,12 +35,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use(
-//   fileUpload({
-//     useTempFiles: true,
-//     tempFileDir: '/tmp/'
-//   })
-// );
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: '/tmp/'
+  })
+);
 
 app.use(express.static('public'));
 
@@ -111,11 +111,14 @@ app.post('/webhook', express.raw({type: 'application/json'}), async (req, res) =
   // Create the order
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object;
-    const userid = session.metadata.userid;
+    let userid = session.metadata.userid;
     const orderemail = session.customer_details.email;
+    const ordername = session.shipping.name;
+    const { city, line1, postal_code } = session.shipping.address;
+    const orderaddress = `${line1} ${city} ${postal_code}`
     try {
       // Create a new order
-      let sqlCreateOrder = `insert into orders (userid, orderemail) values (${userid}, ${orderemail})`;
+      let sqlCreateOrder = `insert into orders (userid, orderemail, ordername, orderaddress) values (${userid}, '${orderemail}', '${ordername}', '${orderaddress}')`;
       await db(sqlCreateOrder);
       
       // Get the orderid of the order you just created

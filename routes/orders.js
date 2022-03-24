@@ -52,6 +52,30 @@ router.get("/user/:userid", async (req, res) => {
     }
   });
 
+// Get order(s) by seller ID
+
+router.get("/seller/:sellerid", async (req, res) => {
+  let sellerid = req.params.sellerid;
+  console.log('The seller id is ' + sellerid);
+  let sqlGetOrders = `select * from orders ORDER BY orderdate DESC`;
+  try {
+    let result = await db(sqlGetOrders);
+    if (result.data.length === 0) {
+      res.status(404).send({ error: "No orders found!" });
+    } else {
+      let sellerOrders = result.data;
+      for (let i in sellerOrders) {
+          let orderid = sellerOrders[i].orderid;
+          let orderItems = await db(`SELECT orderitems.*, products.name, products.listedby from orderitems JOIN products ON products.productid = orderitems.productid WHERE orderid = ${orderid} AND listedby = ${sellerid}`);
+          sellerOrders[i].orderItems = orderItems.data;
+      }
+      res.send(sellerOrders);
+    }
+  } catch (err) {
+    res.status(500).send({ error: err.message });
+  }
+});
+
 // Add new order
 
 router.post("/create", async (req, res) => {

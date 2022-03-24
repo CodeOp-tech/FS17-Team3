@@ -11,6 +11,8 @@ function ProductDisplay({category, user}) {
     const [errorMsg, setErrorMsg] = useState([]);
     const [loading, setLoading] = useState(true);
     const [modalShow, setModalShow] = useState(false);
+    const [sortVal, setSortVal] = useState("default");
+    const [query, setQuery] = useState("");
     const modalInfo = {
       title: 'Sorry, you must be logged in to add items to your cart!',
       closetext: 'Keep browsing',
@@ -57,6 +59,14 @@ function ProductDisplay({category, user}) {
         decreaseOrderCountCB(id, current, price);
     }
 
+    const handleSort = (e) => {
+      setSortVal(e.target.value);
+    };
+
+    const handleSearch = (e) => {
+      setQuery(e.target.value);
+    }
+
     return (
         <div>
 
@@ -65,9 +75,48 @@ function ProductDisplay({category, user}) {
           ?
           <Loading />
           :
-          (<div className="ProductCards">
+          (
+            <div>
+            
+            <div className="d-flex justify-content-end align-items-center mb-3">
+            
+            <div className="w-75 me-3">  
+            <input className="w-100" name="query" value={query} placeholder="Search for a product..." onChange={e => handleSearch(e)}/>
+            </div>
+
+            
+            <select name="product-sort" onChange={e => handleSort(e)} className="product-sort">
+            <option value="default">Sort by recommended</option>
+            <option value="priceAsc">Sort by price, lowest to highest</option>
+            <option value="priceDesc">Sort by price, highest to lowest</option>
+            </select>
+  
+            </div> 
+
+
+          <div className="ProductCards">
+        
           <div className="row">
-              {products.map(p => (
+              {products
+                  .sort((a,b) => {
+                    if (sortVal === "priceAsc") {
+                      return a.price > b.price ? 1 : -1
+                    }
+                    else if (sortVal === "priceDesc") {
+                      return a.price < b.price ? 1 : -1
+                    }
+                    else if (sortVal === "default") {
+                      return a.productid > b.productid ? 1 : -1
+                    }
+                  })
+                  .filter(p => {
+                    if (query === "") {
+                      return p
+                    } else if (p.name.toLowerCase().includes(query.toLowerCase())) {
+                      return p
+                    }
+                  }) 
+                  .map(p => (
                   <div key={p.productid} className="col-sm-6 col-md-6 col-lg-4">
                   
                   <div className="card">
@@ -102,6 +151,7 @@ function ProductDisplay({category, user}) {
                   </div>
                   </div>
                ))}
+          </div>
           </div>
           </div> )
         }

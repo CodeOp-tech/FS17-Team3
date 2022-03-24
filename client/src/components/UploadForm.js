@@ -1,8 +1,36 @@
 import React, {useState} from 'react';
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function UploadForm(props) {
     const [profileFile, setProfileFile] = useState(null);
     const [coverFile, setCoverFile] = useState(null);
+
+    toast.configure();
+
+    const notifyProfile = () => {
+      toast.success('Profile picture updated!', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
+    }
+
+    const notifyCover = () => {
+        toast.success('Cover photo updated!', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          });
+      }
 
     function handleFileChange(event) {
         setProfileFile(event.target.files[0]);
@@ -37,29 +65,37 @@ function UploadForm(props) {
 
     return (
         <div>
+            <div className="container d-flex justify-content-center">
         <div className="upload-form">
-            <form onSubmit={handleSubmit}>
+            <form className="mt-3 user-form" onSubmit={handleSubmit}>
             <label>Upload Profile Picture
+                <br></br>
             <input type="file"
                    onChange={handleFileChange}
                    />
             </label>
-            <button type="submit">Upload</button>
+            <br></br>
+            <button onClick={notifyProfile} type="submit">Upload</button>
             </form>     
         </div>
+        </div>
 
-<div className="upload-form">
-<form onSubmit={handleCoverSubmit}>
-<label>Upload Cover Photo
-<input type="file"
-       onChange={handleCoverChange}
-       />
-</label>
-<button type="submit">Upload</button>
-</form>     
-</div>
+        <div className="container d-flex justify-content-center">
+        <div className="upload-form">
+            <form className="mt-3 user-form" onSubmit={handleCoverSubmit}>
+            <label>Upload Cover Photo
+                <br></br>
+            <input type="file"
+                onChange={handleCoverChange}
+                />
+            </label>
+            <br></br>
+            <button onClick={notifyCover} type="submit">Upload</button>
+            </form>     
+            </div>
+            </div>
 
-</div>
+        </div>
     )
 }
 

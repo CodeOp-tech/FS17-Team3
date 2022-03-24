@@ -23,7 +23,7 @@ function SellerSignUp(props) {
       props.addSellerCb(formData);
       setModalShow(true);
       setFormData(blank);
-      // add MUI alerts here depending on success or not
+      // add MUI alerts here depending on success or not.
     }
   
     function handleChange(event) {
@@ -38,7 +38,7 @@ function SellerSignUp(props) {
       <div>
       <h1>Create Seller Account</h1>
      <div className="container d-flex justify-content-center">
-        <Form className="mt-3 seller-form" onSubmit={handleSubmit}>
+        <Form className="mt-3 user-form" onSubmit={handleSubmit}>
           <div className="mb-3">
           </div>
             <div className="mb-3">

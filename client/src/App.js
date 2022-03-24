@@ -423,12 +423,21 @@ function App() {
                                              <PrivateRouteSellers>
                                              <ShopSettings
                                                   seller={seller}
-                                                  updateShopCB={(
-                                                       updatedShopObject,
+                                                  updateNameCB={(
+                                                       updatedNameObject,
                                                        route
                                                   ) =>
                                                        updateShopInfo(
-                                                            updatedShopObject,
+                                                            updatedNameObject,
+                                                            route
+                                                       )
+                                                  }
+                                                  updateDescCB={(
+                                                       updatedDescObject,
+                                                       route
+                                                  ) =>
+                                                       updateShopInfo(
+                                                            updatedDescObject,
                                                             route
                                                        )
                                                   }

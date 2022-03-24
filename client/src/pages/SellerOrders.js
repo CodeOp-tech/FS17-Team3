@@ -41,6 +41,7 @@ function SellerOrders({seller}) {
 
              } else {
                   setErrorMsg(response.error);
+                  setLoading(false);
              }
         }
    }; 
@@ -54,12 +55,18 @@ function SellerOrders({seller}) {
                 ?
                 <Loading />
                 :
-                orders.length > 0 
-                ? orders.map(order =>  (
+                orders.length > 0
+                ?
+               orders.map(order =>  (
                 
                     <div key={order.orderid} className="order-display mb-3">
                         <h4>Order ID: {order.orderid}</h4>
                         <p>Order created: {order.orderdate}</p>
+                        <div className="mb-3">
+                        <div>{order.ordername}</div>
+                        <div>{order.orderemail}</div>
+                        <div>{order.orderaddress}</div>
+                        </div>
 
                         <table className="table">
                         <thead>
@@ -97,9 +104,9 @@ function SellerOrders({seller}) {
                     </div>
                     
                     )
-                    ) 
-                : 
-                <p>You don't have any orders yet! </p>
+                    )
+                    :
+                    <p>You don't have any orders yet!</p> 
                 }
                
           </div>

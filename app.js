@@ -113,9 +113,12 @@ app.post('/webhook', express.raw({type: 'application/json'}), async (req, res) =
     const session = event.data.object;
     let userid = session.metadata.userid;
     const orderemail = session.customer_details.email;
+    const ordername = session.shipping.name;
+    const { city, line1, postal_code } = session.shipping.address;
+    const orderaddress = `${line1} ${city} ${postal_code}`
     try {
       // Create a new order
-      let sqlCreateOrder = `insert into orders (userid, orderemail) values (${userid}, '${orderemail}')`;
+      let sqlCreateOrder = `insert into orders (userid, orderemail, ordername, orderaddress) values (${userid}, '${orderemail}', '${ordername}', '${orderaddress}')`;
       await db(sqlCreateOrder);
       
       // Get the orderid of the order you just created

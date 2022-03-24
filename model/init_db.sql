@@ -73,6 +73,8 @@ CREATE TABLE `Orders` (
 	`orderid` INT NOT NULL AUTO_INCREMENT,
 	`userid` INT NOT NULL,
 	`orderemail` varchar(255),
+	`ordername` varchar(255),
+	`orderaddress` varchar(255),
 	`orderdate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	`ordertotal` INT,
 	PRIMARY KEY (`orderid`)

@@ -66,9 +66,8 @@ router.get("/seller/:sellerid", async (req, res) => {
       let sellerOrders = result.data;
       for (let i in sellerOrders) {
           let orderid = sellerOrders[i].orderid;
-          let orderItems = await db(`SELECT orderitems.*, products.name, products.listedby from orderitems JOIN products ON products.productid = orderitems.productid WHERE orderid = ${orderid}`);
-          let allItems = orderItems.data;
-          sellerOrders[i].orderItems = allItems
+          let orderItems = await db(`SELECT orderitems.*, products.name, products.listedby from orderitems JOIN products ON products.productid = orderitems.productid WHERE orderid = ${orderid} AND listedby = ${sellerid}`);
+          sellerOrders[i].orderItems = orderItems.data;
       }
       res.send(sellerOrders);
     }

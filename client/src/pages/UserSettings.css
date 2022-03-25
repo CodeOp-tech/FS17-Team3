@@ -4,4 +4,14 @@
 
 .form-label {
     text-align: left;
+    margin-bottom: 4px;
+}
+
+.btn-primary {
+    border-radius: 32px;
+    background-color: #004c99;
+    border-color: #004c99;
+    color: white;
+    box-shadow: none;
+    font-family: 'DM Sans', 'sans-serif';
 }

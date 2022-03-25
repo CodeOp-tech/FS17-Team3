@@ -33,7 +33,7 @@ function Shopfront(props) {
             Object.keys(selectedShop.coverurl !== null && selectedShop.picurl !== null && selectedShop).length > 0
             ?
             (
-              <div>
+              <div className="header-div">
               <div className="profile-cover">
             <img className="profile-cover-img" src={`/images/sellers/${selectedShop.coverurl}`} alt="cover photo"></img>
             <img className="profile-seller-img" src={`/images/sellers/${selectedShop.picurl}`} alt="profile photo"></img>
@@ -44,17 +44,17 @@ function Shopfront(props) {
             <p className="shop-desc">{selectedShop.description}</p>
         </div>
 
-        <div className="container mt-5">
+        <div className="container shopfront-cont mt-5">
           <div className="row">
             {
               selectedShop.products.map(prod => (
-                <div className="col-md-6 d-flex flex-column align-items-center" key={prod.productid}>
+                <div className="col-md-6 col-lg-4 d-flex flex-column align-items-center" key={prod.productid}>
                   
                   <Link to={`/products/${prod.productid}`}>
                   <div className="prod-card d-flex flex-column p-2 rounded">
                   <div className="img-container"><img src={prod.imgurl} className="prod-img"/></div>
-                  <div className="fs-6 mt-2">{prod.name}</div>
-                  <div className="fw-bold fs-5">€{(prod.price/100).toFixed(2)}</div>
+                  <div className="fs-6 mt-2 prod-name">{prod.name}</div>
+                  <div className="fw-bold fs-5 prod-price">€{(prod.price/100).toFixed(2)}</div>
                   </div>
                   </Link>
 
@@ -68,25 +68,15 @@ function Shopfront(props) {
             )
             :
 
-            Object.keys(selectedShop).length > 0
+            Object.keys(selectedShop.coverurl === null && selectedShop.picurl === null &&selectedShop).length > 0
             ?
             (
               <div>
-              <h3>Your shop doesn't have any information yet.
+              <h3>Nothing has been added for this shop.
               </h3>
-              <br></br>
-              <h3>Would you like to add some?
-              </h3>
-              <Link className="" to="/shopsettings">
-                              <button>Get started</button>
-                         </Link>
         </div>
             )
             :
-
-
-
-
             <Loading />
           }
 
@@ -97,6 +87,44 @@ function Shopfront(props) {
 }
 
 export default Shopfront;
+
+// Object.keys(selectedShop.coverurl !== null && selectedShop.picurl !== null && selectedShop).length > 0
+//             ?
+//             (
+//               <div>
+//               <div className="profile-cover">
+//             <img className="profile-cover-img" src={`/images/sellers/${selectedShop.coverurl}`} alt="cover photo"></img>
+//             <img className="profile-seller-img" src={`/images/sellers/${selectedShop.picurl}`} alt="profile photo"></img>
+//         </div>
+
+//         <div className="profile-info">
+//         <h2 className="shop-name">{selectedShop.shopname}</h2>
+//             <p className="shop-desc">{selectedShop.description}</p>
+//         </div>
+
+//         <div className="container mt-5">
+//           <div className="row">
+//             {
+//               selectedShop.products.map(prod => (
+//                 <div className="col-md-6 d-flex flex-column align-items-center" key={prod.productid}>
+                  
+//                   <Link to={`/products/${prod.productid}`}>
+//                   <div className="prod-card d-flex flex-column p-2 rounded">
+//                   <div className="img-container"><img src={prod.imgurl} className="prod-img"/></div>
+//                   <div className="fs-6 mt-2">{prod.name}</div>
+//                   <div className="fw-bold fs-5">€{(prod.price/100).toFixed(2)}</div>
+//                   </div>
+//                   </Link>
+
+//                 </div>
+//               ))
+//             }
+            
+//           </div>
+//         </div>
+//         </div>
+//             )
+//             :
 
 
 

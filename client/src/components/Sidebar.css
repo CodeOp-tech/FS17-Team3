@@ -1,8 +1,9 @@
 .sidebar {
     min-width: 100vw;
-    height: 70px;
-    background-color: #282c34;
-    color: white;
+    height: 56px;
+    background-color: #c1d3c8;
+    color: black;
+    font-family: 'DM Sans', 'sans-serif';
 }
 
 .sb-link {
@@ -16,12 +17,12 @@
 
 .sb-link:hover {
     border-bottom-width: 1px;
-    border-bottom-style: solid;
-    padding-bottom: 3px
+    padding-bottom: 3px;
 }
 
 .sb-active {
-    border-bottom-width: 1px;
+    /* border-bottom-width: 1px;
     border-bottom-style: solid;
-    padding-bottom: 3px
+    padding-bottom: 3px; */
+    font-style: italic;
 }

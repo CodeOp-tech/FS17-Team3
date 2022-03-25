@@ -75,7 +75,7 @@ function UploadForm(props) {
                    />
             </label>
             <br></br>
-            <button onClick={notifyProfile} type="submit">Upload</button>
+            <button class=" btn formbutton" onClick={notifyProfile} type="submit">Upload</button>
             </form>     
         </div>
         </div>
@@ -90,7 +90,7 @@ function UploadForm(props) {
                 />
             </label>
             <br></br>
-            <button onClick={notifyCover} type="submit">Upload</button>
+            <button class="btn formbutton" onClick={notifyCover} type="submit">Upload</button>
             </form>     
             </div>
             </div>

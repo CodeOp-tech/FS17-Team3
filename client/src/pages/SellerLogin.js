@@ -25,44 +25,41 @@ const SellerLogin = (props) => {
   
     return (
       <div>
-      <h1>Seller Log In</h1>
-     <div className="UserLogin row">
-     <div className="col-4 offset-4"></div>
-      <form onSubmit={handleSubmit}>
-      <div className="form-group">
-          </div>
-            <label className="form-label">Username</label>
-              <input
-              type="text"
-              name="username"
-              required
-              value={formData.username}
-              className="form-control"
-              onChange={handleChange}
-              />
-            <div className="form-group">
-              <label className="form-label">Password</label>
-              <input
-              type="password"
-              name="password"
-              required
-              value={formData.password}
-              onChange={handleChange}
-              className="form-control"
-              />
-            </div>
-  
+      <h2>Seller Login</h2>
+
+      <div className="container d-flex justify-content-center">
+    <form className="mt-3 user-form" onSubmit={handleSubmit}>
+        <div className="SellerLoginForm">
+
+        <label className="form-label">Username</label>
+        <input type="text"
+               name="username"
+               value={formData.username}
+               className="form-control"
+               onChange={handleChange}
+                 />
+
+        <label className="form-label">Password</label>
+        <input type="password"
+               name="password"
+               required
+               value={formData.password}
+               className="form-control"
+               onChange={handleChange}
+                 />
+               
             <div>
-              <button type="submit" className="btn btn-primary">Log In</button>
+            <button type="submit" className="btn btn-primary formbutton">Log In</button>
             </div>
-        </form>
-        <div>
+              </div>
+              </form>
+              </div>
+              <div>
           <br></br>
           <h3>Not got an account?</h3>
-        <a className="btn btn-primary" href="/seller-signup" role="button">Create Account</a>
-            </div>
-     </div>
-     </div>
+        <a className="btn btn-primary formbutton" href="/seller/signup" role="button">Create Account</a>
+            </div> 
+              </div> 
   )
 }
 

@@ -39,6 +39,7 @@ function OrderHistory({user}) {
 
              } else {
                   setErrorMsg(response.error);
+                  setLoading(false);
              }
         }
    }; 

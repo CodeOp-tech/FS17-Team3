@@ -59,6 +59,9 @@ function Navbar({user, seller, userLogoutCb, sellerLogoutCb}) {
                          <NavLink to={`/shop/${seller.sellerid}`}>My Shop</NavLink>
                          </div>
                          <div className="nav-link">
+                         <NavLink to={`/addproduct`}>Add Product</NavLink>
+                         </div>
+                         <div className="nav-link">
                          <NavLink to={`/orders/${seller.sellerid}`}>My Orders</NavLink>
                          </div>
                          <div className="nav-link">

@@ -31,7 +31,7 @@ CREATE TABLE `Sellers` (
 );
 -- NOTE: New sellers need encrypted passwords!
 INSERT INTO `Sellers` VALUES 
-    (1,'seller1','$2b$12$eFzMWbS9SogNtxkmo3J7aO8FQMFQSKbtpwLMIOVsF6GGKpTQdgq.W','seller1@example.com', 'seller_1_profile.jpg', 'seller_1_cover_ccexpress (1).jpeg', 'Gracia Wooden Goods', 'Welcome to Gracia Wooden Goods. All pieces are crafted with the utmost care in Gracia.' ),
+    (1,'seller1','$2b$12$eFzMWbS9SogNtxkmo3J7aO8FQMFQSKbtpwLMIOVsF6GGKpTQdgq.W','seller1@example.com', 'seller_1_profile.jpg', 'seller_1_cover.jpg', 'Gracia Wooden Goods', 'Welcome to Gracia Wooden Goods. All pieces are crafted with the utmost care in Gracia.' ),
     (2,'seller2','$2b$12$WZcGPyrkCvD5e8m0Qz/nFOdBryUcsp6uDlE2MDo/AjuBhPrQBCfI6','seller2@example.com', 'seller_2_profile.jpg', 'seller_2_cover.jpg', 'Plants and Paper Co.', 'Shop our products that bring together the plant and intricaate papercraft worlds. All of our packaging is bio-degradable.'),
     (3,'seller3','$2b$12$tiAz4eaXlpU.CdltUVvw6udLA2BWsitk5zXM2XOm2IpAeAiFfMCdy','seller3@example.com', 'seller_3_profile.jpg', 'seller_3_cover.jpg', 'Tuft Queen', 'After graduating from Falmouth University with a degree in Textiles in 2019, Tuft Queen was born. I specialise in hand-tufted cushions and crochet goods of the highest quality.'),
 	(4,'seller4','$2b$12$LJpHMh4/rP4HskaBxdbBUetY8kjTq5gR/FsIUAro.VoleThcXGemu','seller4@example.com', 'seller_4_profile.jpg', 'seller_4_cover.jpg', 'Soy & Ceramics BCN', 'Nothing beats the coziness of a natural soy candle or that first sip of coffee in the morning. Shop all of the sustainable home comforts at Soy & Ceramics BCN'),

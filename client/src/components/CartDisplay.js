@@ -43,7 +43,7 @@ const CartDisplay = ({user}) => {
             <img className="cart-thumb" src={cartitem.imgurl} />
             <div className="ms-3 d-flex flex-column align-items-start">
             <h5>{cartitem.name}</h5>
-            <p className="text-start fs-6">{cartitem.description.substring(0,100)}...<Link to="/">View full description</Link></p>
+            <p className="text-start fs-6">{cartitem.description.substring(0,100)}...<Link to={`/products/${cartitem.productid}`}>View full description</Link></p>
             </div>
             </div>
 

@@ -7,6 +7,10 @@
     font-weight: 400;
 }
 
+#checkout-button:hover {
+    background-color: #0c5fd6;
+}
+
 #quantity {
     height: 100%
 }

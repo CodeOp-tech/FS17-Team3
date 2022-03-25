@@ -44,4 +44,11 @@
 
 .homebutton {
      margin-bottom: 40px;
+     color: #fffdf3
+}
+
+.homebutton:hover {
+     margin-bottom: 40px;
+     color: #fffdf3;
+     background-color: #0c5fd6;
 }

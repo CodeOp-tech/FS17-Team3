@@ -228,17 +228,6 @@ function App() {
           }
      };
 
-     const createOrder = async () => {
-          let response = await Api.addContent(`/orders/create`, {
-               userid: user.userid
-          });
-          if (response.ok) {
-               setCart([]);
-          } else {
-               setErrorMsg(response.error);
-          }
-     };
-
      const contextObj = {
           cart,
           increaseOrderCountCB: increaseOrderCount,

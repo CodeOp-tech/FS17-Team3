@@ -4,11 +4,19 @@ import Api from '../../helpers/Api';
 import './ProductDetail.css';
 import CartContext from '../../CartContext';
 import Loading from '../../components/Loading';
+import Modal from '../../components/Modal';
 
-function ProductDetail() {
+function ProductDetail({user}) {
     const {productid} = useParams();
     const [highlightedProduct, setHighlightedProduct] = useState({});
     const [errorMsg, setErrorMsg] = useState("");
+    const [modalShow, setModalShow] = useState(false);
+    const modalInfo = {
+        title: 'Sorry, you must be logged in to add items to your cart!',
+        closetext: 'Keep browsing',
+        backtext: 'Log in',
+        backpath: '/user/login'
+      }
 
     useEffect(() => {
         getHighlighted();
@@ -27,7 +35,11 @@ function ProductDetail() {
         let { cart, addToCartCB, increaseOrderCountCB, decreaseOrderCountCB } = useContext(CartContext); 
 
         const handleAdd = (id, price) => {
-            addToCartCB(id, price);
+            if (user) {
+                addToCartCB(id, price);}
+            else {
+                setModalShow(true);
+            }
           }
     
         const handleIncrease = (id, current, price) => {
@@ -83,7 +95,12 @@ function ProductDetail() {
                    <Loading />
 
                }
-               
+
+              <Modal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+                modalInfo={modalInfo}
+            /> 
 
           </div>
      );

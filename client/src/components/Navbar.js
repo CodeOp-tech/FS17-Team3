@@ -1,6 +1,7 @@
 import React from 'react';
 import "./Navbar.css";
 import { NavLink } from "react-router-dom";
+import {FaShoppingCart} from "react-icons/fa";
 
 function Navbar({user, seller, userLogoutCb, sellerLogoutCb}) {
      return (
@@ -38,9 +39,9 @@ function Navbar({user, seller, userLogoutCb, sellerLogoutCb}) {
                          user && !seller
                          ?
                          (
-                         <div className="navbar-nav">
+                         <div className="navbar-nav d-flex align-items-center">
                          <div className="nav-link">
-                         <NavLink to="/cart">Cart</NavLink>
+                         <NavLink to="/cart" className="fs-5">{FaShoppingCart}</NavLink>
                          </div>
                          <div className="nav-link">
                          <NavLink to="/usersettings">User Settings</NavLink>
@@ -48,8 +49,8 @@ function Navbar({user, seller, userLogoutCb, sellerLogoutCb}) {
                          <div className="nav-link">
                          <NavLink to="/orderhistory">Order History</NavLink>
                          </div> 
-                         <div className="nav-link nav-logout">
-                         <NavLink onClick={userLogoutCb} to="/">Logout</NavLink>
+                         <div className="nav-link">
+                         <NavLink onClick={userLogoutCb} to="/" className="nav-logout">Logout</NavLink>
                          </div>  
                          </div>
                          )

@@ -19,6 +19,15 @@
     font-family: 'DM Sans', 'sans-serif';
 }
 
+.shop-link {
+    color: #212529 !important;
+    text-decoration: none !important;
+}
+
+.shop-link:hover {
+    text-decoration: underline !important;
+}
+
 .btn-add-to-cart {
     border-radius: 32px;
     background-color: #004c99;

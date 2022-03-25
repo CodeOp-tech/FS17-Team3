@@ -43,8 +43,8 @@ function ProductDetail() {
 
                 <div aria-label="breadcrumb" className="py-3">
                     <ol className="breadcrumb">
-                        <li className="breadcrumb-item"><Link to="/products/all">All Products</Link></li>
-                        <li className="breadcrumb-item"><Link to={highlightedProduct.category === 'Clothing & Accessories' ? '/products/Clothing' : `/products/${highlightedProduct.category}`} >{highlightedProduct.category}</Link></li>
+                        <li className="breadcrumb-item"><Link className="shop-link" to="/products/all">All Products</Link></li>
+                        <li className="breadcrumb-item"><Link className="shop-link" to={highlightedProduct.category === 'Clothing & Accessories' ? '/products/Clothing' : `/products/${highlightedProduct.category}`} >{highlightedProduct.category}</Link></li>
                         <li className="breadcrumb-item active" aria-current="page">{highlightedProduct.name}</li>
                     </ol>
                 </div>
@@ -55,7 +55,7 @@ function ProductDetail() {
                    <div className="d-flex px-3">
                    <img className="highlight-image" src={highlightedProduct.imgurl} />
                    <div className="highlight-text">
-                        <div className="highlight-listedby">Listed by: <Link to={`/shop/${highlightedProduct.listedby}`} >{highlightedProduct.username}</Link></div>
+                        <div className="highlight-listedby"><Link className="shop-link" to={`/shop/${highlightedProduct.listedby}`} >{highlightedProduct.shopname}</Link></div>
                         <div className="highlight-name fs-2">{highlightedProduct.name}</div>
                         <div className="fs-3">€{(highlightedProduct.price/100).toFixed(2)}</div>
                         

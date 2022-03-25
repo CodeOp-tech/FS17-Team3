@@ -79,3 +79,12 @@ a:hover {
   border-top-left-radius: 24px;
   border-top-right-radius: 24px;
 }
+
+.shop-h2 {
+  text-align: center;
+}
+
+.shop-p{
+  text-align: center;
+  margin-top: -25px;
+}

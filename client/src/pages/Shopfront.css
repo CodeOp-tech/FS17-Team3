@@ -78,6 +78,7 @@ a:hover {
 .prod-card {
   border-top-left-radius: 24px;
   border-top-right-radius: 24px;
+  margin-bottom: 26px;
 }
 
 .shop-h2 {

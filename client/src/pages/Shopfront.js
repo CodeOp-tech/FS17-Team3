@@ -48,9 +48,9 @@ function Shopfront(props) {
           <div className="row">
             {
               selectedShop.products.map(prod => (
-                <div className="col-md-6 col-lg-4 d-flex flex-column align-items-center" key={prod.productid}>
+                <div className="seller-prod-display col-md-6 col-lg-4 d-flex flex-column align-items-center" key={prod.productid}>
                   
-                  <Link to={`/products/${prod.productid}`}>
+                  <Link to={`/products/${prod.productid}`} className="seller-prod-link">
                   <div className="prod-card d-flex flex-column p-2 rounded">
                   <div className="img-container"><img src={prod.imgurl} className="prod-img"/></div>
                   <div className="fs-6 mt-2 prod-name">{prod.name}</div>

@@ -67,8 +67,8 @@ function Navbar({user, seller, userLogoutCb, sellerLogoutCb}) {
                          <div className="nav-link">
                          <NavLink to="/shopsettings">Shop Settings</NavLink>
                          </div>
-                         <div className="nav-link nav-logout">
-                         <NavLink onClick={sellerLogoutCb} to="/">Logout</NavLink>
+                         <div className="nav-link">
+                         <NavLink onClick={sellerLogoutCb} to="/" className="nav-logout">Logout</NavLink>
                          </div> 
                          </div>
                     }

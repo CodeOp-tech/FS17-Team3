@@ -21,6 +21,10 @@ nav a.active {
      text-decoration: underline;
 }
 
+div.nav-link a.nav-logout {
+     text-decoration: none !important;
+}
+
 nav a {
      color: #fffdf3; 
      text-decoration: none;

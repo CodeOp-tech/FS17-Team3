@@ -72,8 +72,9 @@ function Shopfront(props) {
             ?
             (
               <div>
-              <h3>Nothing has been added for this shop.
-              </h3>
+                <h2 className="shop-h2"> Shop</h2>
+              <p className="shop-p"> Shop is currently empty
+              </p>
         </div>
             )
             :

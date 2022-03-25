@@ -23,28 +23,24 @@ function Home() {
      };
 
      return (
-          <div className="container">
-               <h1>Homegrown</h1>
-               <div className="grid">
-                    <img
+          <div>
+               <img
                          className="image"
-                         src="https://images.pexels.com/photos/5710033/pexels-photo-5710033.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                         alt="Knitting"
-                         width="1000px"
+                         src="https://images.unsplash.com/photo-1573849652968-ad773a0f0046?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2064&q=80"
+                         alt="candles"
                     ></img>
-                    <div className="details">
-                         <p>
-                              Welcome to Homegrown homepage where you can source
-                              homemade and handcrafted items directly from your
-                              maker.
-                         </p>
-                         <Link className="" to="/products/all">
-                              <button>Explore now</button>
+                    <div className="container-home">
+               <h1 className="home-h1"> Homegrown</h1>
+               <h3 className="home-h3">Shop your local Barcelona makers</h3>
+               <div className="featured-products">
+               <Link to="/products/all">
+                              <button className="primary-btn btn formbutton homebutton"> Explore now</button>
                          </Link>
-                    </div>
-               </div>
+                         </div>
+                         
 
-               <h3>Top Products</h3>
+               <h3 className="featured-h3">Top Products:</h3>
+               </div>
                <div className="ProductCards">
                     <div className="row">
                          {products.map((p) => (
@@ -72,7 +68,6 @@ function Home() {
                                    </div>
                               </div>
                          ))}
-                         ;
                     </div>
                </div>
           </div>

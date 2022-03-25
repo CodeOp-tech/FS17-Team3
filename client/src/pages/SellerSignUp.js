@@ -35,54 +35,47 @@ function SellerSignUp(props) {
   
     return (
       <div>
-      <h1>Create Seller Account</h1>
-     <div className="container d-flex justify-content-center">
-        <Form className="mt-3 user-form" onSubmit={handleSubmit}>
-          <div className="mb-3">
-          </div>
-            <div className="mb-3">
-              <label className="form-label">Email address</label>
-              <input
-              type="text"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="form-control"
-              />
-            </div>
-            <div className="mb-3">
-            <label className="form-label">Username</label>
-              <input
-              type="text"
-              name="username"
-              value={formData.username}
-              className="form-control"
-              onChange={handleChange}
-              />
-            </div>
-            <div className="mb-3">
-              <label className="form-label">Password</label>
-              <input
-              type="password" 
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              className="form-control"
-              />
-            </div>
-            <div>
-              <button type="submit"
-               className="btn btn-primary">Sign Up</button>
-            </div>
-        </Form>
+        <h2>Create Seller Account</h2>
 
-        <SubmitModal
+        <div className="container d-flex justify-content-center">
+      <form className="mt-3 user-form" onSubmit={handleSubmit}>
+          <div className="SellerSignupForm">
+
+          <label className="form-label">Email</label>
+          <input type="text"
+                 name="email"
+                 value={formData.email}
+                 className="form-control"
+                 onChange={handleChange}
+                   />
+
+          <label className="form-label">Username</label>
+          <input type="text"
+                 name="username"
+                 value={formData.username}
+                 className="form-control"
+                 onChange={handleChange}
+                   />
+
+          <label className="form-label">Password</label>
+          <input type="password"
+                 name="password"
+                 value={formData.password}
+                 className="form-control"
+                 onChange={handleChange}
+                   />
+                 
+              <div>
+              <button type="submit" className="btn btn-primary formbutton">Create account</button>
+              </div>
+                </div>
+                </form>
+                </div>
+                <SubmitModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 modalInfo={modalInfo}/>
-                
-      </div> 
-      </div> 
+                </div>
     );
 }
 

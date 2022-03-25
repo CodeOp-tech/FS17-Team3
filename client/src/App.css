@@ -3,7 +3,6 @@
      src: url('../src/fonts/allogist-light-webfont.woff') format('woff');
      font-weight: normal;
      font-style: normal;
- 
  }
 
  .container {
@@ -116,4 +115,27 @@ h3, h4, h5, p {
         margin-right: 10px;
         margin-top: 10px;
 }
-  
+
+.formbutton {
+     border-radius: 32px;
+     background-color: #004c99;
+     border-color: #004c99;
+     color: white;
+     box-shadow: none;
+     font-family: 'DM Sans', 'sans-serif';
+     margin-top: 16px;
+     outline: none;
+}
+
+.user-form {
+     font-family: 'DM Sans', 'sans-serif';
+}
+
+.form-label {
+     margin-top: 12px;
+     margin-bottom: -4px;
+}
+
+label {
+     font-family: 'DM Sans', 'sans-serif';
+}

@@ -68,7 +68,7 @@ const UserSettings = (props) => {
           </div>
           
           <div>
-          <button className="btn btn-primary" type="submit">Submit</button>
+          <button className="btn btn-primary formbuttton" type="submit">Submit</button>
           </div>
 
         </form>
@@ -97,7 +97,7 @@ const UserSettings = (props) => {
           </div>
           
           <div>
-          <button className="btn btn-primary" type="submit">Submit</button>
+          <button className="btn btn-primary formbuttton" type="submit">Submit</button>
           </div>
 
         </form> 

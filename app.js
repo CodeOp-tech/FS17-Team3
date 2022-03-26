@@ -33,17 +33,8 @@ app.use((req, res, next) => {
 });
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(
-  fileUpload({
-    useTempFiles: true,
-    tempFileDir: '/tmp/'
-  })
-);
-
-app.use(express.static('public'));
-
+app.use(express.static(path.join(__dirname, '/client/build')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/sellers', sellersRouter);
@@ -53,11 +44,16 @@ app.use('/', authSellersRouter);
 app.use('/cart', cartRouter);
 app.use('/orders', orderRouter);
 app.use('/orderitems', orderItemsRouter);
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname + '/client/build/index.html'));
+});
 
-
-// Code for Stripe checkout
-
-app.use(express.static('public'));
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: '/tmp/'
+  })
+);
 
 const YOUR_DOMAIN = 'http://localhost:3000/cart';
 
